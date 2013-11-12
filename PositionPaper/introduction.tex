@@ -2,20 +2,22 @@ The emergence of new architectures like the cloud opens new challenges to data p
 The possibility of having unlimited Access to cloud resources and the ``pay as U go'' model make it possible to change the hypothesis under which current technology and solutions address the processing of huge volumes of data. 
 Instead of designing processes and algorithms taking into consideration the limits on resources availability, the cloud sets the focus on the economic cost implied of using resources and producing results by parallelizing the use of computing resources while delivering data under subscription oriented cost models.
  
-Current data management approaches on the cloud tend to use NoSQL stores for managing huge heterogeneous data collections (graph, key-value, tables, relational): polyglot approaches. 
+Current data management approaches on the cloud tend to use NoSQL stores for managing huge heterogeneous data collections (graph, key-value, tables, relational). 
 Yet, having such heterogeneous schema-less data stores, calls for efficient methods for integrating (correlating, associating, filtering) heterogeneous data collections taking into consideration their ``structural'' characteristics (due to the different data models) but also their quality of service, e.g., trust, freshness, provenance, partial or total consistency. 
 Existing data integration techniques based on mappings, views management, ontologies have to be revisited in order to integrate data that are weakly curated and described through metadata or schemas.
 
-{\color{green} 
-Furthermore, security aspects are crucial in integrating big data. Indeed, the integration task must guarantee the integrity and privacy of data, the willingness of the clouds to well contribute to the security process through acceptable runtime environment conditions, and the adequacy of the proposed security levels to the services behind the integration operation.
-}
+%{\color{green} 
+%Furthermore, security aspects are crucial in integrating big data. Indeed, the integration task must guarantee the integrity and privacy of data, the willingness of the clouds to  contribute to the security process through acceptable runtime environment conditions, and the adequacy of the proposed security levels to the services behind the integration operation.
+%}
  
 Our work intends to address data integration on a hybrid cloud guided by the SLA exported by different cloud providers and by several QoS measures associated to data collections properties: trust, privacy, economic cost. 
 We aim to address big data integration d in a multi-cloud hybrid context. 
 This implies several granularities of SLA: first, at the cloud level; the SLA ensured by providers regarding data; then at the service level, as unit for accessing and processing data, to be sure to fit particular service needs; and finally at the integration level i.e the possibility to process, correlate and integrate big data collections distributed along different cloud storage supports, providing different quality properties to data (trust, privacy, reliability, etc).
   
-The objectives of our work are to propose an SLA guided continuous data provision and integration system that will be exported as a DaaS by a cloud provider. 
-Therefore we propose strategies for computing integrated SLA’s according to agreed SLA’s proposed by services and optimized and adaptable query rewriting and bi data sets integration according to user preferences. 
-Given the computational cost of a query evaluation, our approach uses automatic learning techniques for generating knowledge out of every task and reducing its economic cost.
+The objectives of our work are to propose an SLA guided continuous data provision and integration system exported as a DaaS by a cloud provider. 
+Therefore we propose strategies for computing integrated SLA’s according to agreed SLA’s proposed by services and optimized and adaptable query rewriting for integrating data sets  according to user profiles. 
+%Given the computational cost of a query evaluation and a user profile, our approach uses automatic learning techniques for generating knowledge out of every task and reducing query evaluation economic cost.
 
 This paper proposes data integration (lookup, aggregation, correlation) strategies adapted to the vision of the economic model of the cloud such as accepting partial results delivered on demand or under predefined subscription models that can affect the quality of the results; accepting specific data duplication that can respect privacy but ensure data availability; accepting to launch a task that contributes to an integration on a first cloud whose SLA verifies security requirement rather that a more powerful cloud but with less security guarantees in the SLA. 
+
+Accordingly, the remainder of this paper is organized as follows. Section \ref{sec:relWork} presents related works that address SLA modelling, integration and SLA guided data management processes. Section \ref{sec:slaDataInteg} gives an overview of our approach for integrating data sets provided by services (i.e., DaaS) by concilating SLA's provided by services and user's profiles expressing QoS preferences about the data they want to consume and the conditions in which they must be processed and delivered. Section \ref{sec:incremental} introduces on demand and incremental data integration strategies. Section \ref{sec:useCase}presents a use case for illustrating the interest and use of our approach. Finally \ref{sec:conclusions} concludes the papers and discusses future work.
