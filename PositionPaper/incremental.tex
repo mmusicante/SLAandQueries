@@ -1,13 +1,15 @@
 Given a requirement expressing a query and quality of service preferences : cost, provenance, reputation, time the system processes it according to the following steps:
 
 \begin{enumerate}
-\item Computation of a global SLA given the existing possible data providers that can be called for answering the query.
 
 \item See whether a similar SLA has been computed before
   \begin{description}
   \item[$\longrightarrow$ yes:] use it
   \item[$\longrightarrow$ else:] compute the total or partial SLA and store it in the history
   \end{description}
+  
+\item Computation of a global SLA given the existing possible SLA agreed by data providers that can be called for answering the query. Data providers are filtered in this way, since only those agreed SLA that can be combined into a global SLA that can fulfill the user preferences are considered for retrieving data.
+
   \begin{enumerate}
   \item Filter the data providers that can potentially participate in the evaluation of the query taking into consideration the preferences associated to the query
   \item Rewrite the query into n subqueries that can compute a partial answer
@@ -19,7 +21,7 @@ Given a requirement expressing a query and quality of service preferences : cost
   \item[$\longrightarrow$ else:] compute it and store the result
   \end{description}
   \begin{enumerate}
-  \item Generate a service coordination that can compute each subquery and can integrate the global result. 
+  \item Generate a service coordination search space that can compute each subquery and can integrate the global result. 
 Each subquery is optimized with respect to user profile
   \item Dispatch the execution of subqueries, integrate them into a result
   \end{enumerate}
