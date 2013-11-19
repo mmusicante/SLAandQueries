@@ -44,9 +44,37 @@ Given this proposal, we identify several issues:
 \subsection{Query Rewriting}
 \label{sec:queryRew}
 
-{\color{red}
-Here Martin will explain the rewriting problem.
-}
+%{\color{red}
+%Here Martin will explain the rewriting problem.
+%}
+
+Query rewriting is a well-known problem for the database community.
+The problem consists on transforming an abstract query into a set (or list) of lower-level queries to the available databases.
+Traditionally, the abstract query is a query over a set of views and the lower-level queries are performed on the available databases whose information compose the view. 
+The rewriting is guided by the schema of both abstract and concrete databases.
+The answers to the lower level queries are combined in order to obtain the result to be returned to the user.
+
+The query rewriting problem may be generalized to the case of services.
+This is a natural consequence of the use of information-providing\footnote{Services that do not perform changes in the data they use.} services as interfaces over relational databases.
+Both database queries and service invocations may be represented using a similar syntax.
+Indeed, the interfaces to relational databases and information-providing services are exactly the same.
+In the case of general services, the abstract query is seen as an abstract service composition, which is rewritten into a \textit{concrete} service composition.
+The rewriting process is guided by the interfaces (types) of the abstract and concrete services.
+
+Abstract services and database interfaces have some conspicuous differences.
+Services may change information: Two different invocations may not return the same answer, even when given the same input data.
+Also service compositions may need to meet some requirements such as QoS or other quality constraints that need to be verified.
+
+Query rewriting techniques have been adapted to the context of service composition~\cite{queryRewriting}. 
+In~\cite{UmbertoICWE2013} the authors present an algorithm to automatically refine high-level specifications of service compositions into lower-level ones. 
+The method is based on the MiniCon algorithm~\cite{PH01} for query rewriting,  known in the database domain.
+The proposed approach consists in generating several translations of an abstract service specification into compositions
+over concrete  services. 
+The solutions proposed are ranked and may be coded into concrete orchestrations. 
+
+
+
+
 
 \subsection{Data and query models}
 \label{sec:dqm}
