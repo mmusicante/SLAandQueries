@@ -1,3 +1,12 @@
+\begin{figure*}
+\caption{General architecture of an SLA guided  data integration system.\label{fig:arch}}
+\end{figure*}
+
+Figure~\ref{fig:arch} shows the general architecture of an SLA guided data integration system that is supported by data services which are data providers deployed in a cloud and that provide agreed SLA’s. 
+These descriptions are stored in a directory together with meta-data about the way queries are evaluated for producing results. 
+The system uses this information  by query processing and monitoring modules for rewriting queries according to given quality of service (QoS) preferences expressed by a data consumer, for example a user.
+
+
 Consider a smart city that aims at being energy self-sustainable and produce and consume as much as possible, energy within its geographic area. 
 Producers are characterized according to their location, the amount of energy in kWatts-hour that they can sell, the cost, and the time window in which they can produce it, with a given service level agreement concerning their availability and fault tolerance. 
 Consumers, give also their location, their energy requirements during a certain interval of time, the maximum total cost they are ready to pay, and quality of service requirements such as availability and how critical it is to consume this amount of energy. 
