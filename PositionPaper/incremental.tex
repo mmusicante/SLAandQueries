@@ -62,19 +62,19 @@ In this case, the query to be rewritten is seen as an abstract service compositi
 
 The case of more general services (\textit{i.e}, services that maintain and update information) is a generalization of the information-providing case.
 Unlike the simpler case, where only the service interfaces need to be considered, the general case requires considering the functional and non-functional aspects of the query and available services.
-In this context, the \textit{Global as a View} (\textit{GAV}) methods of query rewriting~\cite{queryRewriting} are suitable.
-In the GAV approach, the rewriting process is guided by the specification of both the query to be rewritten and the available databases.
+In this context, the \textit{Local as View} (\textit{LAV}) methods of query rewriting~\cite{Levy2000} are suitable.
+In the LAV approach, the rewriting process is guided by the specification of both the query to be rewritten and the available databases.
 In the case of general services, we can use the specification of the composition to be produced as well as the specification of each available service.
 These specifications may detail both the functional and non-functional behaviour of each service, including SLA.
 
-Query rewriting techniques have been adapted to the context of service composition~\cite{queryRewriting}. 
-In~\cite{UmbertoICWE2013} the authors present an algorithm to automatically refine high-level specifications of service compositions into lower-level ones. 
+Query rewriting techniques have been adapted to the context of service composition~\cite{BBM10,ZLC11,CostaAMR13}. 
+In~\cite{CostaAMR13} the authors present an algorithm to automatically refine high-level specifications of service compositions into lower-level ones. 
 The method is based on the MiniCon algorithm~\cite{PH01} for query rewriting,  known in the database domain.
 The proposed approach consists in generating several translations of an abstract service specification into compositions
 over concrete  services. 
 The solutions proposed are ranked and may be coded into concrete orchestrations. 
 
-The next example shows the main features of the approach proposed in~\cite{UmbertoICWE2013}. 
+The next example shows the main features of the approach proposed in~\cite{CostaAMR13}. 
 
 \begin{example}[Service Refinement by Rewriting]\label{Ex:rew1}
 Let us consider the case of generating sales reports for a global bookstore.
@@ -95,7 +95,7 @@ In this context, the user supplies the list of books, his location and payment i
 The generated service composition should pick each book at the nearest warehouse, in order to minimize the costs of delivery and processing.
 Additional requirements, such as delivery time, may apply.
 
-In order to produce a personalised service composition for each user, the algorithm in~\cite{UmbertoICWE2013} takes into account the specification of the composition (which may be produced by the user's browser, including context information).
+In order to produce a personalised service composition for each user, the algorithm in~\cite{CostaAMR13} takes into account the specification of the composition (which may be produced by the user's browser, including context information).
 The specification of each available service is also considered (this specification is given by each cloud provider).
 ~\hfill\openbox
 \end{example}
