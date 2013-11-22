@@ -56,15 +56,16 @@ The rewriting is guided by the schema of both abstract and concrete databases.
 The answers to the lower level queries are combined in order to obtain the result to be returned to the user.
 
 The query rewriting problem may be generalized to the case of services.
-This is a natural consequence of the use of information-providing\footnote{Services that do not perform changes in the data they use.} services as interfaces over relational databases.
 Both database queries and service invocations may be represented using a similar syntax.
-Indeed, the interfaces to relational databases and information-providing services are exactly the same.
-In the case of general services, the abstract query is seen as an abstract service composition, which is rewritten into a \textit{concrete} service composition.
-The rewriting process is guided by the interfaces (types) of the abstract and concrete services.
+Indeed, the interfaces to relational databases and information-providing\footnote{Services that do not perform changes in the data they use.} services are exactly the same.
+In this case, the query to be rewritten is seen as an abstract service composition, to be expressed in terms of concrete services (which take the place of the available database queries).
 
-Abstract services and database interfaces have some conspicuous differences.
-Services may change information: Two different invocations may not return the same answer, even when given the same input data.
-Also service compositions may need to meet some requirements such as QoS or other quality constraints that need to be verified.
+The case of more general services (\textit{i.e}, services that maintain and update information) is a generalization of the information-providing case.
+Unlike the simpler case, where only the service interfaces need to be considered, the general case requires considering the functional and non-functional aspects of the query and available services.
+In this context, the \textit{Global as a View} (\textit{GAV}) methods of query rewriting~\cite{queryRewriting} are suitable.
+In the GAV approach, the rewriting process is guided by the specification of both the query to be rewritten and the available databases.
+In the case of general services, we can use the specification of the composition to be produced as well as the specification of each available service.
+These specifications may detail both the functional and non-functional behaviour of each service, including SLA.
 
 Query rewriting techniques have been adapted to the context of service composition~\cite{queryRewriting}. 
 In~\cite{UmbertoICWE2013} the authors present an algorithm to automatically refine high-level specifications of service compositions into lower-level ones. 
@@ -72,6 +73,46 @@ The method is based on the MiniCon algorithm~\cite{PH01} for query rewriting,  k
 The proposed approach consists in generating several translations of an abstract service specification into compositions
 over concrete  services. 
 The solutions proposed are ranked and may be coded into concrete orchestrations. 
+
+The next example shows the main features of the approach proposed in~\cite{UmbertoICWE2013}. 
+
+\begin{example}[Service Refinement by Rewriting]\label{Ex:rew1}
+Let us consider the case of generating sales reports for a global bookstore.
+This hypothetical bookstore sells books both at about 300 shops around the globe as well as via Internet.
+The bookstore has four international warehouses, located in four different continents.
+The bookstore uses the services of three different cloud providers.
+Each cloud provider exports their own interfaces.
+
+Local shops use the nearest cloud provider.
+Internet transactions are processed by the Asian and South American cloud providers.
+
+When a potential Internet client requires a list of books, a composed web service is generated, in order to fetch each book (from the nearest warehouse where the book is available) and to put in motion the payment and packing procedures.
+Depending on the location of the client, different conditions may apply on the selling and payment procedures.
+So, for each country or region, a limited number of options may be available for payment, packaging and delivery.
+Additionally, non-functional requirements, defined by SLA may apply.
+
+In this context, the user supplies the list of books, his location and payment information and a composite web service should be generated to satisfy the order.
+The generated service composition should pick each book at the nearest warehouse, in order to minimize the costs of delivery and processing.
+Additional requirements, such as delivery time, may apply.
+
+In order to produce a personalised service composition for each user, the algorithm in~\cite{UmbertoICWE2013} takes into account the specification of the composition (which may be produced by the user's browser, including context information).
+The specification of each available service is also considered (this specification is given by each cloud provider).
+~\hfill\openbox
+\end{example}
+
+The next example illustrates one of the limits of the automatic composition algorithm.
+
+\begin{example}[Incremental queries]\label{Ex:rew2}
+Let us return to the global bookstore of Example~\ref{Ex:rew1}.
+Let us suppose that the sales data is needed to produce daily and weekly ``\textit{Top 500}'' best-selling lists.
+In this case, each warehouse database will be queried and the list will be produced by adding data obtained from them.
+Let us supose that, in order to minimize the the communications between servers around the Globe, the \textit{Top 500} lists need to be produced incrementally.
+In this case, the composition produced by the service refinement may need to include an iteration.
+(The data produced by the warehouse servers will be processed in batches and the process will end once the list reaches the size of 500 titles.)
+
+As far as our knowledge, the incremental production of a solution is outside of the scope of the current solutions for rewriting service compositions and represents a challenge to the area.
+~\hfill\openbox
+\end{example}
 
 
 %-----------------------------------------------------------------
