@@ -1,59 +1,62 @@
-Given a requirement expressing a query and quality of service preferences: cost, provenance, reputation, time the system processes it according to the three  main steps: (i) SLA global computation for filtering possible data providers; (ii) query rewriting for computing services compositions that can be used for building results; (iii) optimizing and integrating results. The results of these steps generate intermediate results that are stored as knowledge in order to reduce the overhead of the query evaluation process. The whole process is monitored to determine whether a computed SLA is being honoured while a query is evaluated. 
+We propose an SLA guided continuous data provision and integration approach that proposes three steps  starting from the processing of the request  to the delivery of the result sets.
+
+Given a requirement expressing a query and quality of service preferences: cost, provenance, reputation, time the system processes it according as follows: (i) SLA global computation for filtering possible data providers; (ii) query rewriting for computing services compositions that can be used for building results; (iii) optimizing and integrating results. The results of these steps generate intermediate results that are stored as knowledge in order to reduce the overhead of the query evaluation process. The whole process is monitored to determine whether a computed SLA is being honoured while a query is evaluated. 
 
  Given a query, expressed as an SQL like expression including spatio-temporal attributes and preferences, for example, {\em List of energy providers that can provision 1000 Kwatts/h, in the next 10 seconds, that are close to my city with a cost of 0,50 euros/Kwatt?}. Assuming also that energy providers are represented by services exporting their SLA agreements and that can potentially be combined for answering the query. Thus, the whole query evaluation process is done through the following steps:
 
 
 \begin{enumerate}
 
-\item  {\bf Global SLA computation: vertical integration}. 
-Given the user preferences, see whether a similar SLA has been computed with this input before or compute the total or partial SLA, and store it in the history
+\item  {\bf Global SLA computation}. 
+This first stage can be defined as a vertical mapping SLAs given the high level SLA described by the user (i.e. macroscopic constraints: execution time, pay / no pay, data reliability, data source). The system should be able to find relevant service compositions that respond to the query and, when combined, meet the constraints imposed by the user (High level SLA).
+
+One may think to a first filter to remove the individual services which do not meet some or all of the constraints expressed by the user. 
+To meet this objective, it is necessary to compare the SLA services to combine, in order to check if their joint use is compatible with the individual SLA. This step may lead either to the rejection of integration in case of total incompatibility, or to a negotiation between SLA which will lead us to the proposal for a negotiated SLA integration and thus the need for an adaptive setting.
+
 
  \begin{enumerate}
 \item Computation of a global SLA given the existing possible SLA agreed by data providers that can be called for answering the query. Data providers are filtered in this way, since only those agreed SLA that can be combined into a global SLA that can fulfill the user preferences are considered for retrieving data.
 
   
-  \item Filter the data providers that can potentially participate in the evaluation of the query taking into consideration the preferences associated to the query
+  \item Filter the data providers that can potentially participate in the evaluation of the query taking into consideration the preferences associated to the query.
+  
+  \item Negociation of this type of SLA depends strongly on the request sent and the services deployed at the arrival time of the application on the cloud. This negotiation can be expensive and may not scale well.
   \end{enumerate}
   
-  \item {\bf Rewrite the query.} See wether a similar Q has been already rewritten or rewrite it into n subqueries that can compute a partial answer. The subsueries represent the possible combination of services that can answer the initial query with given SLA.
-  
+  \item {\bf Rewrite the query.} See wether a similar Q has been already rewritten or rewrite it. Executing a query requires first a semantic analysis which will subdivide R into a set of sub-queries, in such a way that each sub-query can be processed by a DataService deployed on the cloud.   The subsueries represent the possible combination of services that can answer the initial query with given SLA.
+ 
   
   \item {\bf Optimize and execute subqueries.} Generate a service coordination search space that can compute each subquery and can integrate the global result. 
 Each subquery is optimized with respect to user profile.
 
-  \item Dispatch the execution of subqueries, integrate them into a result. Monitor the consumption of resources, the execution, time, behaviour of the services and make decisions
+  \item Dispatch the execution of subqueries, integrate them into a result. Monitor the consumption of resources, the execution, time, behaviour ofi the services and make decisions
 \end{enumerate}
 
+%-----------------------------------------------------------------
 \subsection{SLA model}
 \label{sec:slaModel}
+%-----------------------------------------------------------------
 
-\begin{itemize}
-\item Expression haut niveau du SLA en termes de préférences qui doit converger avec le SLA technique des services.
-  \begin{itemize}
-  \item (Souhait de temps de réponse, coût des services, espace de stockage,  
-  \item Templates pour exprimer le SLA
-  \item Intégration: modèle pivot de SLA
-\end{itemize}
+%\begin{itemize}
+%\item Expression haut niveau du SLA en termes de préférences qui doit converger avec le SLA technique des services.
+%  \begin{itemize}
+%  \item (Souhait de temps de réponse, coût des services, espace de stockage,  
+%  \item Templates pour exprimer le SLA
+%  \item Intégration: modèle pivot de SLA
+%\end{itemize}
+%
+%\item SLA violation contrôlée avec des mechanisms de monitoring.
+%\item Que ce que devient l’intégration de données par rapport au SLA
+%\item Création dynamique de SLA → niche de marché: étant donnée deux SLA fabriquer un SLA d’intégration
+%\end{itemize}
 
-\item SLA violation contrôlée avec des mechanisms de monitoring.
-\item Que ce que devient l’intégration de données par rapport au SLA
-\item Création dynamique de SLA → niche de marché: étant donnée deux SLA fabriquer un SLA d’intégration
-\end{itemize}
 
 
-In order to propose an SLA guided continuous data provision and integration, we need to think about possible steps from the request to the delivery of the result sets. Indeed, let consider a request R launched by a user who specifies a number of constraints on the environment execution. Executing this query requires first a semantic analysis which will subdivide R into a set of sub-queries, in such a way that each sub-query can be processed by a DataService deployed on the cloud. One may think to a first filter to remove the individual services which do not meet some or all of the constraints expressed by the user. This first stage can be defined as a vertical mapping SLAs given the high level SLA described by the user (i.e. macroscopic constraints: execution time, pay / no pay, data reliability, data source). The system should be able to find relevant service compositions that respond to the query and, when combined, meet the constraints imposed by the user (High level SLA).
-To meet this objective, it is necessary to compare the SLA services to combine, in order to check if their joint use is compatible with the individual SLA. This step may lead either to the rejection of integration in case of total incompatibility, or to a negotiation between SLA which will lead us to the proposal for a negotiated SLA integration and thus the need for an adaptive Template.
-The negotiation of this type of SLA depends strongly on the request sent and the services deployed at the arrival time of the application on the cloud. This negotiation can be expensive and may not scale well. It is therefore crucial to provide proactive mechanisms for optimizing the production of such SLA. We believe that the optimization of this process can occur at two levels, firstly at the level of SLA previously traded, and secondly at the level of partial or total results. Indeed, queries requesting the same services compositions will have clauses in their SLAs that are more conditions of use of the infrastructure (ie not touching the data). For two different queries, they will be negotiated in the same way. These previously negotiated SLAs are reusable.
 
-In a second time, we think optimizing this process on the data storage mechanisms to cache intermediate results, individually or in partial or complete combination depending on the terms of SLA services (data access, intermediate storage capacity , cost of storage , etc ... ).
-Given this proposal, we identify several issues:
-- Level modeling would require a model that allows the representation of SLA integration.
-- There should also be a template for representing the requirements expressed by the user
-- A mining component to identify, from the requirements expressed in the template by the user, and before the analysis of the application, the candidate integration SLA to use or adapt according to the request. This implies mapping between property and expressed clauses being.
-
+%-----------------------------------------------------------------
 \subsection{Query Rewriting}
 \label{sec:queryRew}
-
+%-----------------------------------------------------------------
 %{\color{red}
 %Here Martin will explain the rewriting problem.
 %}
@@ -83,3 +86,22 @@ over concrete  services.
 The solutions proposed are ranked and may be coded into concrete orchestrations. 
 
 
+%-----------------------------------------------------------------
+\subsection{Executing optimized queries}
+\label{sec:queryOpt}
+%-----------------------------------------------------------------
+
+
+%-----------------------------------------------------------------
+\subsection{Reducing the overhead of the evaluation process}
+\label{sec:queryProcessOpt}
+%-----------------------------------------------------------------
+% Indeed, let consider a request R launched by a user who specifies a %number of constraints on the environment execution. 
+  
+ It is  crucial to provide proactive mechanisms for optimizing the production of such SLA. We believe that the optimization of this process can occur at two levels, firstly at the level of SLA previously traded, and secondly at the level of partial or total results. Indeed, queries requesting the same services compositions will have clauses in their SLAs that are more conditions of use of the infrastructure (ie not touching the data). For two different queries, they will be negotiated in the same way. These previously negotiated SLAs are reusable.
+
+In a second time, we think optimizing this process on the data storage mechanisms to cache intermediate results, individually or in partial or complete combination depending on the terms of SLA services (data access, intermediate storage capacity , cost of storage , etc ... ).
+Given this proposal, we identify several issues:
+- Level modeling would require a model that allows the representation of SLA integration.
+- There should also be a template for representing the requirements expressed by the user
+- A mining component to identify, from the requirements expressed in the template by the user, and before the analysis of the application, the candidate integration SLA to use or adapt according to the request. This implies mapping between property and expressed clauses being.
