@@ -25,10 +25,9 @@ The following sections describe how this query is computed according to our appr
 %\item Création dynamique de SLA → niche de marché: étant donnée deux SLA fabriquer un SLA d’intégration
 %\end{itemize}
 
-This first stage can be defined as a vertical mapping SLAs given the high level SLA described by the user (i.e. macroscopic constraints: execution time, pay / no pay, data reliability, data source). The system should be able to find relevant service compositions that respond to the query and, when combined, meet the constraints imposed by the user (High level SLA).
+This first stage of our data integration and provision process is  defined as a vertical mapping of SLAs that are expressed as macroscopic constraints: execution time, pay / no pay, data reliability, data source. The system should be able to find relevant service compositions that respond to the query  such that when combined, meet the constraints imposed by the user (High level SLA). One may think to a first filter to remove the individual services which do not meet some or all of the constraints expressed by the user. 
 
-One may think to a first filter to remove the individual services which do not meet some or all of the constraints expressed by the user. 
-To meet this objective, it is necessary to compare the SLA services to combine, in order to check if their joint use is compatible with the individual SLA. This step may lead either to the rejection of integration in case of total incompatibility, or to a negotiation between SLA which will lead us to the proposal for a negotiated SLA integration and thus the need for an adaptive setting.
+To meet this objective, we assume that services export SLA's (agreed SLA's) that are sometimes of finer granularity than those defined by the user. So the challenge  is  to determine whether their joint use is compatible with the individual SLA. This step may lead either to the rejection of integration in case of total incompatibility, or to a negotiation between SLA which will lead us to the proposal for a negotiated SLA integration and thus the need for an adaptive setting.
 
 
  \begin{enumerate}
@@ -119,11 +118,12 @@ As far as our knowledge, the incremental production of a solution is outside of 
 \subsection{Executing optimized queries}
 \label{sec:queryOpt}
 %-----------------------------------------------------------------
-Generate a service coordination search space that can compute each subquery and can integrate the global result. 
-Each subquery is optimized with respect to user profile.
+Given the query rewritten as a service composition, the idea is then to optimize them and execute them. In our approach these queries are implemented as query worflows. A query workflow implements a service composition defining activities and a control flow. An activity is a program that implements the interaction with a data service (through a method call) and the processing of the data it provides; it can also implement an data processing operation such as filter, aggregation, correlation. The control flow defines the order in which activities must be executed (sequencially or in parallel). Service compositions defining subqueries are transformed into query workflows.
 
- Dispatch the execution of subqueries, integrate them into a result. Monitor the consumption of resources, the execution, time, behaviour ofi the services and make decisions
+A query worflow can be optimized with respect to the preferences expressed in a user profile: the economic cost, the execution time, the energy necessary to execute it. Therefore, given a service coordination expressing a (sub)query we compute a search space of all possibile query workflows that can implement a query (all activities sequentially, as much activities in parallel as possible, conmuting activities). Each quey workflow has an estimated multi-dimensional cost, computing according to some measures of the computed SLA. The "optimum" query workflow is the one whose cost is the closest to the expected requirements of the user. Since the cost is multidimensional, several query workflows can be close to the user preferences. For this reason, we use a top-k algorithm for choosing an ordered set of "best" query workflows. One of these queries is executed by a workflow engine.
 
+
+ 
 %-----------------------------------------------------------------
 \subsection{Reducing the overhead of the evaluation process}
 \label{sec:queryProcessOpt}
@@ -137,3 +137,5 @@ Given this proposal, we identify several issues:
 - Level modeling would require a model that allows the representation of SLA integration.
 - There should also be a template for representing the requirements expressed by the user
 - A mining component to identify, from the requirements expressed in the template by the user, and before the analysis of the application, the candidate integration SLA to use or adapt according to the request. This implies mapping between property and expressed clauses being.
+
+Monitor the consumption of resources, the execution, time, behaviour ofi the services and make decisions
