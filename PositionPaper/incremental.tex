@@ -25,20 +25,23 @@ The following sections describe how this query is computed according to our appr
 %\item Création dynamique de SLA → niche de marché: étant donnée deux SLA fabriquer un SLA d’intégration
 %\end{itemize}
 
-This first stage of our data integration and provision process is  defined as a vertical mapping of SLAs that are expressed as macroscopic constraints (i.e., high level SLA): execution time, pay / no pay, data reliability, data source. The system  finds relevant service compositions that respond to the query  such that when combined, they meet the constraints imposed by the user. One may think to a first filter to remove the individual services which do not meet some or all of the constraints expressed by the user. 
+The first stage of our proposed data integration and provision process is  defined as a vertical mapping of high level and agreed SLAs. Hig level SLA is expressed as macroscopic constraints: execution time, pay / no pay, data reliability, data source. The system  finds relevant service compositions that respond to the query  such that when combined, they meet the constraints imposed by the user. One may think to a first filter to remove the individual services which do not meet some or all of the constraints expressed by the user. 
 
-To meet this objective, we assume that services export SLA's (i.e., agreed SLA's) that are sometimes of finer granularity than those defined by the user.  The service SLA measures are are: response time, availability, price/call, reliability, data production rate. Other measures are associated to the conditions in which the service is called. For example the cost, which includes the price of calling the service, plus the price of data transmision according to the amount of trasnmitted MegaOctets through the network and the type of subscription of the user for using the network. With this measures the service has an associated agreed SLA expressed through a XML document using the specification WSLA (Web service level agreement \footnote{http://www.research.ibm.com/people/a/akeller/Data/WSLASpecV1-20030128.pdf}).
+To meet this objective, we assume that services export SLA's (i.e., agreed SLA's) that are sometimes of finer granularity than those defined by the user.  The service SLA measures are are: response time, availability, price/call, reliability, data production rate. Other measures are associated to the conditions in which the service is called. For example the cost, which includes the price of calling the service, plus the price of data transmision according to the amount of trasnmitted MegaOctets through the network and the type of subscription of the user for using the network. With this measures the service has an associated agreed SLA expressed through a XML document using the specification WSLA (Web service level agreement \footnote{\footnotesize http://www.research.ibm.com/people/a/akeller/Data/WSLASpecV1-20030128.pdf}).
 Since we assume that services can be deployed on different cloud providers, measures and SLA threasholds can vary.
 
-The challenge  is  to determine whether their joint use is compatible with the individual SLA. This step may lead either to the rejection of integration in case of total incompatibility, or to a negotiation between SLA which will lead us to the proposal for a negotiated SLA integration and thus the need for an adaptive setting.
+The challenge  is  to determine whether their joint use is compatible with the individual SLA. We propose a classification of SLA measures represents the relationship between fine grained measures used by agree SLAs and coarse grained measures used in globel SLAs. It specifies also how to compute coarse grained measures with fine grained ones. Since some of them can only be determined at execution time, the decision on which services will participate in the evaluation of the query is approximated. 
 
 
+This step may lead either to the rejection of integration in case of total incompatibility, or to a negotiation between SLA which will lead us to the proposal for a negotiated SLA integration and thus the need for an adaptive setting.
+%
+%
 % \begin{enumerate}
 %\item Computation of a global SLA given the existing possible SLA agreed by data providers that can be called for answering the query. Data providers are filtered in this way, since only those agreed SLA that can be combined into a global SLA that can fulfill the user preferences are considered for retrieving data.
-
-  
+%
+ % 
 %  \item Filter the data providers that can potentially participate in the evaluation of the query taking into consideration the preferences associated to the query.
-  
+  %
  % \item 
  Negociation of this type of SLA depends strongly on the request sent and the services deployed at the arrival time of the application on the cloud. This negotiation can be expensive and may not scale well.
  % \end{enumerate}
@@ -53,17 +56,20 @@ The challenge  is  to determine whether their joint use is compatible with the i
 %}
 
 Query rewriting is a well-known problem for the database community.
-The problem consists on transforming an abstract query into a set (or list) of lower-level queries to the available databases.
+The problem consists in transforming an abstract query into a set (or list) of lower-level queries to the available databases.
 Traditionally, the abstract query is a query over a set of views and the lower-level queries are performed on the available databases whose information compose the view. 
 The rewriting is guided by the schema of both abstract and concrete databases.
 The answers to the lower level queries are combined in order to obtain the result to be returned to the user.
 
 The query rewriting problem may be generalized to the case of services.
 Both database queries and service invocations may be represented using a similar syntax.
-Indeed, the interfaces to relational databases and information-providing\footnote{Services that do not perform changes in the data they use.} services are exactly the same.
-In this case, the query to be rewritten is seen as an abstract service composition, to be expressed in terms of concrete services (which take the place of the available database queries).
+Indeed, the interfaces to relational databases and information-provision
+%\footnote{Services that do not perform changes in the data they use.} 
+services are exactly the same.
+In this case, the query to be rewritten is seen as an abstract service composition, to be expressed in terms of concrete services.
+%(which take the place of the available database queries).
 
-The case of more general services (\textit{i.e}, services that maintain and update information) is a generalization of the information-providing case.
+The case of more general services (\textit{i.e}, services that maintain and update information) is a generalization of the information-provision case.
 Unlike the simpler case, where only the service interfaces need to be considered, the general case requires considering the functional and non-functional aspects of the query and available services.
 In this context, the \textit{Local as View} (\textit{LAV}) methods of query rewriting~\cite{Levy2000} are suitable.
 In the LAV approach, the rewriting process is guided by the specification of both the query to be rewritten and the available databases.
@@ -72,12 +78,11 @@ These specifications may detail both the functional and non-functional behaviour
 
 Query rewriting techniques have been adapted to the context of service composition~\cite{BBM10,ZLC11,CostaAMR13}. 
 In~\cite{CostaAMR13} the authors present an algorithm to automatically refine high-level specifications of service compositions into lower-level ones. 
-The method is based on the MiniCon algorithm~\cite{PH01} for query rewriting,  known in the database domain.
+The method is based on the MiniCon algorithm~\cite{PH01} for query rewriting.
+%known in the database domain.
 The proposed approach consists in generating several translations of an abstract service specification into compositions
 over concrete  services. 
-The solutions proposed are ranked and may be coded into concrete orchestrations. 
-
-The next example shows the main features of the approach proposed in~\cite{CostaAMR13}. 
+The solutions proposed are ranked and may be coded into concrete workflows as shown in the following section.  The next example shows the main features of the approach proposed in~\cite{CostaAMR13} and that is extended in the case of SLA guided services based data integration. 
 
 \begin{example}[Service Refinement by Rewriting]\label{Ex:rew1}
 Let us consider the case of generating sales reports for a global bookstore.
@@ -110,8 +115,7 @@ Let us return to the global bookstore of Example~\ref{Ex:rew1}.
 Let us suppose that the sales data is needed to produce daily and weekly ``\textit{Top 500}'' best-selling lists.
 In this case, each warehouse database will be queried and the list will be produced by adding data obtained from them.
 Let us supose that, in order to minimize the the communications between servers around the Globe, the \textit{Top 500} lists need to be produced incrementally.
-In this case, the composition produced by the service refinement may need to include an iteration.
-(The data produced by the warehouse servers will be processed in batches and the process will end once the list reaches the size of 500 titles.)
+In this case, the composition produced by the service refinement may need to include an iteration. The data produced by the warehouse servers will be processed in batch and the process will end once the list reaches the size of 500 titles.
 
 As far as our knowledge, the incremental production of a solution is outside of the scope of the current solutions for rewriting service compositions and represents a challenge to the area.
 ~\hfill\openbox
