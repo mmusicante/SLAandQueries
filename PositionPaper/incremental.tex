@@ -133,17 +133,19 @@ A query worflow can be optimized with respect to the preferences expressed in a 
 
  
 %-----------------------------------------------------------------
-\subsection{Reducing the overhead of the evaluation process}
+\subsection{Monitoring the resources consumed by the evaluation process}
 \label{sec:queryProcessOpt}
 %-----------------------------------------------------------------
 % Indeed, let consider a request R launched by a user who specifies a %number of constraints on the environment execution. 
   
- It is  crucial to provide proactive mechanisms for optimizing the production of such SLA. We believe that the optimization of this process can occur at two levels, firstly at the level of SLA previously traded, and secondly at the level of partial or total results. Indeed, queries requesting the same services compositions will have clauses in their SLAs that are more conditions of use of the infrastructure (ie not touching the data). For two different queries, they will be negotiated in the same way. These previously negotiated SLAs are reusable.
+ %It is  crucial to provide proactive mechanisms for optimizing the production of such SLA. 
+ 
+ We believe that the optimization of this process can occur at two levels, firstly at the level of SLA previously traded, and secondly at the level of partial or total results. Indeed, queries requesting the same services compositions will have clauses in their SLAs that are more conditions of use of the infrastructure (ie not touching the data). For two different queries, they will be negotiated in the same way. These previously negotiated SLAs are reusable.
 
 In a second time, we think optimizing this process on the data storage mechanisms to cache intermediate results, individually or in partial or complete combination depending on the terms of SLA services (data access, intermediate storage capacity , cost of storage , etc ... ).
-Given this proposal, we identify several issues:
-- Level modeling would require a model that allows the representation of SLA integration.
-- There should also be a template for representing the requirements expressed by the user
-- A mining component to identify, from the requirements expressed in the template by the user, and before the analysis of the application, the candidate integration SLA to use or adapt according to the request. This implies mapping between property and expressed clauses being.
+%Given this proposal, we identify several issues:
+%- Level modeling would require a model that allows the representation of SLA integration.
+%- There should also be a template for representing the requirements expressed by the user
+%- A mining component to identify, from the requirements expressed in the template by the user, and before the analysis of the application, the candidate integration SLA to use or adapt according to the request. This implies mapping between property and expressed clauses being.
 
-Monitor the consumption of resources, the execution, time, behaviour ofi the services and make decisions
+Monitor the consumption of resources, the execution, time, behaviour of the services and make decisions
