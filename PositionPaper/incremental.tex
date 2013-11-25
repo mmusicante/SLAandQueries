@@ -1,4 +1,4 @@
-We propose an SLA guided continuous data provision and integration approach that proposes three steps  starting from the processing of the request  to the delivery of the result sets.
+We propose an SLA guided, continuous data provision and integration approach that proposes three steps  starting from the processing of the request  to the delivery of the result sets.
 
 Given a requirement expressing a query and quality of service preferences: cost, provenance, reputation, time the system processes it according as follows: (i) SLA global computation for filtering possible data providers; (ii) query rewriting for computing services compositions that can be used for building results; (iii) optimizing and integrating results. The results of these steps generate intermediate results that are stored as knowledge in order to reduce the overhead of the query evaluation process. The whole process is monitored to determine whether a computed SLA is being honoured while a query is evaluated. 
 The following sections describe how this query is computed according to our approach. 
@@ -25,7 +25,7 @@ The following sections describe how this query is computed according to our appr
 %\item Création dynamique de SLA → niche de marché: étant donnée deux SLA fabriquer un SLA d’intégration
 %\end{itemize}
 
-The first stage of our proposed data integration and provision process is  defined as a vertical mapping of high level and agreed SLAs. Hig level SLA is expressed as macroscopic constraints: execution time, pay / no pay, data reliability, data source. The system  finds relevant service compositions that respond to the query  such that when combined, they meet the constraints imposed by the user. One may think to a first filter to remove the individual services which do not meet some or all of the constraints expressed by the user. 
+The first stage of our proposed data integration and provision process is  defined as a vertical mapping of high level and agreed SLAs. Higher level SLA is expressed as macroscopic constraints: execution time, pay / no pay, data reliability, data source. The system  finds relevant service compositions that respond to the query  such that when combined, they meet the constraints imposed by the user. One may think to a first filter to remove the individual services which do not meet some or all of the constraints expressed by the user. 
 
 To meet this objective, we assume that services export SLA's (i.e., agreed SLA's) that are sometimes of finer granularity than those defined by the user.  The service SLA measures are are: response time, availability, price/call, reliability, data production rate. Other measures are associated to the conditions in which the service is called. For example the cost, which includes the price of calling the service, plus the price of data transmision according to the amount of trasnmitted MegaOctets through the network and the type of subscription of the user for using the network. With this measures the service has an associated agreed SLA expressed through a XML document using the specification WSLA (Web service level agreement \footnote{\footnotesize http://www.research.ibm.com/people/a/akeller/Data/WSLASpecV1-20030128.pdf}).
 Since we assume that services can be deployed on different cloud providers, measures and SLA threasholds can vary.
@@ -94,17 +94,17 @@ Each cloud provider exports their own interfaces.
 Local shops use the nearest cloud provider.
 Internet transactions are processed by the Asian and South American cloud providers.
 
-When a potential Internet client requires a list of books, a composed web service is generated, in order to fetch each book (from the nearest warehouse where the book is available) and to put in motion the payment and packing procedures.
+When an on-line client requires a list of books, a composed web service is generated, in order to fetch each book (from the nearest warehouse where the book is available) and to put in motion the payment and packing procedures.
 Depending on the location of the client, different conditions may apply on the selling and payment procedures.
 So, for each country or region, a limited number of options may be available for payment, packaging and delivery.
 Additionally, non-functional requirements, defined by SLA may apply.
 
-In this context, the user supplies the list of books, his location and payment information and a composite web service should be generated to satisfy the order.
+In this context, the user supplies the list of books, his location and payment information and a composite web service should be generated to fulfill the order.
 The generated service composition should pick each book at the nearest warehouse, in order to minimize the costs of delivery and processing.
 Additional requirements, such as delivery time, may apply.
 
 In order to produce a personalised service composition for each user, the algorithm in~\cite{CostaAMR13} takes into account the specification of the composition (which may be produced by the user's browser, including context information).
-The specification of each available service is also considered (this specification is given by each cloud provider).
+The specification of each available service is also considered (this specification should be given by the service provider).
 ~\hfill\openbox
 \end{example}
 
@@ -117,7 +117,7 @@ In this case, each warehouse database will be queried and the list will be produ
 Let us supose that, in order to minimize the the communications between servers around the Globe, the \textit{Top 500} lists need to be produced incrementally.
 In this case, the composition produced by the service refinement may need to include an iteration. The data produced by the warehouse servers will be processed in batch and the process will end once the list reaches the size of 500 titles.
 
-As far as our knowledge, the incremental production of a solution is outside of the scope of the current solutions for rewriting service compositions and represents a challenge to the area.
+As far as our knowledge, the incremental production of a solution is outside of the scope of the current methods for rewriting service compositions and represents a challenge to the area.
 ~\hfill\openbox
 \end{example}
 
