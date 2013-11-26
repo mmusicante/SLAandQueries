@@ -29,12 +29,20 @@ Each service is deployed in different cloud provider and each exports an agreed 
  \end{description}
  
 
- Given a query, expressed as an SQL like expression including spatio-temporal attributes and preferences, for example, {\em List of energy providers that can provision 1000 Kwatts/h, in the next 10 seconds, that are close to my city with a cost of 0,50 euros/Kwatt and that are labeled as green?}. 
+ Given a query, expressed as an SQL like expression including spatio-temporal attributes and preferences, for example, {\em List of energy providers that can provision 1000 Kwatts/h, in the next 10 seconds, that are close to my city with a cost of 0,50 euros/Kwatt and that are labeled as green?}. The user preferences statement, includes her cloud provider contract and her quality preferences. 
+ \begin{description}
+\sf\footnotesize
  
+ \item  {\sf cloudSLA:$\langle$0,05 cents per call, 8 Gigabytes I/0 volume/month, free, 1 Giga$\rangle$}. 
  
- Assume that there are four civilian energy providers are represented by services  {\sf e$_1$, ... e$_4$} and two {\sf hub}s which are also services integrating energy providers communities {\sf h$_1$ and h$_2$}; there are two free location services exporting  the following interface {\sf loc(IP) $\leftarrow$ $\langle$ X, Y$\rangle$} meaning that given an IP address it returns the geographic position expresses as {\sf X} and {\sf Y}. t can potentially be combined for answering the query. 
+ \item {\sf preferencesStatement:$\langle$cost/call, maxCalls/day, availability, responseTime, reliability, privacy, precision, freshness, provenance$\rangle$}. 
  
- \paragraph{Derived SLA}
+ \end{description}
+ We consider a simplified SLA cloud contract inspired in the lowest contract provided by Azure with {\sf 0,05 cents per call,  8 Gigabytes of I/O volume/month, free data transfert cost within the same region,  Gigabyte of storage}. The user is ready to pay maximum {\sf 5 euros as total query cost}, she wants only {\sf green} energy providers (provenance), at least {\sf 85$\%$} of precision of provided data, even if they are not fresh, she wants at least {\sf 90$\%$} available services, with a response time of {\sf 0,01 seconds}.
+ 
+ Assume that there are four civilian energy providers are represented by services  {\sf e$_1$, ... e$_4$} and two {\sf hub}s which are also services integrating energy providers communities {\sf h$_1$ and h$_2$}; there are two free location services exporting  the following interface {\sf loc(IP) $\leftarrow$ $\langle$ X, Y$\rangle$} meaning that given an IP address it returns the geographic position expresses as {\sf X} and {\sf Y}. This services can potentially be combined for answering the query. 
+ 
+ \paragraph{Derived SLA} Som of the user preferences statement measures are used for defining a dervied SLA that, as said in previous section, will guide the evaluation of the query. These measures are defined as a function of the measures used by the agreed SLAs and by the cloud SLA contract.
  
   \paragraph{Computing service compositions}
   
