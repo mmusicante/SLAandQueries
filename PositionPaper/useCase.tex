@@ -66,7 +66,13 @@ $\langle$ C$_1$, E$_1$ $\rangle$ = e$_1$() $\parallel$ ...$\parallel$ $\langle$ 
   
   In fact our apporaches would generate k service compoisions combining as much as possible the services available such that the constraints of the derived SLA are verified. 
  
-   \paragraph{Optimizing service compositions execution}
+    %.  .  .  .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  
+    \paragraph{Optimizing service compositions execution} 
+ %.  .  .  .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  .     
+    A service composition expressed in Datalog is then transformed into a query workflow search space consisting of workflows with different control flows and where constraints serve to determine an optimization objective. In the case of {\sf Q$_1$} the corresponding search space contains for example a workflow {\sf QW$_1$} where all activities are executed sequentially. Another one, {\sf QW$_2$}, with parallel activities programming the call to a location service for the user and the energy providers, then a filter activity selecting only services located not farther to 1,5 Km., followed by  parallel activities that compute the total cost of the energy to buy, the total amount of energy. 
+    
+    Once the search space has been computed the QWs are filtered according to their economic and execution time costs. The QWs that minimize this cost are identified and ordered accoding to their conformance to the user preferences statement.
+   
 % \begin{figure*}
 %\includegraphics[width=0.95\textwidth]{figs/exchange.pdf}
 %\caption{\label{fig:energyXChange} Energy exchange.}
