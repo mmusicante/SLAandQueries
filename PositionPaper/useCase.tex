@@ -1,7 +1,7 @@
-\begin{figure*}
-\includegraphics[width=0.8\textwidth]{figs/arch.png}
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{figs/arch.png}
 \caption{General architecture of an SLA guided  data integration system.\label{fig:arch}}
-\end{figure*}
+\end{figure}
 
 Figure~\ref{fig:arch} shows the general architecture of an SLA guided data integration system that is supported by data services which are data providers deployed in a cloud and that provide agreed SLA’s. 
 These descriptions are stored in a directory together with meta-data about the way queries are evaluated for producing results. 
@@ -20,11 +20,22 @@ A energy exchange market is established in order to continuously trade  energy p
 
 In our approach energy producers are modelled as services with associated ``agreed'' SLAs. 
 In general, we assume that several producers will be able to supply energy for a given period of time given specific  preferences expressed by a consumer. 
-An energy request is expressed as a query that specifies an energy requirement with QoS preferences independently of the possible producers. In our example assume that there are several energy provision services (e$_1$, ... e$_n$) that can be independent or hubs:
+An energy request is expressed as a query that specifies an energy requirement with QoS preferences independently of the possible producers. In our example assume that there are several energy provision services ({\sf e$_1$, ... e$_n$}) that can be independent or hubs integrating several energy providers:
 \begin{description}
-\item energyProvider.requestAvailability() $\rangle$ $<$ KWatt/h, cost, rate, location $>$ $\langle$
+\sf\footnotesize
+\item energyProvider.requestAvailability() $\rightarrow$ $\langle$KWatt/h, Ecost, rate, location$\rangle$
 
-\item energyHub.requestAvailability() $\rangle$ $<$ {ID, KWatt/h, cost, rate, location $>$}$\langle$
+\item energyHub.requestAvailability() $\rightarrow$  \{$\langle$ID, KWatt/h, cost, rate, location$\rangle$\}
+
 \end{description}
 
+Each service is deployed in different cloud provider and each exports an agreed SLA that specifies {\sf agreedSLA:$\langle$cost/call, maxCalls, availability, responseTime, reliability, privacy, precision, freshness, provenance$\rangle$}. Cloud providers define also their SLA contracts defining {\sf cloudSLA:$\langle$cost/request, I/0 volume/month, datatransferCost/region, storageSpace$\rangle$}. 
+
  Given a query, expressed as an SQL like expression including spatio-temporal attributes and preferences, for example, {\em List of energy providers that can provision 1000 Kwatts/h, in the next 10 seconds, that are close to my city with a cost of 0,50 euros/Kwatt?}. Assuming also that energy providers are represented by services exporting their SLA agreements and that can potentially be combined for answering the query. 
+ 
+ \paragraph{Derived SLA}
+ 
+  \paragraph{Computing service compositions}
+  
+   \paragraph{Optimizing service compositions execution}
+ 
