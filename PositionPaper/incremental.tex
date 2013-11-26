@@ -158,3 +158,15 @@ Second, precalculated queries and partial results can be also stored in cache or
 As discussed in previous sections, the derived SLA associated to service compositions can have free measures that can only be evaluated at run-time. In order to do so, we assume that there is a monitoring system observing and aggregating events for computing resources consumption, execution and time cost, volumes of data transfered when services deliver results. These computations are used dynamically for instanciating free variables in the derived SLA and thus determine wether te contract is respected by the execution of a query. Since this is monitered dynamicalle, the evaluation of the query can be adapted if the SLA is not being respected anymore.
 
 
+%-----------------------------------------------------------------
+\subsection{SLA based data integration system}
+\label{sec:architecture}
+%-----------------------------------------------------------------
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{figs/arch.png}
+\caption{General architecture of an SLA guided  data integration system.\label{fig:arch}}
+\end{figure}
+
+Figure~\ref{fig:arch} shows the general architecture of an SLA guided data integration system that is supported by data services which are data providers deployed in a cloud and that provide agreed SLA’s. 
+These descriptions are stored in a directory together with meta-data about the way queries are evaluated for producing results. 
+The system uses this information  by query processing and monitoring modules for rewriting queries according to given quality of service (QoS) preferences expressed by a data consumer, for example a user.
