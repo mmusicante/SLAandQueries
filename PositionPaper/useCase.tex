@@ -1,22 +1,22 @@
-Consider a smart city that aims at being energy self-sustainable and produce and consume as much as possible, energy within its geographic area. 
-Producers are characterized according to their location, the amount of energy in kWatts-hour that they can sell, the cost, and the time window in which they can produce it, with a given service level agreement concerning their availability and fault tolerance. 
-Consumers, give also their location, their energy requirements during a certain interval of time, the maximum total cost they are ready to pay, and quality of service requirements such as availability and how critical it is to consume this amount of energy. 
-A energy exchange market is established in order to continuously trade  energy provision/consumption ensuring that all consumers will have the energy they require at every moment.
+Consider a smart city that aims at being energy self-sustainable and produce and consume, as much as possible, energy within its geographic area. 
+Producers are characterized according to their location, the amount of energy in Kilowatts-hour that they can sell, the cost of that energy, and the time window in which they can produce it, with a given service level agreement concerning their availability and fault tolerance. 
+Consumers are described by their location, their energy requirements during a certain interval of time, the maximum total cost they are ready to pay, and quality of service requirements such as availability and how critical it is to consume this amount of energy. 
+An energy exchange market is established in order to continuously trade  energy provision/consumption ensuring that all consumers will have the energy they require at every moment.
 
-
-
-In our approach energy producers are modelled as services with associated ``agreed'' SLAs. 
+In our approach, energy producers are modelled as services with associated ``agreed'' SLAs. 
 In general, we assume that several producers will be able to supply energy for a given period of time given specific  preferences expressed by a consumer. 
-An energy request is expressed as a query that specifies an energy requirement with QoS preferences independently of the possible producers. In our example assume that there are several energy provision services ({\sf e$_1$, ... e$_n$}) that can be independent or hubs integrating several energy providers:
+An energy request is expressed as a query that specifies an energy requirement with QoS preferences independently of the possible producers. 
+In our example assume that there are several energy provision services ({\sf e$_1$, ... e$_n$}) that can be independent or hubs integrating several energy providers. 
+Each of them is specified by a clause:
 \begin{itemize}
 \sf\footnotesize
-\item energyProvider.requestAvailability() $\rightarrow$ $\langle$KWatt/h, Ecost, rate, location$\rangle$
-
-\item energyHub.requestAvailability() $\rightarrow$  \{$\langle$ID, KWatt/h, cost, rate, location$\rangle$\}
-
+\item e$_i$ $\equiv$ provider(KW-h, Ecost, rate, location), \textit{SLA}$_i$
 \end{itemize}
 
-Each service is deployed in different cloud provider and each exports an agreed SLA that specifies the economic cost per call, the maximum number of calls that can be done per day, the disponibility of the service, the average response time when a method is called, the reliability, the privace of the produced data (whether they can be stored or not), the precision,freshness and provenance of the produced data. As said in previous sections, some of these measures ({\sf cost/call, maxCall/day}) are static and explicitly specified by the service provider. In contrast, the other measures are constantly computed by monitoring the conversations between the service and the applications that contact it.  Cloud providers define also their SLA contracts defining normally subscription contracts that specify, the cost per request ({\sf cost/request}), the volume of data that can be exchanged per month ({\sf I/0 volume/month}), the cost of transfering data or applications within the same data centre or between data centres ({\sf datatransferCost/region}), the storage space ({\sf storageSpace}). For exmaple some cloud providers enable the customer to choose the zone to install PaaS services and deploy applications (e.g. zone 1 is Europe). If the customer wishes to deploy services in zone 1 but store data in zone 2 the transfer cost will change.
+Services are deployed in different cloud providers and each service exports an agreed SLA that specifies the economic cost per call, the maximum number of calls that can be done per day, the availability of the service, the average response time when a method is called, the reliability, the privacy of the produced data (whether they can be stored or not), the precision, freshness and provenance of the produced data. 
+As said in previous sections, some of these measures ({\sf cost/call, maxCall/day}) are static and explicitly specified by the service provider. 
+In contrast, the other measures should be computed by monitoring the conversations between the service and the applications that contact it.  
+Cloud providers define also their SLA contracts defining normally subscription contracts that specify, the cost per request ({\sf cost/request}), the volume of data that can be exchanged per month ({\sf I/0 volume/month}), the cost of transferring data or applications within the same data centre or between data centres ({\sf datatransferCost/region}), the storage space ({\sf storageSpace}). For example some cloud providers enable the customer to choose the zone to install PaaS services and deploy applications (e.g. zone 1 is Europe). If the customer wishes to deploy services in zone 1 but store data in zone 2 the transfer cost will change.
 
 \begin{itemize}
 \sf\footnotesize
