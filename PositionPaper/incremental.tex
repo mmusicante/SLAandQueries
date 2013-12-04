@@ -1,23 +1,23 @@
-We propose an SLA guided, continuous data provision and integration approach that proposes three steps  starting from the processing of the request  to the delivery of the result sets.
+We propose an SLA guided, continuous data provision and integration approach that proposes three steps  starting from the processing of the query  to the delivery of the results.
+Figure~\ref{fig:arch} shows the general architecture of an SLA guided data integration system that is supported by data services which are data providers deployed in a cloud and that provide agreed SLA’s. 
+Given a requirement expressing a query and quality of service preferences: cost, provenance, reputation, time the system processes it  as follows: (i) derived SLA  computation for filtering possible data providers; (ii) query rewriting for computing services compositions that can be used for building results; (iii) managing the integration process including storing partial results, delivering adata and launching and re-launching queries. Intermediate results that are stored as knowledge in order to reduce the overhead of the query evaluation process. 
+%The whole process is monitored to determine whether a computed SLA is being honoured while a query is evaluated. 
 
-Given a requirement expressing a query and quality of service preferences: cost, provenance, reputation, time the system processes it  as follows: (i) derived SLA  computation for filtering possible data providers; (ii) query rewriting for computing services compositions that can be used for building results; (iii) optimizing and integrating results. The output of these steps generate intermediate results that are stored as knowledge in order to reduce the overhead of the query evaluation process. The whole process is monitored to determine whether a computed SLA is being honoured while a query is evaluated. 
+%These descriptions are stored in a directory together with meta-data about the way queries are evaluated for producing results. 
+%The system uses this information  by query processing and monitoring modules for rewriting queries according to given quality of service (QoS) preferences expressed by a data consumer, for example a user.The following lines describe how this query is evaluated according to our approach. 
 
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{figs/arch.png}
+\caption{General architecture of an SLA guided  data integration system.\label{fig:arch}}
+\end{figure}
 
-
-
-Consider a smart city that aims at being energy self-sustainable and produce and consume, as much as possible, energy within its geographic area. 
-Producers are characterized according to their location, the amount of energy in Kilowatts-hour that they can sell, the cost of that energy, and the time window in which they can produce it, with a given service level agreement concerning their availability and fault tolerance. 
+In order to illustrate our approach, consider a smart city that aims at being energy self-sustainable and produce and consume, as much as possible, energy within its geographic area. 
+Producers are characterized according to their location, the amount of energy in Kilowatts-hour that they can sell, the cost of that energy, and the time window in which they can produce it. 
 Consumers are described by their location, their energy requirements during a certain interval of time, the maximum total cost they are ready to pay, and quality of service requirements such as availability and how critical it is to consume this amount of energy. 
 An energy exchange market is established in order to continuously trade  energy provision/consumption ensuring that all consumers will have the energy they require at every moment.
 
-In our approach, energy producers are modelled as services with associated ``agreed'' SLAs. 
-In general, we assume that several producers will be able to supply energy for a given period of time given specific  preferences expressed by a consumer. 
-An energy request is expressed as a query that specifies an energy requirement with QoS preferences independently of the possible producers. 
-In our example assume that there are several energy provision services ({\sf e$_1$, ... e$_n$}) that can be independent or hubs integrating several energy providers. 
-Each of them is specified by a clause:
-\begin{trivlist}\sf\footnotesize
-\item[~$\bullet$ ]   e$_i$ $\equiv$ provider(KW-h, Ecost, rate, location), \textit{SLA}$_i$
-\end{trivlist}
+
+
 
 Services are deployed in different cloud providers and each service exports an agreed SLA that specifies the economic cost per call, the maximum number of calls that can be done per day, the availability of the service, the average response time when a method is called, the reliability, the privacy of the produced data (whether they can be stored or not), the precision, freshness and provenance of the produced data. 
 As said in previous sections, some of these measures ({\sf cost/call, maxCall/day}) are static and explicitly specified by the service provider. 
@@ -31,6 +31,22 @@ Cloud providers define also their SLA contracts defining normally subscription c
  \end{trivlist}
  
 
+
+According to our approach, energy producers are modelled as data services with associated ``agreed'' SLAs. In the example, we assume that several producers will be able to supply energy for a given period of time given specific  preferences expressed by a consumer. 
+Assume that there are four household energy providers that can be queried individually and two hubs that collect information from the community smartmeters.
+Hubs will store information about (surplus) energy, available from particular users.
+We represent these services by {\sf e$_1$, \dots, e$_4$} and {\sf h$_1$ and h$_2$}.
+We also suppose the existence of two free location services exporting the following interface: {\sf loc(IP) $\leftarrow$ $\langle$ X, Y$\rangle$}, meaning that given an IP address it returns a geographic position expressed as a pair of coordinates. 
+All these services can potentially be combined for answering queries.
+
+
+
+An energy request is expressed as a query that specifies an energy requirement with QoS preferences independently of the possible producers. 
+In our example assume that there are several energy provision services ({\sf e$_1$, ... e$_n$}) that can be independent or hubs integrating several energy providers. 
+Each of them is specified by a clause:
+\begin{trivlist}\sf\footnotesize
+\item[~$\bullet$ ]   e$_i$ $\equiv$ provider(KW-h, Ecost, rate, location), \textit{SLA}$_i$
+\end{trivlist}
 Queries may be expressed as Datalog-like programs or an SQL-like expressions, including spatio-temporal attributes and preferences.
 For instance, \textit{List of energy providers that can provision 1000 Kwatts/h, in the next 10 seconds, that are close to my city with a cost of 0,50 euros/Kwatt and that are labeled as green?}. 
 The user preferences statement would include their cloud provider contract and quality preferences:
@@ -40,23 +56,11 @@ The user preferences statement would include their cloud provider contract and q
 \item[~$\bullet$ ] {\sf preferencesStatement:$\langle$query total cost,  total responseTime, reliability, freshness, precision, provenance, storage$\rangle$}. 
 \end{trivlist}
 
+
 We consider a simplified SLA cloud contract inspired in the lowest contract provided by Azure: {\sf cost of \$0,05 cents per call,  8~GB of I/O volume/month, free data transfer cost within the same region,  01~GB of storage}. 
 The user is ready to pay maximum {\sf \$5 as total query cost}; she requests that only {\sf green} energy providers are listed (provenance); at least {\sf 85$\%$} of precision of provided data, even if they are not fresh; she requires an availability rate of at least {\sf 90$\%$} and with a response time of {\sf 0,01 seconds}.
  
-Assume that there are four household energy providers that can be queried individually and two hubs that collect information from the community smartmeters.
-Hubs will store information about (surplus) energy, available from particular users.
-We represent these services by {\sf e$_1$, \dots, e$_4$} and {\sf h$_1$ and h$_2$}.
-We also suppose the existence of two free location services exporting the following interface: {\sf loc(IP) $\leftarrow$ $\langle$ X, Y$\rangle$}, meaning that given an IP address it returns a geographic position expressed as a pair of coordinates. 
-All these services can potentially be combined for answering the query.
 
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{figs/arch.png}
-\caption{General architecture of an SLA guided  data integration system.\label{fig:arch}}
-\end{figure}
-
-Figure~\ref{fig:arch} shows the general architecture of an SLA guided data integration system that is supported by data services which are data providers deployed in a cloud and that provide agreed SLA’s. 
-These descriptions are stored in a directory together with meta-data about the way queries are evaluated for producing results. 
-The system uses this information  by query processing and monitoring modules for rewriting queries according to given quality of service (QoS) preferences expressed by a data consumer, for example a user.The following sections describe how this query is evaluated according to our approach. 
 
 
 
@@ -79,17 +83,35 @@ The system uses this information  by query processing and monitoring modules for
 %\item Création dynamique de SLA → niche de marché: étant donnée deux SLA fabriquer un SLA d’intégration
 %\end{itemize}
 
-The key and original aspect of   our proposed data integration and provision process is  defined as a vertical mapping of user QoS preferences and agreed SLAs. This  leads to a {\em derived SLA} that guides the evaluation of a query. A query has associated preferences  expressed as macroscopic constraints (i.e. user preferences statement): execution time, pay / no pay, data reliability, provenance, freshness, privacy, partial/full results, delivery mode. These constraints are coupled with the profile of the user which is in general stated in her cloud subscription (amount of assigned storage space, number of requests, I/O transfered Mega bytes, etc.). Given a query and its preferences statement, the system  finds  service compositions that produce results   meeting the required constraints. 
+The key and original aspect of   our proposed data integration and provision process is  defined as a vertical mapping of user QoS preferences and agreed SLAs. This  leads to a {\em derived SLA} that guides the evaluation of a query. 
+
+A query has associated preferences  expressed as macroscopic constraints (i.e. user preferences statement): execution time, pay / no pay, data reliability, provenance, freshness, privacy, partial/full results, delivery mode. These constraints are coupled with the profile of the user which is in general stated in her cloud subscription (amount of assigned storage space, number of requests, I/O transfered Mega bytes, etc.). 
+
+
 
 %One may think to a first filter to remove the individual services which do not meet some or all of the constraints expressed by the user. 
 
-We assume that services export SLAs (i.e., agreed SLAs) that define measures  of finer granularity than those defined by the user.  The service SLA measures  are: response time, availability, price/call, reliability, data production rate. Other measures are associated to the conditions in which the service is called or to the precision and recall of their produced data given a request. These measures are, in general, computed by monitoring the execution and conversations associted to services. For example the cost of retrieving the list of energy providers within a region with their KWatt cost provided that calls cost between 0,25 - 0,50 euros depending on the data service. This request  includes the price of calling a service, plus the price of data transmision according to the amount of trasnmitted MegaOctets through the network and the type of subscription of the user for using the network. Since we assume that services can be deployed on different cloud providers, measures and SLA threasholds can vary.
- Measures can be also hybrid, in the sense that they can be statically stated partially but they require to be precised at execution time.  A service  agreed SLA is expressed through an  XML document using the specification WSLA (Web service level agreement \footnote{\footnotesize http://www.research.ibm.com/people/a/akeller/\-Data/WSLASpecV1-20030128.pdf}).
+We assume that services export SLAs (i.e., agreed SLAs) that define measures   that can be either expressed as constants,  computed (dynamically) by monitoring the execution and conversations associted to services, and hybrid they can be statically stated  but they change at execution time.  A service  agreed SLA is expressed through an  XML document using the specification WSLA (Web service level agreement \footnote{\footnotesize http://www.research.ibm.com/people/a/akeller/\-Data/WSLASpecV1-20030128.pdf}). The service SLA measures  that we consider are: response time, availability, price/call, reliability, data production rate. Other measures are associated to the conditions in which the service is called or to the precision and recall of their produced data given a request. 
+
+An example of computed measure is the cost of retrieving the list of energy providers within a region with their KWatt cost. The cost is determined by the  cost of the calls. This request  includes the price of calling a service (e.g.,  between 0,25 - 0,50 euros depending on the data service), plus the price of data transmision according to the amount of trasnmitted MegaOctets through the network and the type of subscription of the user for using the network. 
+%Since we assume that services can be deployed on different cloud providers, measures and SLA threasholds can vary.
+
 
 
 Given agreed SLA's and a user preferences statement the challenge is to compute a  {\em derived SLA} that  maps SLA measures and preferences attributes.  The derived SLA is defined as a set of measures that correspond to the user preferences computed as a function of different static, computed and hybrid measures. The {\em derived SLA}  will guide the way the query will be evaluated, and the way results will be computed and delivered.
 
- We propose a classification of SLA measures that represents the relationship between fine grained measures used by agreed SLAs and coarse grained measures used in user preferences statements. It specifies also how to compute coarse grained measures with fine grained ones. For example, data precision will be computed as a function of availability, freshness and provenance exported by data services. The derived SLA  can be seen as a set of inequations that have to be solved during the execution of a service composition. Since some of them can only be determined at execution time, the decision on which services will participate in the evaluation of the query is approximated. We will discuss this issue in the next sections.
+In the example, some of the user preferences statement measures are used for defining a dervied SLA that, as said in previous section, will guide the evaluation of the query. These measures are defined as a function of the measures used by the agreed SLAs and by the cloud SLA contract.
+\begin{trivlist}\sf\footnotesize
+\item[~$\bullet$ ] query total cost: $\sum_{i = 1\dots n}$ cost(s$_i$) + data transfer $\leq$ \$5
+ \item[~$\bullet$ ] total response time: of services + data transfer
+ \item[~$\bullet$ ] availability: {\em (of services involved)} $\leq$ {\sf 90$\%$}, 
+ \item[~$\bullet$ ] freshness: non 
+ \item[~$\bullet$ ] precision: {\em avg (precision of services involved)} $\leq$ {\sf 85$\%$}
+ \item[~$\bullet$ ] provenance:  all services involved must be $green$
+ \item[~$\bullet$ ] storage: {\em partial results size} $\leq 1 Giga$ 
+ \end{trivlist} 
+ 
+Therefore, we propose a classification of SLA measures that represents the relationship between fine grained measures used by agreed SLAs and coarse grained measures used in user preferences statements. It specifies also how to compute coarse grained measures with fine grained ones. For example, data precision will be computed as a function of availability, freshness and provenance exported by data services. The derived SLA  can be seen as a set of inequations that have to be solved during the execution of a service composition. Since some of them can only be determined at execution time, the decision on which services will participate in the evaluation of the query is approximated. We will discuss this issue in the next sections.
 
 
 This step may lead either to the rejection of integration in case of total incompatibility, or to a negotiation between SLA which will lead us to the proposal for a negotiated SLA integration and thus the need for an adaptive setting.
@@ -105,16 +127,10 @@ This step may lead either to the rejection of integration in case of total incom
  Negociation of this type of SLA depends strongly on the request sent and the services deployed at the arrival time of the application on the cloud. This negotiation can be expensive and may not scale well.
  % \end{enumerate}
 
-Some of the user preferences statement measures are used for defining a dervied SLA that, as said in previous section, will guide the evaluation of the query. These measures are defined as a function of the measures used by the agreed SLAs and by the cloud SLA contract.
-\begin{trivlist}\sf\footnotesize
-\item[~$\bullet$ ] query total cost: $\sum_{i = 1\dots n}$ cost(s$_i$) + data transfer $\leq$ \$5
- \item[~$\bullet$ ] total response time: of services + data transfer
- \item[~$\bullet$ ] availability: {\em (of services involved)} $\leq$ {\sf 90$\%$}, 
- \item[~$\bullet$ ] freshness: non 
- \item[~$\bullet$ ] precision: {\em avg (precision of services involved)} $\leq$ {\sf 85$\%$}
- \item[~$\bullet$ ] provenance:  all services involved must be $green$
- \item[~$\bullet$ ] storage: {\em partial results size} $\leq 1 Giga$ 
- \end{trivlist} 
+
+ 
+ 
+ Given a query and its preferences statement, the system  finds  service compositions that produce results   meeting the required constraints, as discussed in the following section.
  
 %-----------------------------------------------------------------
 \section{Query Rewriting}
@@ -209,25 +225,25 @@ Q_1 &\equiv&
 One challenge of this is to generate incremental queries.
  
 
-
-%-----------------------------------------------------------------
-\subsection{Executing optimized queries}
-\label{sec:queryOpt}
-%-----------------------------------------------------------------
-Given the query rewritten as a service composition, the idea is then to optimize them and execute them. In our approach these queries are implemented as query worflows. A query workflow implements a service composition defining activities and a control flow. An activity is a program that implements the interaction with a data service (through a method call) and the processing of the data it provides; it can also implement an data processing operation such as filter, aggregation, correlation. The control flow defines the order in which activities must be executed (sequencially or in parallel). Service compositions defining subqueries are transformed into query workflows.
-
-A query worflow can be optimized with respect to the preferences expressed in a user profile: the economic cost, the execution time, the energy necessary to execute it. Therefore, given a service coordination expressing a (sub)query we compute a search space of all possibile query workflows that can implement a query (all activities sequentially, as much activities in parallel as possible, conmuting activities). Each quey workflow has an estimated multi-dimensional cost, computing according to some measures of the computed SLA. The "optimum" query workflow is the one whose cost is the closest to the expected requirements of the user. Since the cost is multidimensional, several query workflows can be close to the user preferences. For this reason, we use a top-k algorithm for choosing an ordered set of "best" query workflows. One of these queries is executed by a workflow engine.
-
-
-A service composition (expressed in a Datalog-like syntax) is then transformed into a query workflow search space consisting of workflows with different control flows and where constraints serve to determine an optimization objective. 
-In the case of $Q_1$ above, the corresponding search space contains for example a workflow {\sf QW$_1$} where all activities are executed sequentially. 
-Another one, {\sf QW$_2$}, with parallel activities programming the call to a location service for the user and the energy providers, then a filter activity selecting only services located not farther to 1.5 Km, followed by  parallel activities that compute the total cost of the energy to buy, the total amount of energy. 
-    
-    Once the search space has been computed the QWs are filtered according to their economic and execution time costs. The QWs that minimize this cost are identified and ordered according to their conformance to the user preferences statement.
+%
+%%-----------------------------------------------------------------
+%\subsection{Executing optimized queries}
+%\label{sec:queryOpt}
+%%-----------------------------------------------------------------
+%Given the query rewritten as a service composition, the idea is then to optimize them and execute them. In our approach these queries are implemented as query worflows. A query workflow implements a service composition defining activities and a control flow. An activity is a program that implements the interaction with a data service (through a method call) and the processing of the data it provides; it can also implement an data processing operation such as filter, aggregation, correlation. The control flow defines the order in which activities must be executed (sequencially or in parallel). Service compositions defining subqueries are transformed into query workflows.
+%
+%A query worflow can be optimized with respect to the preferences expressed in a user profile: the economic cost, the execution time, the energy necessary to execute it. Therefore, given a service coordination expressing a (sub)query we compute a search space of all possibile query workflows that can implement a query (all activities sequentially, as much activities in parallel as possible, conmuting activities). Each quey workflow has an estimated multi-dimensional cost, computing according to some measures of the computed SLA. The "optimum" query workflow is the one whose cost is the closest to the expected requirements of the user. Since the cost is multidimensional, several query workflows can be close to the user preferences. For this reason, we use a top-k algorithm for choosing an ordered set of "best" query workflows. One of these queries is executed by a workflow engine.
+%
+%
+%A service composition (expressed in a Datalog-like syntax) is then transformed into a query workflow search space consisting of workflows with different control flows and where constraints serve to determine an optimization objective. 
+%In the case of $Q_1$ above, the corresponding search space contains for example a workflow {\sf QW$_1$} where all activities are executed sequentially. 
+%Another one, {\sf QW$_2$}, with parallel activities programming the call to a location service for the user and the energy providers, then a filter activity selecting only services located not farther to 1.5 Km, followed by  parallel activities that compute the total cost of the energy to buy, the total amount of energy. 
+%    
+%    Once the search space has been computed the QWs are filtered according to their economic and execution time costs. The QWs that minimize this cost are identified and ordered according to their conformance to the user preferences statement.
 
  
 %-----------------------------------------------------------------
-\subsection{Dealing with the resources consumed by the evaluation process}
+\section{Dealing with the resources consumed by the evaluation process}
 \label{sec:queryProcessOpt}
 %-----------------------------------------------------------------
 % Indeed, let consider a request R launched by a user who specifies a %number of constraints on the environment execution. 
@@ -238,7 +254,7 @@ Another one, {\sf QW$_2$}, with parallel activities programming the call to a lo
  
  We believe that the optimization of this process can occur at two levels: first at the level of agreed SLA exported by services.  Indeed, queries requesting the same services compositions will have clauses in their SLAs that are more conditions of use of the infrastructure (ie not storing the data produced by a service). Instead of recomputing the derived SLA every time, we propose to store it and reuse it for other queries. 
  
-Second, precalculated queries and partial results can be also stored in cache or in a persistent supprt. Rewritting and optimization results can be also stored and reduce execution and resources consumption time when evaluating similar queries. Being able of storing such SLAs will depend on the cloud subscription (data access, intermediate storage capacity , cost of storage , etc ... ).
+Second, precalculated queries and partial results can be also stored in cache or in a persistent supprt. Rewritting results can be also stored and reduce execution and resources consumption time when evaluating similar queries. Storing or not such SLAs will depend on the cloud subscription of the user the issued the query (data access, intermediate storage capacity , cost of storage , etc ... ).
 %Given this proposal, we identify several issues:
 %- Level modeling would require a model that allows the representation of SLA integration.
 %- There should also be a template for representing the requirements expressed by the user
@@ -247,15 +263,15 @@ Second, precalculated queries and partial results can be also stored in cache or
 As discussed in previous sections, the derived SLA associated to service compositions can have free measures that can only be evaluated at run-time. In order to do so, we assume that there is a monitoring system observing and aggregating events for computing resources consumption, execution and time cost, volumes of data transfered when services deliver results. These computations are used dynamically for instanciating free variables in the derived SLA and thus determine wether te contract is respected by the execution of a query. Since this is monitered dynamicalle, the evaluation of the query can be adapted if the SLA is not being respected anymore.
 
 
-%-----------------------------------------------------------------
-\subsection{SLA based data integration system}
-\label{sec:architecture}
-%-----------------------------------------------------------------
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{figs/arch.png}
-\caption{General architecture of an SLA guided  data integration system.\label{fig:arch}}
-\end{figure}
-
-Figure~\ref{fig:arch} shows the general architecture of an SLA guided data integration system that is supported by data services which are data providers deployed in a cloud and that provide agreed SLA’s. 
-These descriptions are stored in a directory together with meta-data about the way queries are evaluated for producing results. 
-The system uses this information  by query processing and monitoring modules for rewriting queries according to given quality of service (QoS) preferences expressed by a data consumer, for example a user.
+%%-----------------------------------------------------------------
+%\subsection{SLA based data integration system}
+%\label{sec:architecture}
+%%-----------------------------------------------------------------
+%\begin{figure}
+%\includegraphics[width=0.5\textwidth]{figs/arch.png}
+%\caption{General architecture of an SLA guided  data integration system.\label{fig:arch}}
+%\end{figure}
+%
+%Figure~\ref{fig:arch} shows the general architecture of an SLA guided data integration system that is supported by data services which are data providers deployed in a cloud and that provide agreed SLA’s. 
+%These descriptions are stored in a directory together with meta-data about the way queries are evaluated for producing results. 
+%The system uses this information  by query processing and monitoring modules for rewriting queries according to given quality of service (QoS) preferences expressed by a data consumer, for example a user.

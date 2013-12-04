@@ -22,15 +22,16 @@ Service Level Agreements (SLA)~\cite{SLA} can be used in the context of cloud co
 %SLA currently exploited in the cloud allows service providers and cloud clients to describe the amount of resources to be simultaneously used and also the conditions to use them.
 %This limit may apply both for the service provider and the client (in the case of service invocation). 
 
-Negotiating a SLA may be a difficult task.
-Indeed, SLA are normally expressed in terms of \textit{low level} concepts, like size of the used storage or degree of virtualization. 
-On the client side, the interest is normally on \textit{higher level} concepts such as QoS requirements.
-Some recent proposals address this problem.  
-For instance,~\cite{5547150} propose a bottom-up approach, where a cloud component that acts autonomously based on low level monitored features after analysing them towards high level clauses expressed by the user. 
-  \cite{Dastjerdi:2012:DOA:2275356.2275360} describe a \textit{Semantic SLA} which can be understood by all parties including providers, requestors, and monitoring services.
-Their goal is, starting from a high level SLA, to measure and identify how the SLA be declined at different layers in the cloud. In the domain of cloud data service, Ortiz and al  \cite{Ortiz:2013:VPS:2486767.2486772}
-  proposes a set of templates to the user of cloud data services, each specifying the query type that can be executed with some tread-off in time and corresponding cost.  The client has just to choose among proposed tempate the one that corresponds the best to her requirements. \cite{6141307} proposes a set of matching algorithms to identify compatible cloud provider for a given requirements by matching SLA parameters. In this work, SLA parameters of the cloud are defined in a cloud capable model and application's requirements are defined in an application requirement model. Those models specified firstly using RDF, are converted into graph structures  
-From whom an Induced Propagation Graph is calculate to establish a correspondence between the cloud capability model and the application requirement model.
+%Negotiating a SLA may be a difficult task.
+%Indeed, 
+SLAs are normally expressed in terms of \textit{low level} concepts, like the storage space size  or the degree of virtualization. 
+On the user side, the interest is normally on \textit{higher level} concepts such as QoS requirements.
+The challenge is thus, to couple cloud SLA terms with user ones in order to agree the conditions in which they will interact. Existin works use matching and negociation techniques for addressing this challenge.  
+For instance,~\cite{5547150} 
+proposes a bottom-up approach based on a cloud component that monitors low level measures, analyses and matches them to high level clauses expressed by the user.
+  \cite{Dastjerdi:2012:DOA:2275356.2275360} describes a \textit{Semantic SLA} that can be understood by all parties including providers, consumers, and monitoring services.
+Their goal is, starting from a high level SLA, to measure and identify how to derive SLA measures  at different layers of the cloud.  \cite{Ortiz:2013:VPS:2486767.2486772}
+  proposes a set of templates  cloud data services users, each specifying the query type that can be executed with some tread-off in time and corresponding cost.  The client  chooses among the proposed tempates the one that best corresponds   to her requirements. \cite{6141307} proposes a set of matching algorithms to identify compatible cloud providers for a given requirements specification by matching SLA parameters. Cloud SLA parameters and application requirements are represented by two models using RDF. RDF definitions are then converted into graph representations. An Induced Propagation Graph is calculated using both models to establish a correspondence between them.
 
 
 %{\color{red}
@@ -40,16 +41,16 @@ From whom an Induced Propagation Graph is calculate to establish a correspondenc
 %In \cite{5614035}, the authors propose LAYSI, a layered solution that minimizes user interactions with the system and prevents violations of agreed SLAs. 
 %}
 
-Some recent research works on SLA are devoted to the SLA extension to security concerns. 
+Recent  works on SLA are devoted to extend  SLA for including  security concerns. 
 \cite{6274042} propose an extension of the WSAgreement, initially developed by the GRAAP
 working group. 
-The extension allows security constraints to be expressed over the service description
+Security constraints are expressed over the service description
 terms (SDTs) and the service level objectives (SLOs) of the SLA. 
-Consequently, this leads to a certain kind of security expression interoperability and lets the client to be able to compare security level of different cloud service provider. 
+This leads to an interoperable security expression that can be used by users for comparing security levels of different cloud service providers. 
 \cite{LunaGarcia:2012:BCS:2381913.2381932} focuses on how to build a SEcSLA Template starting from gathering then categorizing a set of security statements using a semantic tool. 
-The designed template is then used both to express user security requirements and cloud service provider security provisions.
-Finally, some works tend to deal with SLA violation anticipation and SLA failure cascading on violation detection.  \cite{Dastjerdi:2012:DOA:2275356.2275360}  proposes an SLA dependency modeling using Web Service Modeling Ontology (WSMO) to build a knowledge database. \cite{5614035} proposes to anticipate failure by analysing the monitored feature and to act by anticipation. in
-\cite{5614035}, the authors propose LAYSI, a layered solution that minimizes user interactions with the system and prevents violations of agreed SLAs.
+The designed template is then used both to express user security requirements and cloud service provider security provision.
+Finally, some works  deal with SLA violation anticipation and SLA failure cascading on violation detection.  \cite{Dastjerdi:2012:DOA:2275356.2275360}  proposes an SLA dependency model using Web Service Modeling Ontology (WSMO) to build a knowledge database. \cite{5614035} proposes to anticipate failure by analysing the monitored feature. 
+\cite{5614035} proposes LAYSI, a layered solution that minimizes user interactions with the system and prevents violations of agreed SLAs.
 
 %=====================================
 
