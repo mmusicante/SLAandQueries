@@ -68,8 +68,13 @@ The user preferences statement would include their cloud provider contract and q
 We consider a simplified SLA cloud contract inspired in the lowest contract provided by Azure: {\sf cost of \$0,05 cents per call,  8~GB of I/O volume/month, free data transfer cost within the same region,  01~GB of storage}. 
 The user is ready to pay maximum {\sf \$5 as total query cost}; she requests that only {\sf green} energy providers are listed (provenance); at least {\sf 85$\%$} of precision of provided data, even if they are not fresh; she requires an availability rate of at least {\sf 90$\%$} and with a response time of {\sf 0,01 seconds}.
  
-
-
+As usual, SLAs will be represented as conditions over variables that will be used in the query.
+In this context, the compliance to the SLAs will drive the query rewriting process.
+Indeed, our rewriting process will proceed in stages.
+User preferences and user SLAs will be used to produce derived SLA to be added to the query. 
+These SLAs will influence the choice of data/service providers.
+The SLA proposed by the chosen providers need to be combined with the conditions on each proposed rewriting of the query.
+These combination will influence the decision about the actual services to be used.
 
 
 
@@ -178,44 +183,44 @@ over concrete  services.
 The solutions proposed are ranked and may be coded into concrete workflows as shown in the following section.  The next example shows the main features of the approach proposed in~\cite{CostaAMR13} and that is extended in the case of SLA guided services based data integration. 
 
 \begin{example}[Service Refinement by Rewriting]\label{Ex:rew1}
-Let us consider the case of generating sales reports for a global bookstore.
-This hypothetical bookstore sells books both at about 300 shops around the globe as well as via Internet.
-The bookstore has four international warehouses, located in four different continents.
-The bookstore uses the services of three different cloud providers.
+Let us consider the case of a smart city, where particulars can participate on an energy trading pool.
+We suppose that this hypothetical city has a large number of households that are capable of selling their energy surplus to other consumers. 
+The city has four information hubs, located in four different neighbourhoods, connected to very small energy producers.
+Some other producers may be contacted directly, though the services of three different cloud providers.
 Each cloud provider exports their own interfaces.
+There exist SLAs defined for each individual energy provider server, each hub, and each cloud provider. 
 
-Local shops use the nearest cloud provider.
-Internet transactions are processed by the Asian and South American cloud providers.
+When an on-line consumer requires a list of servers to buy energy from them, a composed web service is generated, in order to fetch each individual or hub service and to put in motion the energy reservation procedures.
+Depending on the location of the consumer and producers, different conditions may apply.
+Also the cloud providers may publish the conditions for using their services.
+All these conditions are expressed as user preferences and SLAs.
+Additionally, other non-functional requirements (such as authentication or security requirements) may apply.
 
-When an on-line client requires a list of books, a composed web service is generated, in order to fetch each book (from the nearest warehouse where the book is available) and to put in motion the payment and packing procedures.
-Depending on the location of the client, different conditions may apply on the selling and payment procedures.
-So, for each country or region, a limited number of options may be available for payment, packaging and delivery.
-Additionally, non-functional requirements, defined by SLA may apply.
-
-In this context, the user supplies the list of books, his location and payment information and a composite web service should be generated to fulfill the order.
-The generated service composition should pick each book at the nearest warehouse, in order to minimize the costs of delivery and processing.
-Additional requirements, such as delivery time, may apply.
+In this context, the user supplies an energy demand, his location and payment information and a composite web service should be generated to fulfil the order.
+The generated service composition should pick the nearest providers, in accordance to the agreed SLA.
 
 In order to produce a personalised service composition for each user, the algorithm in~\cite{CostaAMR13} takes into account the specification of the composition (which may be produced by the user's browser, including context information).
 The specification of each available service is also considered (this specification should be given by the service provider).
+The algorithm should be modified to take into account the different SLA.
 ~\hfill\openbox
 \end{example}
 
 The next example illustrates one of the limits of the automatic composition algorithm.
 
 \begin{example}[Incremental queries]\label{Ex:rew2}
-Let us return to the global bookstore of Example~\ref{Ex:rew1}.
-Let us suppose that the sales data is needed to produce daily and weekly ``\textit{Top 500}'' best-selling lists.
-In this case, each warehouse database will be queried and the list will be produced by adding data obtained from them.
-Let us supose that, in order to minimize the the communications between servers around the Globe, the \textit{Top 500} lists need to be produced incrementally.
-In this case, the composition produced by the service refinement may need to include an iteration. The data produced by the warehouse servers will be processed in batch and the process will end once the list reaches the size of 500 titles.
+Let us return to the energy trade system of Example~\ref{Ex:rew1}.
+Let us suppose that the available energy data is needed to produce daily and weekly ``\textit{Star Providers for One MegaWatt-hour}'' producers lists.
+In this case, each individual and hub database will be queried and the list will be produced by adding data obtained from them, until the one MegaWatt-hour capacity is reached.
+Let us suppose that, in order to minimize the the communications between servers, the lists need to be produced incrementally.
+In this case, the composition produced by the service refinement may need to include an iteration (to aggregate partial results). 
+The data produced by the warehouse servers will be processed in batch and the process will end once the list reaches the desired capacity.
 
 As far as our knowledge, the incremental production of a solution is outside of the scope of the current methods for rewriting service compositions and represents a challenge to the area.
 ~\hfill\openbox
 \end{example}
 
 
-Given a a set of services that can possibly be composed and the derived SLA, a service cmposition must be produced.
+Given a a set of services that can possibly be composed and the derived SLA, a service composition must be produced.
 Some of the inequations of the derived SLA should be included in the service compositions that answer the query.
 In the case of our query example the following composition can be used for answering it:
 \begin{eqnarray*}
