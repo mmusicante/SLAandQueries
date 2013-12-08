@@ -109,8 +109,6 @@ We assume that services export SLAs (i.e., agreed SLAs) that define measures   t
 An example of computed measure is the cost of retrieving the list of energy providers within a region with their KWatt cost. The cost is determined by the  cost of the calls. This request  includes the price of calling a service (e.g.,  between 0,25 - 0,50 euros depending on the data service), plus the price of data transmision according to the amount of trasnmitted MegaOctets through the network and the type of subscription of the user for using the network. 
 %Since we assume that services can be deployed on different cloud providers, measures and SLA threasholds can vary.
 
-
-
 Given agreed SLA's and a user preferences statement the challenge is to compute a  {\em derived SLA} that  maps SLA measures and preferences attributes.  The derived SLA is defined as a set of measures that correspond to the user preferences computed as a function of different static, computed and hybrid measures. The {\em derived SLA}  will guide the way the query will be evaluated, and the way results will be computed and delivered.
 
 In the example, some of the user preferences statement measures are used for defining a dervied SLA that, as said in previous section, will guide the evaluation of the query. These measures are defined as a function of the measures used by the agreed SLAs and by the cloud SLA contract.
@@ -153,69 +151,55 @@ This step may lead either to the rejection of integration in case of total incom
 %See wether a similar Q has been already rewritten or rewrite it. Executing a query requires first a semantic analysis which will subdivide R into a set of sub-queries, in such a way that each sub-query can be processed by a DataService deployed on the cloud.   The subqueries represent the possible combination of services that can answer the initial query with given SLA.
 %}
 
-Query rewriting is a well-known problem for the database community.
-The problem consists in transforming an abstract query into a set (or list) of lower-level queries to the available databases.
-Traditionally, the abstract query is a query over a set of views and the lower-level queries are performed on the available databases whose information compose the view. 
-The rewriting is guided by the schema of both abstract and concrete databases.
+Query rewriting is a well-known problem in the database domain.
+The problem consists in transforming an abstract query into a set (or list) of lower-level queries that can be solved by  available databases.
+%Traditionally, an abstract query is expressed over a set of views and the lower-level queries are performed on the available databases for retrieving the information necessary for composing a view. 
+Query rewriting is guided by the schema of  abstract and concrete databases.
 The answers to the lower level queries are combined in order to obtain the result to be returned to the user.
 
-The query rewriting problem may be generalized to the case of services.
-Both database queries and service invocations may be represented using a similar syntax.
-Indeed, the interfaces to relational databases and information-provision
+The query rewriting problem can be generalized to the case of services.
+%known in the database domain.
+%Both database queries and service invocations may be represented using a similar syntax.
+%Indeed, the interfaces to relational databases and information-provision
 %\footnote{Services that do not perform changes in the data they use.} 
-services are exactly the same.
+%services are exactly the same.
 In this case, the query to be rewritten is seen as an abstract service composition, to be expressed in terms of concrete services.
-%(which take the place of the available database queries).
+%(which take the place of the available database queries). 
+Query rewriting techniques have been adapted to the context of service composition~\cite{BBM10,ZLC11,CostaAMR13}. 
+In~\cite{CostaAMR13} the authors present an algorithm to automatically refine high-level specifications of service compositions into lower-level ones. 
+The method is based on the MiniCon algorithm~\cite{PH01} for query rewriting.
 
 The case of more general services (\textit{i.e}, services that maintain and update information) is a generalization of the information-provision case.
 Unlike the simpler case, where only the service interfaces need to be considered, the general case requires considering the functional and non-functional aspects of the query and available services.
 In this context, the \textit{Local as View} (\textit{LAV}) methods of query rewriting~\cite{Levy2000} are suitable.
 In the LAV approach, the rewriting process is guided by the specification of both the query to be rewritten and the available databases.
-In the case of general services, we can use the specification of the composition to be produced as well as the specification of each available service.
+The specification of the composition to be produced as well as the specification of each available service are used in the case of general services.
 These specifications may detail both the functional and non-functional behaviour of each service, including SLA.
 
-Query rewriting techniques have been adapted to the context of service composition~\cite{BBM10,ZLC11,CostaAMR13}. 
-In~\cite{CostaAMR13} the authors present an algorithm to automatically refine high-level specifications of service compositions into lower-level ones. 
-The method is based on the MiniCon algorithm~\cite{PH01} for query rewriting.
-%known in the database domain.
-The proposed approach consists in generating several translations of an abstract service specification into compositions
+
+We propose an approach consists in generating several translations of an abstract service specification into compositions
 over concrete  services. 
 The solutions proposed are ranked and may be coded into concrete workflows as shown in the following section.  The next example shows the main features of the approach proposed in~\cite{CostaAMR13} and that is extended in the case of SLA guided services based data integration. 
 
 \begin{example}[Service Refinement by Rewriting]\label{Ex:rew1}
-Let us consider the case of a smart city, where particulars can participate on an energy trading pool.
-We suppose that this hypothetical city has a large number of households that are capable of selling their energy surplus to other consumers. 
+Let us consider the case of the smart city scenario, where particulars can participate on an energy trading pool.
+We suppose that this hypothetical city has a large number of households that sell their energy surplus to other consumers. 
 The city has four information hubs, located in four different neighbourhoods, connected to very small energy producers.
-Some other producers may be contacted directly, though the services of three different cloud providers.
-Each cloud provider exports their own interfaces.
-There exist SLAs defined for each individual energy provider server, each hub, and each cloud provider. 
+Other producers are be contacted directly, though the services of three different cloud providers.
+Each cloud provider exports its own interfaces.
+ SLAs are defined for each individual energy provider server, each hub, and each cloud provider. 
 
-When an on-line consumer requires a list of servers to buy energy from them, a composed web service is generated, in order to fetch each individual or hub service and to put in motion the energy reservation procedures.
-Depending on the location of the consumer and producers, different conditions may apply.
-Also the cloud providers may publish the conditions for using their services.
-All these conditions are expressed as user preferences and SLAs.
+When an on-line consumer searches  servers to buy energy, a composed web service is generated, in order to fetch each individual or hub service and to start  energy reservation procedures.
+Depending on the location of the consumer and producers, different conditions and constraints may apply.
+Also  cloud providers  publish the conditions for using their services.
+These conditions are expressed as user preferences and SLAs.
 Additionally, other non-functional requirements (such as authentication or security requirements) may apply.
 
-In this context, the user supplies an energy demand, his location and payment information and a composite web service should be generated to fulfil the order.
-The generated service composition should pick the nearest providers, in accordance to the agreed SLA.
+In this context, the user  expresses an energy order, her location and payment information. A composite web service is  generated to fulfil the order.
+The generated service composition should consider the nearest providers, in accordance to the agreed SLA.
 
 In order to produce a personalised service composition for each user, the algorithm in~\cite{CostaAMR13} takes into account the specification of the composition (which may be produced by the user's browser, including context information).
 The specification of each available service is also considered (this specification should be given by the service provider).
-The algorithm should be modified to take into account the different SLA.
-~\hfill\openbox
-\end{example}
-
-The next example illustrates one of the limits of the automatic composition algorithm.
-
-\begin{example}[Incremental queries]\label{Ex:rew2}
-Let us return to the energy trade system of Example~\ref{Ex:rew1}.
-Let us suppose that the available energy data is needed to produce daily and weekly ``\textit{Star Providers for One MegaWatt-hour}'' producers lists.
-In this case, each individual and hub database will be queried and the list will be produced by adding data obtained from them, until the one MegaWatt-hour capacity is reached.
-Let us suppose that, in order to minimize the the communications between servers, the lists need to be produced incrementally.
-In this case, the composition produced by the service refinement may need to include an iteration (to aggregate partial results). 
-The data produced by the warehouse servers will be processed in batch and the process will end once the list reaches the desired capacity.
-
-As far as our knowledge, the incremental production of a solution is outside of the scope of the current methods for rewriting service compositions and represents a challenge to the area.
 ~\hfill\openbox
 \end{example}
 
@@ -235,8 +219,21 @@ Q_1 &\equiv&
 \end{eqnarray*}
 
   In fact our approach would generate a number $k$ of service compositions, combining as much as possible the services available such that the constraints of the derived SLA are verified. 
-One challenge of this is to generate incremental queries.
- 
+%One challenge of this is to generate incremental queries.
+ Yet, the algorithm should be modified to take into account the different SLAs. The next example illustrates one of the limits of the automatic composition algorithm.
+
+\begin{example}[Incremental queries]\label{Ex:rew2}
+Let us return to the energy trade system of Example~\ref{Ex:rew1}.
+ Suppose that the user requires to retrieve a list of star providers  daily and weekly that can deliver ``\textit{One MegaWatt-hour}''.
+In this case, each individual and hub database will be queried and the list will be produced by adding data obtained from them, until the one MegaWatt-hour capacity is reached.
+Let us suppose that, in order to minimize the the communications between servers, the lists need to be produced incrementally.
+In this case, the composition produced by the service refinement may need to include an iteration (to aggregate partial results). 
+The data produced by the warehouse servers will be processed in batch and the process will end once the list reaches the desired capacity.
+
+To our knowledge, the incremental production of a solution is beyond  the scope of the current methods for rewriting service compositions and represents a challenge to the area.
+~\hfill\openbox
+\end{example}
+
 
 %
 %%-----------------------------------------------------------------
