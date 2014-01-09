@@ -416,13 +416,15 @@ genoveva.vargas@imag.fr}
 
 
 \begin{abstract}
-The abstract goes here. DO NOT USE SPECIAL CHARACTERS, SYMBOLS, OR MATH IN YOUR TITLE OR ABSTRACT.
-
+Cloud computing is becoming a popular model for storing and accessing data on the Internet.
+The model includes financial cost for using the services provided on the Cloud, as well as other constraints like QoS and non-functional requirements.
+Service Level Agreements implement the contracts between the cloud provider and the users. 
+In this paper, we propose a data integration architecture for querying multiple clouds.
+Our approach uses SLA to guide the discovery and integration process.
 \end{abstract}
 
 \begin{IEEEkeywords}
-component; formatting; style; styling;
-
+SLA; Cloud Computing; Data Integration;
 \end{IEEEkeywords}
 
 
@@ -448,39 +450,52 @@ component; formatting; style; styling;
 % You must have at least 2 lines in the paragraph with the drop letter
 % (should never be an issue)
 
-The recent emergence of  the cloud paradigm opens new challenges to data processing. Indeed, unlimited access to cloud resources and the "pay as U go" model change the hypothesis for processing big data collections. Nevertheless, integrating and processing heterogeneous data collections, calls for efficient methods for correlating, associating, filtering those data taking into consideration their “structural” characteristics (due to the different data
-models) but also their quality, e.g., trust, freshness, provenance, partial or total consistency.
+The recent emergence of  the cloud paradigm opens new challenges to data processing. Indeed, unlimited access to cloud resources and the "pay as U go" model change the hypothesis for processing big data collections.
+Nevertheless, integrating and processing heterogeneous data collections, calls for efficient methods for correlating, associating, filtering those data taking into consideration their “structural” characteristics (due to the different data models) but also their quality, e.g., trust, freshness, provenance, partial or total consistency.
 
-Indeed, existing data integration techniques have to be revisited in order to integrate data that are weakly curated and described through metadata or schemas. This issue is more highlighted by the numerous resources deployed by several providers  on the cloud, and for which a Service Level Agreement Contracts (SLA) is associated. In the meantime, users interested in data have subscribed a contract with one to many clouds that is materialized by an user SLA. Furthermore, each user has his own constraints and quality of service requirements when querying data on the cloud. 
-To illustrate our issue, in the domain of energy management, the kind of queries that can be submitted is: \textit{What is the list of energy providers that can provision 1000 Kwatts/h, in the next 10 seconds, that are close to my city with a cost of 0,50 euros/Kwatt and that are labeled as green?}. We consider a simplified SLA cloud contract inspired in the lowest contract provided by Azure: \textit{cost of \$0,05 cents per call,  8~GB of I/O volume/month, free data transfer cost within the same region,  01~GB of storage.} 
-The user is ready to pay maximum \textit{\$5 as total query cost}; she requests that only  \textit{green} energy providers are listed (provenance); at least  \textit{85$\%$} of precision of provided data, even if they are not fresh; she requires an availability rate of at least 90$\%$ and with a response time of  \textit{0,01 seconds}. 
+Existing data integration techniques have to be revisited in order to integrate data that are both weakly curated and described through metadata or schemas. 
+This issue is highlighted by the numerous resources deployed by several providers  on the cloud, and for which Service Level Agreement Contracts (SLA) are associated. 
+In the current model, users sign a contract with one or many cloud providers.
+The contract is materialized as an \textit{user SLA}. 
+Each user has his own constraints and quality of service requirements when querying data on the cloud. 
+
+Let us illustrate our our problem by an example in the domain of energy management.
+We are interested in queries like: \textit{What is the list of energy providers that can provision 1000 KW-h, in the next 10 seconds, that are close to my city, with a cost of 0,50 Euro/KW-h and that are labelled as green?}. 
+We consider a simplified SLA cloud contract inspired in the lowest contract provided by Azure: \textit{cost of \$0,05 cents per call,  8~GB of I/O volume/month, free data transfer cost within the same region,  01~GB of storage.} 
+The user is ready to pay a maximum of \textit{\$5 as total query cost}; she requests that only  \textit{green} energy providers are listed (provenance), with at least  \textit{85$\%$} of precision of provided data, even if they are not fresh; she requires an availability rate of at least 90$\%$ and a response time of  \textit{0,01 s}. 
 
 % which differs from the users’ SLA.
-    The question is how can the user  obtain efficiently results for her queries that meet her Q\&S requirements while respecting her subscribed contracts with the cloud and also without neglecting services contracts, especially for queries that implies several services deployed eventually on different clouds?
+    The question is how can the user  obtain efficiently results for her queries that meet her Q\&S requirements while respecting her subscribed contracts with the cloud and also without neglecting services contracts, especially for queries to several services deployed eventually on different clouds?
 %    needs especially for those that requires requests especially complex ones that need data service compositions,  can met Quality Of Service requirements expressed by their consumers and Service Level Agreement Contracts (SLA), both at the cloud level and at the service level. 
 %présenter le type de requête et le contexte d'utilisation du type de reque^te 
 
-To our knowledge, actual projects and deployments of SLAs in the context of Cloud Computing aim and rely on two principles: (i) The negotiation of conditions, which are statically agreed between the parts  (\cite{5547150, Dastjerdi:2012:DOA:2275356.2275360, Ortiz:2013:VPS:2486767.2486772} (ii) The monitoring of these conditions during the use of cloud resources in order to detect SLA contract violation (\cite{6274042,5614035}).
+To our knowledge, projects and deployments of SLAs in the context of Cloud Computing aim and rely on two principles: (i) The negotiation of conditions, which are statically agreed between the parts (\cite{5547150,Dastjerdi:2012:DOA:2275356.2275360,Ortiz:2013:VPS:2486767.2486772} (ii) The monitoring of these conditions during the use of cloud resources in order to detect SLA contract violation (\cite{6274042,5614035}).
 
 
-Our work intends to address data integration on a  cloud guided by the SLA exported by different cloud providers and by QoS measures associated to data collections properties: trust, privacy, economic cost. This implies several granularities of SLA: first, at the cloud level; the SLA ensured by providers regarding data; then at the service level, as unit for accessing and processing data, to be sure to fit particular service needs; and finally at the integration level i.e the possibility to process, correlate and integrate big data collections distributed along different cloud storage supports, providing different quality properties to data (trust, privacy, reliability, etc).
-The objective is an SLA guided data integration system exported as a distributed DaaS by a set of clouds providers that handles the SLA interoperability and collaboration. 
+Our work intends to address data integration on a  cloud guided by the SLA exported by different cloud providers and by QoS measures associated to data collections properties: trust, privacy, economic cost. 
+This implies several granularities of SLA: first, at the cloud level; the SLA ensured by providers regarding data; then at the service level, as unit for accessing and processing data, to be sure to fit particular service needs; and finally at the integration level i.e the possibility to process, correlate and integrate big data collections distributed along different cloud storage supports, providing different quality properties to data (trust, privacy, reliability, etc).
+The goal is to propose an SLA guided data integration system exported as a distributed DaaS by a set of clouds providers that handles the SLA interoperability and collaboration. 
 
 %comment on pense faire pour répondre à la problématique en se basant sur le use case
 
-
-In this paper, we present our approach and optimized economic driven and client-oriented data integration (lookup, aggregation, correlation) strategies adapted to the vision of the economic model of the cloud such as accepting partial results delivered on demand or under predefined subscription models that can affect the quality of the results; accepting specific data duplication that can respect privacy but ensure data availability; accepting to launch a task that contributes to an integration on a first cloud whose SLA verifies security requirement rather than a more powerful cloud but with less security guarantees in the SLA. 
+In this paper, we present our approach and optimized economic driven and client-oriented data integration (lookup, aggregation, correlation) strategies adapted to the vision of the economic model of the cloud.
+We aim at (i) accepting partial results delivered on demand or under predefined subscription models that can affect the quality of the results; (ii) accepting specific data duplication that can respect privacy but ensure data availability; (iii) accepting to launch a task that contributes to an integration on a first cloud whose SLA verifies security requirement rather than a more powerful cloud but with less security guarantees in the SLA. 
 %The paper is outlined as follows: Section 2 describes the service architecture. Section 3 presents our Integration SLA structure that allows to optimize further query execution by minimizing time negociation and time execution when similar partial or total queries has been already executed. 
 
 \section{The SLA-guided  data integration approach}
 Our SLA guided data  integration approach proposes three steps starting from the processing of the request to the delivery of the result sets.
-Given an expressed query and a set of Q\&S preferences: cost, data provenance, service reputation, execution deadline and so on, the system processes it accordingly as follows: first (i) an SLA derivation computation to  filter possible data and services providers; this may be done using a set of matching algorithms based on  graph structures and RDF specification; then (ii)  a query rewriting in term of possible service compositions giving partial or exhaustive  results according to SLAs content; and finally, (iii) integrating results; 
-The results of these steps generate intermediate results that are stored as knowledge in order to reduce the overhead of the query evaluation process. The whole process is monitored to determine whether a computed SLA is being honored while a query is evaluated. The following section  describes our SLA-guided data integration As a service (SLAG-DIAAS) architecture.
+Given an expressed query and a set of Q\&S preferences: cost, data provenance, service reputation, execution deadline and so on, the system processes in three steps, as follows: first (i) an SLA derivation computation is performed to filter possible data and services providers.
+This may be done using a set of matching algorithms based on  graph structures and RDF specification.
+Then, (ii) a query rewriting is done, in term of possible service compositions giving partial or exhaustive  results according to SLAs content; and finally, (iii) the results are integrated into an answer. 
+These steps generate intermediate results that are stored as knowledge in order to reduce the overhead of the query evaluation process. 
+The whole process is monitored to determine whether a computed SLA is being honoured while a query is evaluated. 
+
+%We can now describe our SLA-guided data integration As a service (SLAG-DIAAS) architecture.
 %
 %\section{The SLA-GIDAAS architecture}
-Figure 1 shows the general architecture of an SLA guided data integration system that is supported by data services which are data providers deployed in a cloud and that provide agreed SLAs. These descriptions are stored in a directory together with meta-data about the way queries are evaluated for producing results.
-The system uses this information by query processing and monitoring modules for rewriting queries according to given quality of service (QoS) preferences expressed by a data consumer, for example a user.
-
+Figure~\ref{fig_sim} shows the SLAG-DIAAS architecture of an SLA guided data integration system that is supported by data services which are data providers deployed in a cloud and that provide agreed SLAs. 
+The architecture keeps a \textit{directory} together with meta-data about the way queries are evaluated for producing results.
+The system uses this information by query processing and monitoring modules for rewriting queries according to given quality of service (QoS) preferences expressed by a data consumer.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=3in]{figs/arch}
@@ -592,8 +607,15 @@ The system uses this information by query processing and monitoring modules for 
 % command of the stfloats package.
 
 
-\section{The integration SLA structure}
-Figure 2 depicts how we extend the SLA structure in order to be able to capitalize on previous SLA negotiation. The yellow part of the schema gives an abstract presentation of SLA content necessary to describe our extension. Compared to standard SLA where two mandatory parties are concerned and a set of optional ones, in our case, the set of parties are those (clouds, services, user)  that are concerned by data implied in the data integration process. After the filtering process of services that will participate in the query answer, the service selects the service composition that will cover the total result set. For each selected composition an integration SLA should be derived from the services and the user SLA. For each, Obligations concerning the same items like data storage for example will be confronted and will produce some new guaranties specified by the \textit{negotiation rules}. The semantic analysis of the query allow to extract a set of concepts that are associated to the built \textit{Integration SLA}. These concepts are helpful in case of a new query that uses the same concepts. This will allow to fetch for compositions or sub composition that already meet the requirements of the user at first and the SLA of the entities implied thank to the Integration SLA.
+%\section{The integration SLA structure}
+Figure~\ref{fig_integ} depicts how we extend the SLA structure in order to be able to capitalize on previous SLA negotiation. 
+The yellow part of the schema gives an abstract presentation of SLA content necessary to describe our extension. 
+Compared to standard SLA where two mandatory parties are concerned and a set of optional ones, we propose a set of parties formed by those (clouds, services, user) actors that are concerned in the data integration process. 
+After the filtering process, the service selects the service composition that will cover the total result set. 
+For each selected composition an integration SLA should be derived from the services and the user SLA. 
+For each, obligations concerning the same items will be confronted to produce some new guaranties specified by the negotiation rules. 
+The semantic analysis of the query allows to extract a set of concepts that are associated to the built \textit{Integration SLA}. 
+These concepts are helpful in case of a future query that uses the same concepts and will allow to fetch for compositions that already meet the requirements of the user at first and the SLA of the entities implied thank to the Integration SLA.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=3in]{figs/diagram}
@@ -604,8 +626,11 @@ Figure 2 depicts how we extend the SLA structure in order to be able to capitali
 
 
 \section{Conclusion}
-This paper introduces the challenge of integrating data from distributed data services deployed on different cloud providers guided by service level agreement. The data integration problem is stated as a continuous data provision problem that has an associated economic cost and that uses automatic learning techniques for ensuring different qualities of delivered data (fresh, precise, partial).
-Current big data settings impose today to consider SLA and different data delivery models. We believe that given the volume and the complexity of query evaluation that includes steps that imply greedy computations, it is important to combine and revisit wellknowns solutions and adapted to this contexts. We are currently developing the strategies and algorithms sketched here applied to energy consumption applications as the one described in the paper and also to elections and political campaign data integration in order to guide decision making on campaign strategies.
+This paper introduces the challenge of integrating data from distributed data services deployed on different cloud providers guided by service level agreement. 
+The data integration problem is stated as a continuous data provision problem that has an associated economic cost and that uses automatic learning techniques for ensuring different qualities of delivered data (fresh, precise, partial).
+Current big data settings impose today to consider SLA and different data delivery models. 
+We believe that given the volume and the complexity of query evaluation that includes steps that imply greedy computations, it is important to combine and revisit well-known solutions and adapted to this contexts. 
+We are currently developing the strategies and algorithms sketched here applied to energy consumption applications as the one described in the paper and also to elections and political campaign data integration in order to guide decision making on campaign strategies.
 
 % conference papers do not normally have an appendix
 
