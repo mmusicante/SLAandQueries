@@ -416,11 +416,9 @@ genoveva.vargas@imag.fr}
 
 
 \begin{abstract}
-Cloud computing is becoming a popular model for storing and accessing data on the Internet.
-The model includes financial cost for using the services provided on the Cloud, as well as other constraints like QoS and non-functional requirements.
-Service Level Agreements implement the contracts between the cloud provider and the users. 
-In this paper, we propose a data integration architecture for querying multiple clouds.
-Our approach uses SLA to guide the discovery and integration process.
+Existing data integration techniques have to be revisited in order to query multiple data on the Cloud.
+Service Level Agreements implement the contracts between the cloud provider and the users, as well as between  the cloud and service providers. 
+Owing to SLA heterogeneity and to data integration scalability problems, we propose an SLA guided data integration for querying data on multiple clouds.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -459,7 +457,7 @@ In the current model, users sign a contract with one or many cloud providers.
 The contract is materialized as an \textit{user SLA}. 
 Each user has his own constraints and quality of service requirements when querying data on the cloud. 
 
-Let us illustrate our our problem by an example in the domain of energy management.
+Let us illustrate our problem by an example from the domain of energy management.
 We are interested in queries like: \textit{What is the list of energy providers that can provision 1000 KW-h, in the next 10 seconds, that are close to my city, with a cost of 0,50 Euro/KW-h and that are labelled as green?}. 
 We consider a simplified SLA cloud contract inspired in the lowest contract provided by Azure: \textit{cost of \$0,05 cents per call,  8~GB of I/O volume/month, free data transfer cost within the same region,  01~GB of storage.} 
 The user is ready to pay a maximum of \textit{\$5 as total query cost}; she requests that only  \textit{green} energy providers are listed (provenance), with at least  \textit{85$\%$} of precision of provided data, even if they are not fresh; she requires an availability rate of at least 90$\%$ and a response time of  \textit{0,01 s}. 
@@ -626,8 +624,8 @@ These concepts are helpful in case of a future query that uses the same concepts
 
 
 \section{Conclusion}
-This paper introduces the challenge of integrating data from distributed data services deployed on different cloud providers guided by service level agreement. 
-The data integration problem is stated as a continuous data provision problem that has an associated economic cost and that uses automatic learning techniques for ensuring different qualities of delivered data (fresh, precise, partial).
+%This paper introduces the challenge of integrating data from distributed data services deployed on different cloud providers guided by service level agreement. 
+%The data integration problem is stated as a continuous data provision problem that has an associated economic cost and that uses automatic learning techniques for ensuring different qualities of delivered data (fresh, precise, partial).
 Current big data settings impose today to consider SLA and different data delivery models. 
 We believe that given the volume and the complexity of query evaluation that includes steps that imply greedy computations, it is important to combine and revisit well-known solutions and adapted to this contexts. 
 We are currently developing the strategies and algorithms sketched here applied to energy consumption applications as the one described in the paper and also to elections and political campaign data integration in order to guide decision making on campaign strategies.
