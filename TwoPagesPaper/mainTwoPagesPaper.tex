@@ -485,8 +485,7 @@ Our SLA guided data  integration approach proposes three steps starting from the
 Given an expressed query and a set of Q\&S preferences: cost, data provenance, service reputation, execution deadline and so on, the system processes in three steps, as follows: first (i) an SLA derivation computation is performed to filter possible data and services providers.
 This may be done using a set of matching algorithms based on  graph structures and RDF specification.
 Then, (ii) a query rewriting is done, in term of possible service compositions giving partial or exhaustive  results according to SLAs content; and finally, (iii) the results are integrated into an answer. 
-These steps generate intermediate results that are stored as knowledge in order to reduce the overhead of the query evaluation process. 
-The whole process is monitored to determine whether a computed SLA is being honoured while a query is evaluated. 
+These steps generate intermediate results that are stored as knowledge in order to reduce the overhead of further query evaluation processes. Moreover, an integration SLA is generated to archive the negotiated rules obtained during  the integration. For an incoming query, the whole process is monitored to determine whether a integration SLA is being honoured .
 
 %We can now describe our SLA-guided data integration As a service (SLAG-DIAAS) architecture.
 %
@@ -616,7 +615,7 @@ The semantic analysis of the query allows to extract a set of concepts that are 
 These concepts are helpful in case of a future query that uses the same concepts and will allow to fetch for compositions that already meet the requirements of the user at first and the SLA of the entities implied thank to the Integration SLA.
 \begin{figure}[!t]
 \centering
-\includegraphics[width=3in]{figs/diagram}
+\includegraphics[width=3in]{figs/SLAexetension.jpg}
 \caption{SLA extension}
 \label{fig_integ}
 \end{figure}
