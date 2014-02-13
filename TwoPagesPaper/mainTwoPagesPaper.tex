@@ -457,9 +457,9 @@ The contract is materialized as an \textit{user SLA}.
 Each user has her own constraints and quality of service (QoS) requirements when querying data on the cloud. 
 
 Let us illustrate our problem by an example from the domain of energy management.
-We are interested in queries like: \textit{Give a list of energy providers that can provision 1000 KW-h, in the next 10 seconds, that are close to my city, with a cost of 0,50 Euro/KW-h and that are labelled as green?}. 
-We consider a simplified SLA cloud contract inspired in the cheapest contract provided by Azure: \textit{cost of \$0,05 cents per call,  8~GB of I/O volume/month, free data transfer cost within the same region,  01~GB of storage.} 
-The user is ready to pay a maximum of \textit{\$5 as total query cost}; she requests that only  \textit{green} energy providers are listed (provenance), with at least  \textit{85$\%$} of precision of provided data, even if they are not fresh; she requires an availability rate of at least 90$\%$ and a response time of  \textit{0,01 s}. 
+We are interested in queries like: \textit{Give a list of energy providers that can provision 1000 KW-h, in the next 10 seconds, that are close to my city, with a cost of 0,50 Euro/KW-h and that are labelled as green?}
+We consider a simplified SLA cloud contract inspired in the cheapest contract provided by Azure: \textit{cost of \$0,05 cents per call,  8~GB of I/O volume/month, free data transfer cost within the same region,  1~GB of storage.} 
+The user is ready to pay a maximum of \textit{\$5 as total query cost}; she requests that only  \textit{green} energy providers should be  listed (provenance), with at least  \textit{85$\%$} of precision of provided data, even if they are not fresh; she requires an availability rate of at least 90$\%$ and a response time of  \textit{0,01 s}. 
 
 % which differs from the users’ SLA.
     The question is how can the user efficiently obtain  results for her queries such that they meet her QoS requirements, they respect her subscribed contracts with the involved cloud provider(s) and such that they do not neglect services contracts? Particularly, for queries that call several services deployed  on different clouds.
@@ -469,13 +469,13 @@ The user is ready to pay a maximum of \textit{\$5 as total query cost}; she requ
 To our knowledge, projects and deployments of SLAs in the context of Cloud Computing aim and rely on two principles: (i) The negotiation of use conditions, which are statically agreed between the parts (\cite{5547150,Dastjerdi:2012:DOA:2275356.2275360,Ortiz:2013:VPS:2486767.2486772} (ii) The monitoring of these conditions as cloud resources are used, to detect SLA contracts violation (\cite{6274042,5614035}).
 
 
-Our work  addresses data integration on a  cloud, guided by  SLAs exported by different cloud providers and by QoS measures associated to data collections properties: trust, privacy, economic cost. 
-This implies several granularities of SLA: first, at the cloud level, the SLA ensured by data providers. Then, at the service level, where a service is a  data accessing and processing unit, to be sure that the SLA fits particular  needs (e.g., response time, availabitiy). At the integration level i.e the possibility to process, correlate and integrate big data collections distributed across different cloud storage supports, providing different quality properties to data (trust, privacy, reliability, etc).
+Our work  addresses data integration on a  cloud, guided by  SLAs exported by different cloud providers and by QoS measures associated to data collections properties: trust, privacy, economic cost.   
+This implies several granularities of SLA: first, at the cloud level, the SLA ensured by data providers. Then, at the service level, where a service is a  data accessing and processing unit, to be sure that the SLA fits particular  needs (e.g., response time, availability). At the integration level i.e the possibility to process, correlate and integrate big data collections distributed across different cloud storage supports, providing different quality properties to data (trust, privacy, reliability, etc).
 The goal is to propose an SLA guided data integration system exported as a distributed data as a services (DaaS) by a set of cloud providers, that handles  SLA interoperability and collaboration. 
 
 %comment on pense faire pour répondre à la problématique en se basant sur le use case
 
-In this paper, we present our SLA data integration guided apporoach based on
+In this paper, we present our SLA data integration guided approach based on
 %approach and optimized economic driven and client-oriented data integration 
  strategies (lookup, aggregation, correlation) adapted to the vision of the economic model of the cloud.
 We aim at (i) accepting partial results delivered on demand or under predefined subscription models that can affect the quality and cost of the results; (ii) accepting specific data duplication that can respect privacy but ensure data availability; (iii) accepting to launch a task that contributes to an integration on a first cloud whose SLA verifies security requirements rather than a more powerful cloud but with less security guarantees in the SLA. 
@@ -490,7 +490,7 @@ These steps generate intermediate results that are stored as knowledge  to reduc
 %We can now describe our SLA-guided data integration As a service (SLAG-DIAAS) architecture.
 %
 %\section{The SLA-GIDAAS architecture}
-Figure~\ref{fig_sim} shows the SLA Guided - Data Integration as a Service (SLAG-DIAAS) architecture  supported by data services which are data providers deployed in a cloud and that provide agreed SLAs. 
+Figure~\ref{fig_sim} shows the SLA Guided - Data Integration As A Service (SLAG-DIAAS) architecture  supported by data services which are data providers deployed in a cloud and that provide agreed SLAs. 
 The SLAG-DIAAS keeps a \textit{directory} together with meta-data about the way queries are evaluated for producing results.
 Query processing and monitoring modules use this information for rewriting queries according to given quality of service (QoS) preferences expressed by a data consumer.
 \begin{figure}[!t]
@@ -606,13 +606,15 @@ Query processing and monitoring modules use this information for rewriting queri
 
 %\section{The integration SLA structure}
 Figure~\ref{fig_integ} depicts our extension of the SLA model that capitalizes on previous SLA negotiation. 
-The yellow part of the schema gives an abstract representation of SLA content necessary to describe our extension. 
-Compared to standard SLA where two mandatory parties are concerned and a set of optional ones, we propose a set of parties formed by those  actors that are concerned in the data integration process, namely, clouds, services, and user.
-Once the filtering process has been completed, the DaaS selects the service composition that will produce the total result set. 
-For each selected composition an integrated SLA should be derived from the services and the user SLA. 
-Obligations concerning the same items will be confronted to produce some new guaranties specified by  negotiation rules. 
-The semantic analysis of the query allows to extract a set of concepts that are associated to the built \textit{Integrated SLA}. 
-The integrated SLA concepts can be resused for evaluating other  queries using  the same concepts. They allow  to use previous compositions that  met the requirements of the user  and an SLA.
+The yellow part of the schema gives an abstract representation of standard SLA content, necessary to describe our extension. 
+Compared to standard SLA where two mandatory parties are concerned and a set of optional ones, we propose a set of parties formed by those  actors that are concerned in the data integration process, namely, clouds, services, and user. 
+%This requires the derivation of a new SLA class, the \textit{integrated SLA} that is composed of a set of negotiation rules that imply a set of guarantees. This new SLA is linked to a  user, providers and services  SLAs that are used to establish the negotiation rules. Furthermore, the \textit{integrated SLA}  is also associated to the query -and thus its subqueries- for which it has been created. 
+Once the filtering process has been completed, the  SLA-GIDAAS selects the service composition that will produce the total result set. 
+For each selected composition, an integrated SLA should be derived from the services and the user SLA. 
+Obligations concerning the same items will be confronted to produce some new guarantees specified by  negotiation rules. 
+The semantic analysis of the query allows to extract a set of concepts that are associated to the built \textit{Integrated SLA} (see Figure \ref{fig_integ}).
+The integrated SLA concepts can be reused for evaluating other  queries using  the same concepts. They allow  to use previous compositions that  met the requirements of the user  and an SLA.
+To briefly give a very simplified idea of our integrated SLA, let us consider  the example of query expressed above, and considering the time response facet, let us assume that two cloud services G1 and G2 are able to deliver information on green energy providers and one service E is able to give provided quantity of energy  of the corresponding providers. Assume that composing the two kind of service that will meet the response time requirement will be G1 and E, the integrated SLA will mention that the suitable composition is $<S1,E>$.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=3in]{figs/SLAexetension.jpg}
