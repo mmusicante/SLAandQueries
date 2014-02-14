@@ -605,14 +605,16 @@ Query processing and monitoring modules use this information for rewriting queri
 
 
 %\section{The integration SLA structure}
-Figure~\ref{fig_integ} depicts our extension of the SLA model that capitalizes on previous SLA negotiation. 
-The yellow part of the schema gives an abstract representation of SLA content necessary to describe our extension. 
-Compared to standard SLA where two mandatory parties are concerned and a set of optional ones, we propose a set of parties formed by those  actors that are concerned in the data integration process, namely, clouds, services, and user.
-Once the filtering process has been completed, the DaaS selects the service composition that will produce the total result set. 
-For each selected composition an integrated SLA should be derived from the services and the user SLA. 
-Obligations concerning the same items will be confronted to produce some new guaranties specified by  negotiation rules. 
-The semantic analysis of the query allows to extract a set of concepts that are associated to the built \textit{Integrated SLA}. 
-The integrated SLA concepts can be resused for evaluating other  queries using  the same concepts. They allow  to use previous compositions that  met the requirements of the user  and an SLA.
+Figure~\ref{fig_integ} illustrates our proposed an SLA model.
+% that capitalizes on previous SLA negotiation models. 
+The yellow classes are an abstract representation of SLA content. %necessary to describe our extension. 
+Compared to standard SLA where two mandatory parties are concerned and a set of optional ones, we propose a set of parties consisting of  those  actors  concerned in the data integration process, namely, clouds, services, and user.
+
+Once the filtering process has been completed, the DaaS selects the service composition that will produce the  result set of a query. 
+For each selected composition an integrated SLA should be derived from the SLAs of the services and the user. 
+Obligations concerning the same items will be confronted to produce  new guaranties specified by  negotiation rules. 
+The semantic analysis of the query extracts a set of concepts that are associated to the  \textit{Integrated SLA}. 
+The integrated SLA concepts can be resused for evaluating other  queries using  the same concepts. This enables the use previous compositions that  met the requirements of the user  and an SLA.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=3in]{figs/SLAexetension.jpg}
