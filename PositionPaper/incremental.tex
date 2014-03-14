@@ -7,7 +7,7 @@ Given a requirement expressing a query and quality of service preferences: cost,
 %The system uses this information  by query processing and monitoring modules for rewriting queries according to given quality of service (QoS) preferences expressed by a data consumer, for example a user.The following lines describe how this query is evaluated according to our approach. 
 
 \begin{figure}
-\includegraphics[width=0.5\textwidth]{figs/arch.png}
+\includegraphics[width=0.99\textwidth]{figs/arch.png}
 \caption{General architecture of an SLA guided  data integration system.\label{fig:arch}}
 \end{figure}
 
@@ -23,7 +23,6 @@ Services are deployed in different cloud providers and each service exports an a
 
 \begin{trivlist}\sf\footnotesize
 \item[~$\bullet$ ] {\sf agreedSLA:$\langle$cost/call, maxCalls/day, availability, responseTime, reliability, privacy, precision, freshness, provenance$\rangle$}. 
-  
  \end{trivlist}
  
 As said in previous sections, some of these measures ({\sf cost/call, maxCall/day}) are static and explicitly specified by the service provider. 
@@ -119,7 +118,7 @@ In the example, some of the user preferences statement measures are used for def
  \item[~$\bullet$ ] freshness: non 
  \item[~$\bullet$ ] precision: {\em avg (precision of services involved)} $\leq$ {\sf 85$\%$}
  \item[~$\bullet$ ] provenance:  all services involved must be $green$
- \item[~$\bullet$ ] storage: {\em partial results size} $\leq 1 Giga$ 
+ \item[~$\bullet$ ] storage: {\em partial results size} $\leq 1$ GB
  \end{trivlist} 
  
 Therefore, we propose a classification of SLA measures that represents the relationship between fine grained measures used by agreed SLAs and coarse grained measures used in user preferences statements. It specifies also how to compute coarse grained measures with fine grained ones. For example, data precision will be computed as a function of availability, freshness and provenance exported by data services. The derived SLA  can be seen as a set of inequations that have to be solved during the execution of a service composition. Since some of them can only be determined at execution time, the decision on which services will participate in the evaluation of the query is approximated. We will discuss this issue in the next sections.
@@ -135,7 +134,7 @@ This step may lead either to the rejection of integration in case of total incom
 %  \item Filter the data providers that can potentially participate in the evaluation of the query taking into consideration the preferences associated to the query.
   %
  % \item 
- Negociation of this type of SLA depends strongly on the request sent and the services deployed at the arrival time of the application on the cloud. This negotiation can be expensive and may not scale well.
+ Negotiation of this type of SLA depends strongly on the request sent and the services deployed at the arrival time of the application on the cloud. This negotiation can be expensive and may not scale well.
  % \end{enumerate}
 
 
