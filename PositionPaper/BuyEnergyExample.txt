@@ -1,0 +1,133 @@
+SLA-Guided process:
+
+Step 0: Receive User’s Query and state SLAs.
+
+User’s Query: BuyNRJ(ClientID?, $Qty?, From?, Until?, GreenIndex?, Local?, Max-Price?, Max-Dist?
+                     list of <ProviderID, q, price, Invoice/ContactInfo>!)
+
+SLA Client-Application:
+
+  - Pro-user?(ClientID) == Yes/No
+
+  ** How to model the different categories of clients? SLA client capabilities?
+
+SLA Application-CloudProvider:
+
+  - Bandwidth, monthly traffic allowance, etc.
+
+==================================================================
+Step 1: Separate aggregation functions.
+
+Query: BuyNRJ’(ClientID?, Q?, From?, Until?, GreenIndex?, Local?, Max-Price?, Max-Dist?
+               ProviderID!, q!, price!, invoice!)
+
+Additionally: 
+  - Store the information about Q will be aggregated until Qty. (Summation).
+
+  - SLAs??
+
+==================================================================
+Step 2: Specify Abstract Query
+
+Two Query definitions (According to Client-App SLA):
+ 
+(1)  BuyNRJ’’(ClientID?, Q?, From?, Until?, GreenIndex?, Local?, Max-Price?, Max-Dist?
+            ProviderID!, q!, price!, invoice!)
+  is defined as
+    Pro-user(ClientID?, p!), p = YES, 
+    SearchProvider(Q?, From?, Until?, ProviderID!, q!, price!),
+    price <= Max-Price,
+    Location(ProviderID?, ProviderLocal!),
+    Distance(Local?, ProviderLocal?, D!), D <= MaxDist,
+    GetGreenIndex(ProviderID?, I!), I <= GreenIndex,
+    BuyFromProvider(ProviderID?, q?, From?, Until?, Invoice!),
+    UpdateLocalInfo(ProviderID?, q?, From?, Until?)
+
+
+(2)  BuyNRJ’’(ClientID?, Q?, From?, Until?, GreenIndex?, Local?, Max-Price?, Max-Dist?
+            ProviderID!, q!, price!, ContactInfo!)
+  is defined as
+    Pro-user(ClientID?, p!), p = NO, 
+    FreeSearchProvider(Q?, From?, Until?, ProviderID!, q!, price!),
+    price <= Max-Price,
+    Location(ProviderID?, ProviderLocal!),
+    Distance(Local?, ProviderLocal?, D!), D <= MaxDist,
+    GetGreenIndex(ProviderID?, I!), I <= GreenIndex,
+    SuggestProvider(ProviderID?, q?, From?, Until?, ContactInfo!)
+
+
+
+Concrete Services definitions:
+
+Local Service Definitions:
+—————————————————————————
+
+Local-Free-Service(ClientID?, ProviderID?, q?, From?, Until?, ContactInfo!)
+  is defined as
+    Pro-user(ClientID?, p!), p = NO, 
+    SuggestProvider(ProviderID?, q?, From?, Until?, ContactInfo!)
+
+Local-Pro-Service(ClientID?, ProviderID?, q?, From?, Until?)
+  is defined as
+    Pro-user(ClientID?, p!), p = YES, 
+    UpdateLocalInfo(ProviderID?, q?, From?, Until?)
+
+Local-Quotation(Q?, From?, Until?, ProviderID!, q!, price!)
+  is defined as
+    FreeSearchProvider(Q?, From?, Until?, ProviderID!, q!, price!)
+
+
+
+Third-party services:
+————————————————————
+
+LocationService(ProviderID?, Local?, D!, I!)
+  is defined as
+    Location(ProviderID?, ProviderLocal!),
+    Distance(Local?, ProviderLocal?, D!),
+    GetGreenIndex(ProviderID?, I!)
+
+
+Alice’s Service Operations:
+——————————————————————————
+
+Alice.ReserveAndBuy(Q?, From?, Until?, ProviderID!, q!, price!, Invoice!)
+  is defined as
+    SearchProvider(Q?, From?, Until?, ProviderID!, q!, price!), ProviderID = Alice,
+    BuyFromProvider(ProviderID?, q?, From?, Until?, Invoice!)
+
+
+
+Bob’s Service Operations:
+————————————————————————
+
+Bob.Reserve(Q?, From?, Until?, ProviderID!, q!, price!)
+  is defined as
+    SearchProvider(Q?, From?, Until?, ProviderID!, q!, price!), ProviderID = Bob
+
+
+Bob.Buy(q?, From?, Until?, ProviderID?, Invoice!)
+  is defined as
+    BuyFromProvider(ProviderID?, q?, From?, Until?, Invoice!), ProviderID = Bob
+
+
+=====================================================================
+Step 3: Refine the query in terms of specific (concrete) services. 
+
+** In this step, we can use Umberto’s algorithm. **
+
+
+=====================================================================
+Step 4: Incrementally execute the queries in the list, until the aggregation required is met.
+  
+  - Notice that step 3 can be implemented as an iterator, called by step 4.
+  - Before executing each query, the app-provider SLA must be verified.
+  - Use aggregation functions to stop the iteration.
+
+** This step can benefit from Genoveva’s work **
+
+=====================================================================
+Step 5: Integrate the results and answer to the user.
+
+** This step can benefit from Genoveva’s work **
+
