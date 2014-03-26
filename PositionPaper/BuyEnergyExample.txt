@@ -7,13 +7,44 @@ User’s Query: BuyNRJ(ClientID?, $Qty?, From?, Until?, GreenIndex?, Local?, Max
 
 SLA Client-Application:
 
-  - Pro-user?(ClientID) == Yes/No
+  - Pro-user(ClientID) == Yes/No
 
   ** How to model the different categories of clients? SLA client capabilities?
 
 SLA Application-CloudProvider:
 
   - Bandwidth, monthly traffic allowance, etc.
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%     EXAMPLE 1     %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+For a client with the following SLA:
+
+- ClientID = Claudia
+- Pro-User(Claudia) = YES
+
+And the query:
+
+- BuyNRJ(Claudia, $1000, today, tomorrow, 0.9, Grenoble, 0.53, 100,
+                     list of <ProviderID, quant, price, Invoice/ContactInfo>!)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%     EXAMPLE 2     %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+For a client with the following SLA:
+
+- ClientID = Daniel
+- Pro-User(Daniel) = NO
+
+And the query:
+
+- BuyNRJ(Daniel, $500, today, tomorrow, 0.4, Orléans, 0.44, 200,
+                     list of <ProviderID, quant, price, Invoice/ContactInfo>!)
+
+
 
 ==================================================================
 Step 1: Separate aggregation functions.
@@ -26,6 +57,28 @@ Additionally:
 
   - SLAs??
 
+%%%%%%%%%%%%%%%%%%%%%%%
+%%     EXAMPLE 1     %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+Mark the second parameter as *aggregated* (Summation up to 1000 KW-h.), Somewhere in the system.
+
+And the query becomes:
+
+- BuyNRJ(Claudia, 1000, today, tomorrow, 0.9, Grenoble, 0.53, 100,
+                     list of <ProviderID, quant, price, Invoice/ContactInfo>!)
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%     EXAMPLE 2     %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+Mark the second parameter as *aggregated* (Summation up to 500 KW-h.), Somewhere in the system.
+
+And the query becomes:
+
+- BuyNRJ(Daniel, 500, today, tomorrow, 0.4, Orléans, 0.44, 200,
+                     list of <ProviderID, quant, price, Invoice/ContactInfo>!)
+
 ==================================================================
 Step 2: Specify Abstract Query
 
@@ -35,8 +88,8 @@ Two Query definitions (According to Client-App SLA):
             ProviderID!, q!, price!, invoice!)
   is defined as
     Pro-user(ClientID?, p!), p = YES, 
-    SearchProvider(Q?, From?, Until?, ProviderID!, q!, price!),
-    price <= Max-Price,
+    SearchProvider(Q?, From?, Until?, ProviderID!),
+    QuoteFromProvider(ProviderID?, Q?, From?, Until?, q!, price!), price <= Max-Price,
     Location(ProviderID?, ProviderLocal!),
     Distance(Local?, ProviderLocal?, D!), D <= MaxDist,
     GetGreenIndex(ProviderID?, I!), I <= GreenIndex,
@@ -44,12 +97,13 @@ Two Query definitions (According to Client-App SLA):
     UpdateLocalInfo(ProviderID?, q?, From?, Until?)
 
 
+
 (2)  BuyNRJ’’(ClientID?, Q?, From?, Until?, GreenIndex?, Local?, Max-Price?, Max-Dist?
             ProviderID!, q!, price!, ContactInfo!)
   is defined as
     Pro-user(ClientID?, p!), p = NO, 
-    FreeSearchProvider(Q?, From?, Until?, ProviderID!, q!, price!),
-    price <= Max-Price,
+    FreeSearchProvider(Q?, From?, Until?, ProviderID!),
+    FreeQuoteFromProvider(ProviderID?, Q?, From?, Until?, q!, price!), price <= Max-Price,
     Location(ProviderID?, ProviderLocal!),
     Distance(Local?, ProviderLocal?, D!), D <= MaxDist,
     GetGreenIndex(ProviderID?, I!), I <= GreenIndex,
@@ -76,6 +130,9 @@ Local-Quotation(Q?, From?, Until?, ProviderID!, q!, price!)
   is defined as
     FreeSearchProvider(Q?, From?, Until?, ProviderID!, q!, price!)
 
+FreeLookupProvider(Q?, From?, Until?, ProviderID!)
+  is defined as
+    FreeSearchProvider(Q?, From?, Until?, ProviderID!)
 
 
 Third-party services:
@@ -87,13 +144,17 @@ LocationService(ProviderID?, Local?, D!, I!)
     Distance(Local?, ProviderLocal?, D!),
     GetGreenIndex(ProviderID?, I!)
 
+LookupProvider(Q?, From?, Until?, ProviderID!)
+  is defined as
+    SearchProvider(Q?, From?, Until?, ProviderID!)
 
 Alice’s Service Operations:
 ——————————————————————————
 
-Alice.ReserveAndBuy(Q?, From?, Until?, ProviderID!, q!, price!, Invoice!)
+Alice.ReserveAndBuy(Q?, From?, Until?, ProviderID?, q!, price!, Invoice!)
   is defined as
-    SearchProvider(Q?, From?, Until?, ProviderID!, q!, price!), ProviderID = Alice,
+    ProviderID = Alice,
+    QuoteFromProvider(ProviderID?, Q?, From?, Until?, q!, price!), 
     BuyFromProvider(ProviderID?, q?, From?, Until?, Invoice!)
 
 
@@ -114,7 +175,65 @@ Bob.Buy(q?, From?, Until?, ProviderID?, Invoice!)
 =====================================================================
 Step 3: Refine the query in terms of specific (concrete) services. 
 
-** In this step, we can use Umberto’s algorithm. **
+%%%%%%%%%%%%%%%%%%%%%%%
+%%     EXAMPLE 1     %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+The query (instance)
+
+- BuyNRJ(Claudia, 1000, today, tomorrow, 0.9, Grenoble, 0.53, 100,
+                     list of <ProviderID, quant, price, Invoice/ContactInfo>!)
+is defined as
+    Pro-user(Claudia, p!), p = YES, 
+    SearchProvider(1000, today, tomorrow, ProviderID!),
+    QuoteFromProvider(ProviderID?, 1000, today, tomorrow, q!, price!), price <= 0.53,
+    Location(ProviderID?, ProviderLocal!),
+    Distance(Grenoble, ProviderLocal?, D!), D <= 100,
+    GetGreenIndex(ProviderID?, I!), I <= 0.9,
+    BuyFromProvider(ProviderID?, q?, today, tomorrow, Invoice!),
+    UpdateLocalInfo(ProviderID?, q?, today, tomorrow)
+
+is refined as a list of the following queries:
+
+BuyNRJ(Claudia, 1000, today, tomorrow, 0.9, Grenoble, 0.53, 100,
+                     list of <ProviderID, quant, price, Invoice/ContactInfo>!)
+is defined as
+
+Local-Pro-Service(Claudia, ProviderID?, q?, today, tomorrow)
+LookupProvider(1000, today, tomorrow, ProviderID!)
+Alice.ReserveAndBuy(Q?, From?, Until?, ProviderID?, q!, price!, Invoice!)
+
+
+  is defined as
+    ProviderID = Alice,
+    QuoteFromProvider(ProviderID?, Q?, From?, Until?, q!, price!), 
+    BuyFromProvider(ProviderID?, q?, From?, Until?, Invoice!)
+    
+
+    QuoteFromProvider(ProviderID?, 1000, today, tomorrow, q!, price!), price <= 0.53,
+    Location(ProviderID?, ProviderLocal!),
+    Distance(Grenoble, ProviderLocal?, D!), D <= 100,
+    GetGreenIndex(ProviderID?, I!), I <= 0.9,
+    BuyFromProvider(ProviderID?, q?, today, tomorrow, Invoice!),
+
+WE ARE WORKING ON THIS EXAMPLE!
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%     EXAMPLE 2     %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+Mark the second parameter as *aggregated* (Summation up to 500 KW-h.), Somewhere in the system.
+
+And the query becomes:
+
+- BuyNRJ(Daniel, 500, 02/02/2015, 03/02/2015, 0.4, Orléans, 0.44, 200,
+                     list of <ProviderID, quant, price, Invoice/ContactInfo>!)
+
+
+
+
+
 
 
 =====================================================================
