@@ -61,7 +61,7 @@ Two Query definitions (According to Client-App SLA):
             ProviderID!, q!, price!, invoice!)
   is defined as
     Pro-user(ClientID?, p!), p = YES, 
-    SearchProvider(Q?, From?, Until?, ProviderID!),
+    SearchProvider(ClientID?, Q?, From?, Until?, ProviderID!),
     <<QuoteFromProvider>>(ProviderID?, Q?, From?, Until?, q!, price!), price <= Max-Price,
     Location(ProviderID?, ProviderLocal!),
     Distance(Local?, ProviderLocal?, D!), D <= MaxDist,
