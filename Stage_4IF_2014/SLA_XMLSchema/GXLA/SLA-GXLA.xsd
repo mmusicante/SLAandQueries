@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="GXLA">
+    <xsd:complexType>
+        <xsd:sequence>
+
+            <!--Schedule : represents the total temporal range of the contract, is structured like a set of time intervals delimited by a beginning and an end  -->
+            <xsd:element name="Schedule" type="scheduleType"/>
+
+            <!--PartiesType : represents the parties involved in the service, describes general information of each party without specifying its nature (provider or customer)-->
+            <xsd:element name="Parties">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="Party" type="partyType" minOccurs="2" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!--Service package : an abstraction to describe one or more services -->
+            <xsd:element name="ServicePackage">
+                <xsd:complexType>
+                   <xsd:element name="ServiceDescription" type="serviceType" minOccurs="1" maxOccurs="unbounded"/>
+                    </xsd:element>
+                </xsd:complexType>
+            </xsd:element>
+            
+            <!--Role : describes the SLOs which will define the level of service necessary for each service -->
+            <xsd:element name="Roles" type="roleType">
+                <xsd:complexType >
+                    <xsd:sequence>
+                        <xsd:element name="Obliged" type="xsd:string"/>
+                        <xsd:element name="Validity" type="periodType" maxOccurs="unbounded"/>
+                        <xsd:element name="Action" type="actionType"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:element>
+
+<!-- Proprietes de scheduleType : periode -->
+<xsd:complexType name="scheduleType">
+    <xsd:all>
+        <xsd:element name="Begin" type="xsd:dateTime"/>
+        <xsd:element name="End" type="xsd:dateTime"/>
+    </xsd:all>
+</xsd:complexType>
+
+<!-- partyType -->
+<xsd:complexType name="partyType">
+    <xsd:all>
+        <xsd:element name="Contact" type="xsd:string"/>
+        <!-- roles joues dans le service-->
+        <xsd:element name="HasRole" type="xsd:string"/>
+    </xsd:all>
+</xsd:complexType>
+
+<!-- description of one service-->
+<xsd:complexType name="serviceType">
+    <xsd:all>
+        <!--Constraint specifies the temporal range of each service within the limit of the temporal range of the including components -->
+        <xsd:element name="Constraint" type="scheduleType"/>
+        <xsd:element name="SPParameter" type="spParameterType" minOccurs="1" maxOccurs="unbounded" />
+        <xsd:element name="ServiceElement" type="serviceElementType" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:all>
+</xsd:complexType>
+
+    <!--SP Parameter SP-Parameter: is the formalization of the high level parameters and represents the common sight of the service by all the participants, results of synthesis of metrics-->
+    <xsd:complexType name="spParameterType">
+        <xsd:all>
+            <xsd:element name="Name" type="xsd:string"/>
+            <xsd:element name="Type" type="xsd:string" />
+            <xsd:element name="Value" type="xsd:int"/>
+        </xsd:all>
+    </xsd:complexType>
+
+    <!-- Service element is an abstraction to define the service in question, its operations, its constraints and its parameters-->
+    <xsd:complexType name="serviceElementType">
+        <xsd:all>
+            <xsd:element name="Name" type="xsd:string"/>
+            <xsd:element name="Operation" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="Constraint" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+
+        </xsd:all>
+    </xsd:complexType>
+
+<!--The GXLA described in the Role element, the SLOs which will define the level of service necessary for each service-->
+<xsd:complexType name="roleType">
+    <xsd:all>
+        <xsd:element name="SLO" type="sloType" minOccurs = "1" max Occurs="unbounded"/>
+    </xsd:all>
+</xsd:complexType>
+    
+    <!--A SLO is ensured by one or more policies-->
+    <xsd:complexType name="sloType">
+        <xsd:all>
+            <xsd:element name="Policy" type="policyType" minOccurs = "1" max Occurs="unbounded"/>
+            <xsd:element name="Constraint" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+
+    <!--The policies are policies of obligation (define the QualifedAction and the party responsible for the role under certain conditions on SP-Parameter), policies of authorization (define the access rights for certain actions on a system resource under certain conditions, in particular on the metric ones)-->
+    <xsd:complexType name="policyType">
+        <xsd:all>
+            <xsd:element name="Predicate" type="predicateType" minOccurs = "1" max Occurs="unbounded"/>
+            <xsd:element name="Guarantee"/ type="guaranteeType">
+        </xsd:all>
+    </xsd:complexType>
+
+    <!--Predicate checking is done each time when event arrive; the SP-Paramter is compared to the Value-->
+    <xsd:complexType name="predicateType">
+        <xsd:all>
+            <xsd:element name="SPParameter" type="spParameterType"/>
+            <xsd:element name="Value" type="xsd:int"/>
+            <xsd:element name="Event" type="xsd:String"/>
+        </xsd:all>
+    </xsd:complexType>
+
+    <!--If the condition is verify, QualifedAction is triggered-->
+    <xsd:complexType name="guaranteeType">
+        <xsd:all>
+            <xsd:element name="Party" type="partyType"/>
+            <xsd:element name="QualifiedAction" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:all>
+    </xsd:complexType>
