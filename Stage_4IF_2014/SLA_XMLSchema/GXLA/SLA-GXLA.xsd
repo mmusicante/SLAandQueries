@@ -21,7 +21,6 @@
             <xsd:element name="ServicePackage">
                 <xsd:complexType>
                    <xsd:element name="ServiceDescription" type="serviceType" minOccurs="1" maxOccurs="unbounded"/>
-                    </xsd:element>
                 </xsd:complexType>
             </xsd:element>
             
@@ -88,14 +87,14 @@
 <!--The GXLA described in the Role element, the SLOs which will define the level of service necessary for each service-->
 <xsd:complexType name="roleType">
     <xsd:all>
-        <xsd:element name="SLO" type="sloType" minOccurs = "1" max Occurs="unbounded"/>
+        <xsd:element name="SLO" type="sloType" minOccurs="1" maxOccurs="unbounded"/>
     </xsd:all>
 </xsd:complexType>
     
     <!--A SLO is ensured by one or more policies-->
     <xsd:complexType name="sloType">
         <xsd:all>
-            <xsd:element name="Policy" type="policyType" minOccurs = "1" max Occurs="unbounded"/>
+            <xsd:element name="Policy" type="policyType" minOccurs = "1" maxOccurs="unbounded"/>
             <xsd:element name="Constraint" type="xsd:string"/>
         </xsd:all>
     </xsd:complexType>
@@ -103,8 +102,8 @@
     <!--The policies are policies of obligation (define the QualifedAction and the party responsible for the role under certain conditions on SP-Parameter), policies of authorization (define the access rights for certain actions on a system resource under certain conditions, in particular on the metric ones)-->
     <xsd:complexType name="policyType">
         <xsd:all>
-            <xsd:element name="Predicate" type="predicateType" minOccurs = "1" max Occurs="unbounded"/>
-            <xsd:element name="Guarantee"/ type="guaranteeType">
+            <xsd:element name="Predicate" type="predicateType" minOccurs = "1" maxOccurs="unbounded"/>
+            <xsd:element name="Guarantee" type="guaranteeType"/>
         </xsd:all>
     </xsd:complexType>
 
@@ -124,3 +123,5 @@
             <xsd:element name="QualifiedAction" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
         </xsd:all>
     </xsd:complexType>
+
+</xsd:schema>
