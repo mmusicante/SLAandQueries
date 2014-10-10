@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ServiceDefinition name="Downloadservice">
+    <ServiceDescription name="Download">
+        <ServType>Download</ServType>
+        <ServiceLevel>bronze</ServiceLevel>
+    </ServiceDescription>
+    <ServiceMetric>
+        <Expression>
+            <Predicate xsi:type="sla:less">
+                <SLAParameter>AverageResponseTime</SLAParameter>
+                <Value>5</Value>
+            </Predicate>
+        </Expression>
+        <MetricGrade>4</MetricGrade>
+    </ServiceMetric>
+</ServiceDefinition>
