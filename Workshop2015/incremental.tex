@@ -61,7 +61,7 @@ The user preferences statement would include their cloud provider contract and q
 
 
 We consider a simplified SLA cloud contract inspired in the lowest contract provided by Azure: {\sf cost of \$0,05 cents per call,  8~GB of I/O volume/month, free data transfer cost within the same region,  01~GB of storage}. 
-The user is ready to pay maximum {\sf \$1 as total query cost}; she requests that only {\sf certified} content providers are listed (provenance); at least {\sf 85$\%$} of precision of provided data, even if they are not fresh; she requires an availability rate of at least {\sf 90$\%$} in the next three hours and with a maximmum response time of {\sf 30} seconds for tutored contents and {\sf 0,5} seconds for online contents.
+The user is ready to pay maximum {\sf \$1 as total query cost}; she requests that only {\sf certified} content providers are listed (provenance); at least {\sf 85$\%$} of precision of provided data, even if they are not fresh; she requires an availability rate of at least {\sf 90$\%$} in the next three hours and with a maximum response time of {\sf 30} seconds for tutored contents and {\sf 0,5} seconds for online contents.
 
 As usual, SLAs will be represented as conditions over variables that will be used in the query.
 In this context, the compliance to the SLAs will drive the query rewriting process.
@@ -97,7 +97,7 @@ In the example, some of the user preferences statement measures are used for def
  \item[~$\bullet$ ] storage: {\em partial results size} $\leq 1$ GB
  \end{trivlist} 
  
-Therefore, we propose a classification of SLA measures that represents the relationship between fine grained measures used by agreed SLAs and coarse grained measures used in user preferences statements. It specifies also how to compute coarse grained measures with fine grained ones. For example, data precision will be computed as a function of availability, freshness and provenance exported by data services. The derived SLA  can be seen as a set of unequations that have to be solved during the execution of a service composition. Since some of them can only be determined at execution time, the decision on which services will participate in the evaluation of the query is approximated. We will discuss this issue in the next sections.
+Therefore, we propose a classification of SLA measures that represents the relationship between fine grained measures used by agreed SLAs and coarse grained measures used in user preferences statements. It specifies also how to compute coarse grained measures with fine grained ones. For example, data precision will be computed as a function of availability, freshness and provenance exported by data services. The derived SLA  can be seen as a set of inequations that have to be solved during the execution of a service composition. Since some of them can only be determined at execution time, the decision on which services will participate in the evaluation of the query is approximated. We will discuss this issue in the next sections.
 
 
 This step may lead either to the rejection of integration in case of total incompatibility, or to a negotiation between SLA which will lead us to the proposal for a negotiated SLA integration and thus the need for an adaptive setting.
@@ -175,7 +175,7 @@ Q_1 &\equiv&
 
 \begin{example}[Incremental queries]\label{Ex:rew2}
 Let us return to the content  trade system of the MOOC Example~\ref{Ex:rew1}.
- Suppose that the user requires to retrieve a list of star providers  daily and weekly that can deliver ``\textit{5 Go}'' of expert content about Emily Dickinson peotry.
+ Suppose that the user requires to retrieve a list of star providers  daily and weekly that can deliver ``\textit{5 Go}'' of expert content about Emily Dickinson poetry.
 In this case, each individual and hub database will be queried and the list will be produced by adding data obtained from them, until the 5Go  capacity is reached.
 Let us suppose that, in order to minimize the the communications between servers, the lists need to be produced incrementally.
 In this case, the composition produced by the service refinement may need to include an iteration (to aggregate partial results). 
@@ -194,7 +194,7 @@ To our knowledge, the incremental production of a solution is beyond  the scope 
  
  We believe that the optimization of this process can occur at two levels: first at the level of agreed SLA exported by services.  Indeed, queries requesting the same services compositions will have clauses in their SLAs that are more conditions of use of the infrastructure (ie not storing the data produced by a service). Instead of recomputing the derived SLA every time, we propose to store it and reuse it for other queries. 
  
-Second, precalculated queries and partial results can be also stored in cache or in a persistent support. Rewriting results can be also stored and reduce execution and resources consumption time when evaluating similar queries. Storing or not such SLAs will depend on the cloud subscription of the user the issued the query (data access, intermediate storage capacity , cost of storage , etc ... ).
+Second, pre-computed queries and partial results can be also stored in cache or in a persistent support. Rewriting results can be also stored and reduce execution and resources consumption time when evaluating similar queries. Storing or not such SLAs will depend on the cloud subscription of the user the issued the query (data access, intermediate storage capacity , cost of storage , etc ... ).
 
 As discussed in previous sections, the derived SLA associated to service compositions can have free measures that can only be evaluated at run-time. In order to do so, we assume that there is a monitoring system observing and aggregating events for computing resources consumption, execution and time cost, volumes of data transferred when services deliver results. These computations are used dynamically for instantiating free variables in the derived SLA and thus determine wether te contract is respected by the execution of a query. Since this is monitored dynamically, the evaluation of the query can be adapted if the SLA is not being respected anymore.
 
