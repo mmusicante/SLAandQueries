@@ -39,12 +39,13 @@ All these services can potentially be combined for answering queries.
 
 In our example, we assume that the content provision services ({\sf e$_1$, ... e$_4$}) have their interfaces defined as follows:
 \begin{trivlist}\sf\footnotesize
-\item[~-~e$_i$:]estim-cost$_i$(contents, req\_size, cost, prov\_size), SLA$_\mathit{user}$.
+\item[~-~e$_i$:]estim-cost$_i$(contents, req\_size, cost, prov\_size, loc), SLA$_\mathit{user}$.
 
-                engage$_i$(contents, req\_size, payment, course), agreedSLA$_i$.
+                engage$_i$(contents, req\_size, payment), agreedSLA$_i$.
 \end{trivlist}
 
-The first operation permits the user to ask for the budget of a given course (content).
+The first operation permits the user to ask for the budget of a given course (content) and a required minimmum size.
+This operation will return the cost of the data, as well as its actual size and location.
 {\sf SLA}$_\mathit{user}$ is the user's proposal to the contents provider. 
 This SLA will become the {\sf agreedSLA}$_i$, in case of availability of the contents. 
 We suppose that availability is characterized by a non-zero value of size of the provided data ({\sf prov\_size}).
@@ -109,8 +110,8 @@ The derived SLA  will guide the way the query will be evaluated, and the way res
 In the example, some of the user preferences statement measures are used for defining a dervied SLA that, as said in previous section, will guide the evaluation of the query. 
 These measures are defined as a function of the measures used by the agreed SLAs and by the cloud SLA contract.
 \begin{trivlist}\sf\footnotesize
- \item[~-~query total cost:] $\sum_{i = 1\dots n}$ cost(s$_i$) + data transfer $\leq$ \$5.
- \item[~-~availability:] {\em (of services involved)} $\leq$ {\sf 90$\%$}.
+ \item[~-~query total cost:] $\sum_{i = 1\dots n}$ cost(s$_i$) + data transfer $\leq$ \$1.
+ \item[~-~availability:] {\em (of services involved)} $\geq$ {\sf 90$\%$}.
  \item[~-~freshness:] non.
  \item[~-~provenance:] all services involved must be $expert$.
  \item[~-~duration:] 7 days.
@@ -146,24 +147,23 @@ The method is based on the MiniCon algorithm~\cite{PH01} for query rewriting.
 The case of more general services (\textit{i.e}, services that maintain and update information) is a generalization of the information-provision case.
 Unlike the simpler case, where only the service interfaces need to be considered, the general case requires considering the functional and non-functional aspects of the query and available services.
 In this context, the \textit{Local as View} (\textit{LAV}) methods of query rewriting~\cite{Levy2000} are suitable.
-In the LAV approach, the rewriting process is guided by the specification of both the query to be rewritten and the available databases.
+In the LAV approach, the rewriting process is guided by the specification of both the query to be rewritten and the available sources.
 The specification of the composition to be produced as well as the specification of each available service are used in the case of general services.
 These specifications may detail both the functional and non-functional behaviour of each service, including SLA.
 
 
-We propose an approach consists in generating several translations of an abstract service specification into compositions
-over concrete  services. 
-The solutions proposed are ranked and may be coded into concrete workflows as shown in the following section.  The next example shows the main features of the approach proposed in~\cite{CostaAMR13} and that is extended in the case of SLA guided services based data integration. 
+We propose an approach that consists in generating translations of an abstract query into \textit{several}  compositions over concrete  services. 
+The solutions proposed are ranked and may be coded into concrete workflows as shown in the following section.  The next example shows the main features of the approach proposed in~\cite{CostaAMR13} which is extended to the case of SLA-guided service-based data integration. 
 
-\begin{example}[Service Refinement by Rewriting]\label{Ex:rew1}
-Let us consider the case of the MOOC scenario, where people can participate on an content trading pool.
-We suppose that this hypothetical MOOC has a large number of participants that sell their content  to other consumers. 
+%\begin{example}[Service Refinement by Rewriting]\label{Ex:rew1}
+Let us consider the MOOC scenario, where people can participate on an content trading pool.
+We suppose that this hypothetical MOOC has a large number of participants that sell their content  to  consumers. 
 The MOOC has four information hubs, located in four different geographic locations, connected to other content providers.
-Other content providers are  contacted directly, through the services of three different cloud providers.
+Content providers may be  contacted directly, through the services of three different cloud providers.
 Each cloud provider exports its own interfaces.
- SLAs are defined for each individual content provider server, each hub, and each cloud provider. 
+SLAs are defined for each individual content provider server, each hub, and each cloud provider. 
 
-When an on-line consumer searches  servers to buy/retrieve content, a composed web service is generated, in order to fetch each individual or hub service and to start  content retrieval procedures.
+When an on-line consumer searches servers to buy/retrieve content, a composed web service is generated, in order to fetch each individual or hub service and to start  content retrieval procedures.
 Depending on the location of the consumer and producers, different conditions and constraints may apply.
 Also  cloud providers  publish the conditions for using their services.
 These conditions are expressed as user preferences and SLAs.
@@ -174,29 +174,36 @@ The generated service composition should consider the nearest providers, in acco
 
 In order to produce a personalized service composition for each user, the algorithm in~\cite{CostaAMR13} takes into account the specification of the composition (which may be produced by the user's browser, including context information).
 The specification of each available service is also considered (this specification should be given by the service provider).
-~\hfill\openbox
-\end{example}
+%~\hfill\openbox
+%\end{example}
 
 
-Given a a set of services that can possibly be composed and the derived SLA, a service composition must be produced.
-Some of the un-equations of the derived SLA should be included in the service compositions that answer the query.
+Given a set of services that can possibly be composed and the derived SLA, a service composition must be produced.
+Some of the inequations of the derived SLA should be included in the service compositions that answers the query.
 In the case of our query example the following composition can be used for answering it:
-\begin{eqnarray*}
-Q_1 &\equiv&
-   \langle X_1,Y_1\rangle = loc_1(IP), \\
-&& \langle X_2,Y_2 \rangle = loc_1(Cprovider), \\
-&& D = distance(\langle X_1,Y_1\rangle, \langle X_2,Y_2\rangle), \\
-&& \langle C_1, E_1 \rangle = e_1(\dots), \dots \langle C_4, E_4 \rangle = e_4(\dots), \\
-&& D \leq 1.5 \mathsf{Km},\ \ sum(C_1:C_4) \leq 5, \\
-&& union(E_1:E_4) \geq 5\ \mathsf{Go}, \\
-&& \mathsf{totalResponseTime}  \leq 10\ \mathsf{seg}
-\end{eqnarray*}
 
-  In fact our approach would generate a number $k$ of service compositions, combining as much as possible the services available such that the constraints of the derived SLA are verified. 
+\begin{footnotesize}
+\sf
+\begin{tabbing}
+ -~Q(myIPad\=dress, ``E.Dickinson'', 1MB, ``expert'', \$1, myCreditCard) $\equiv$ \\
+ \>  myLoc = loc(myIPaddress), \\
+ \>  estim$\_$cost(``E.Dickinson'', 1MB, cost, size, theirLocation), \\
+ \>  query total cost + cost $\leq$ \$1,\\
+ \>  availability $\geq$ 90$\%$, \\
+ \>  freshness = any, \\
+ \>  provenance = ``expert'', \\
+ \>  duration = 7 days, \\
+ \>  I/0 volume/month $\leq$ 8GB, \\
+ \>  storageSpace $\leq$ 1GB, \\
+ \>  engage(``E.Dickinson'', size, myCreditCard).
+ \end{tabbing} 
+\end{footnotesize}
+
+Our approach would generate a number $k$ of service compositions, combining as much as possible the services available such that the constraints of the derived SLA are verified. 
  Yet, the algorithm should be modified to take into account the different SLAs. The next example illustrates one of the limits of the automatic composition algorithm.
 
 \begin{example}[Incremental queries]\label{Ex:rew2}
-Let us return to the content  trade system of the MOOC Example~\ref{Ex:rew1}.
+Let us return to the content  trade system of the MOOC Example.
  Suppose that the user requires to retrieve a list of star providers  daily and weekly that can deliver ``\textit{5 Go}'' of expert content about Emily Dickinson poetry.
 In this case, each individual and hub database will be queried and the list will be produced by adding data obtained from them, until the 5Go  capacity is reached.
 Let us suppose that, in order to minimize the the communications between servers, the lists need to be produced incrementally.
@@ -218,5 +225,5 @@ To our knowledge, the incremental production of a solution is beyond  the scope 
  
 Second, pre-computed queries and partial results can be also stored in cache or in a persistent support. Rewriting results can be also stored and reduce execution and resources consumption time when evaluating similar queries. Storing or not such SLAs will depend on the cloud subscription of the user the issued the query (data access, intermediate storage capacity , cost of storage , etc ... ).
 
-As discussed in previous sections, the derived SLA associated to service compositions can have free measures that can only be evaluated at run-time. In order to do so, we assume that there is a monitoring system observing and aggregating events for computing resources consumption, execution and time cost, volumes of data transferred when services deliver results. These computations are used dynamically for instantiating free variables in the derived SLA and thus determine wether te contract is respected by the execution of a query. Since this is monitored dynamically, the evaluation of the query can be adapted if the SLA is not being respected anymore.
+As discussed in previous sections, the derived SLA associated to service compositions can have free measures that can only be evaluated at run-time. In order to do so, we assume that there is a monitoring system observing and aggregating events for computing resources consumption, execution and time cost, volumes of data transferred when services deliver results. These computations are used dynamically for instantiating free variables in the derived SLA and thus determine whether the contract is respected by the execution of a query. Since this is monitored dynamically, the evaluation of the query can be adapted if the SLA is not being respected anymore.
 
