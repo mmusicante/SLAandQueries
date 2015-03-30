@@ -347,6 +347,7 @@
 % *** Our packages ***
 
 \usepackage{amsmath}
+\usepackage{color}
 
 \usepackage[thmmarks,amsmath]{ntheorem}
 
@@ -397,7 +398,11 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{Integrating databases on a multi-cloud environment using SLA contracts}
+\title{Towards a secure database integration using SLA in multi-cloud context}
+
+%\title{Integrating databases on a multi-cloud environment using SLA contracts \\
+%SLA-based secure database integration on a multi-cloud environment  \\}
+
 
 
 % author names and affiliations
@@ -461,11 +466,17 @@ Martin A. Musicante\IEEEauthorrefmark{4}\\[4mm]}
 
 
 \begin{abstract}
-This paper proposes data integration  (lookup, aggregation, correlation) strategies that can be performed on a multi-cloud environment according to different SLA contacts. The resulting data integration is provided as a data as a service function that copes with the SLA of different clouds hosting data providers, and that provides a global SLA that consolidates as much as possible the SLA adopted by every cloud provider. Our data integration approach has been tested for integrating databases used for managing an education program.
+
+The recent emergence of  the cloud paradigm opens new challenges for data processing. Indeed, unlimited access to cloud resources and the "pay as U go" model change the hypothesis for processing big data collections. This is accentuated due to cloud provider incentives to attract data providers and let them choose their cloud. In this context data services are deployed on several clouds which make data integration face several heterogeneity problems.  
+This paper proposes a secure-aware data integration (lookup, aggregation,
+correlation) strategies that can be performed on a multi-cloud environment according to their respective SLA contracts. The resulting data integration is provided as a DaaS (data as a service) with a global SLA that consolidates as much as possible the SLA adopted by every cloud provider.
+Our data integration approach has been tested for integrating
+databases used for managing an education program.
+%This paper proposes data integration  (lookup, aggregation, correlation) strategies that can be performed on a multi-cloud environment according to different SLA contacts. The resulting data integration is provided as a data as a service function that copes with the SLA of different clouds hosting data providers, and that provides a global SLA that consolidates as much as possible the SLA adopted by every cloud provider. Our data integration approach has been tested for integrating databases used for managing an education program.
 \end{abstract}
 
 \begin{IEEEkeywords}
-SLA; Cloud Computing; Data Integration;
+security services, SLA; Cloud Computing; Data Integration;
 \end{IEEEkeywords}
 
 % For peer review papers, you can put extra information on the cover
@@ -492,13 +503,17 @@ SLA; Cloud Computing; Data Integration;
 %\label{sec:slaDataInteg}
 %\input{slaDataInteg}
 
+%\section{SLA based data integration: the requirements}
+%\label{sec:requirements}
+%\input{requirement}
+
 \section{SLA based incremental data integration}
 \label{sec:incremental}
 \input{incremental}
 
-\section{{Experimental validation}}
-\label{sec:useCase}
-\input{useCase}
+%\section{{Experimental validation}}
+%\label{sec:useCase}
+%\input{useCase}
 
 
 \section{Conclusions and Future work}
