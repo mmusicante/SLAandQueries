@@ -39,27 +39,29 @@ We represent these services by {\sf e$_1$, \dots, e$_4$} and {\sf h$_1$} and {\s
 We also suppose the existence of two free location services exporting the following interface: {\sf loc(IP) $\rightarrow$ $\langle$ X, Y$\rangle$}, meaning that given an IP address it returns a geographic position expressed as a pair of coordinates. 
 All these services can potentially be combined for answering queries.
 
-In our example, non-functional characteristics of the content provision services ({\sf e$_1$, ... e$_4$}) are calculated by services that enforce SLAs  as follows:
-\begin{trivlist}\sf\footnotesize
-\item[~-~e$_i$:]estim-cost$_i$(contents, req\_size, cost, prov\_size, loc), QoS preferences$_\mathit{user}$.
-
-                engage$_i$(contents, req\_size, payment), agreedSLA$_i$.
-\end{trivlist}
+%In our example, non-functional characteristics of the content provision services ({\sf e$_1$, ... e$_4$}) are calculated by services that enforce SLAs  as follows:
+%\begin{trivlist}\sf\footnotesize
+%\item[~-~e$_i$:]estim-cost$_i$(contents, req\_size, cost, prov\_size, loc).
+%QoS preferences$_\mathit{user}$.
+%
+%                engage$_i$(contents, req\_size, payment)
+                %agreedSLA$_i$.
+%\end{trivlist}
 
 \color{red}
 
-The first operation permits the user to ask for the budget of a given course (content) and a required minimmum size.
-This operation will return the cost of the data, as well as its actual size and location.
-{QoS preferences}$_\mathit{user}$ is the user's proposal to the contents provider. 
-This SLA will become the {\sf agreedSLA}$_i$, in case of availability of the contents. 
-We suppose that availability is characterized by a non-zero value of size of the provided data ({\sf prov\_size}).
+The first operation permits the user to ask for the budget of a given  content and a required minimum size.
+This operation  returns the cost of the data, as well as its actual size and location.
+%{QoS preferences}$_\mathit{user}$ expresses the user's preferences with respect to  the way she will receive content from a provider. 
+%The requirements will be matched with the agreedSLAs of the services that can provide the content, in order to derive an {\sf agreedSLA}$_i$. 
+We suppose that availability is characterized by a non-zero value representing the size of the provided data ({\sf prov\_size}) by a given service.
 The second operation is used to engage in a course. 
-The agreed SLAs are those containing the information described above in this example.
+The agreed SLAs are those containing the information described above.
 %The user will ask for a given derived SLA to which the provider may agree.
 
 
 
-Cloud providers also define their SLA contracts that specify the cost per request ({\sf cost/request}), the volume of data that can be exchanged per month ({\sf I/0 volume/month}), the cost of transferring data or applications within the same data center or between data centers ({\sf datatransferCost/region}), the storage space ({\sf storageSpace}). For example some cloud providers enable the customer to choose the zone to install PaaS services and deploy applications (e.g. zone 1 is Europe). If the customer wishes to deploy services in zone 1 but store data in zone 2 the transfer cost will change.
+Cloud providers also define their agreed SLA contracts that specify the cost per request ({\sf cost/request}), the volume of data that can be exchanged per month ({\sf I/0 volume/month}), the cost of transferring data or applications within the same data center or between data centers ({\sf datatransferCost/region}), the storage space ({\sf storageSpace}). For example some cloud providers enable the customer to choose the zone to install PaaS services and deploy applications (e.g. zone 1 is Europe). If the customer wishes to deploy services in zone 1 but store data in zone 2 the transfer cost will change.
 
 \begin{trivlist}\sf\footnotesize
  \item[~-~cloudSLA:]  $\langle$cost/request, I/0 volume/month, datatransferCost/region, storageSpace$\rangle$.
@@ -69,27 +71,28 @@ Cloud providers also define their SLA contracts that specify the cost per reques
 
 Queries may be expressed as Datalog-like programs or an SQL-like expressions, including spatio-temporal attributes and preferences.
 For instance, let us have the query ``\textit{List of English poetry content providers that can provide commented Emily Dickinson poems that are close to my city and that are labelled as experts, where the total cost is not higher to 1 dollar}''. 
-This query has two parts: the one that corresponds to the content that will be solved by combining data services and the user preferences. For this query the user is ready to pay a maximum of \$1 as total cost; she requests that content providers be certified as experts (provenance) and that her privacy be saved by adapting the anonymity process with regard to services reputation. The maximum total cost will condition also which kind of privacy preserving algorithms to apply.
+This query has two parts: the one that corresponds to the content that will be solved by combining data services and the user preferences. For this query the user is ready to pay a maximum of \$1 as total cost; she requests that content providers be certified as experts (provenance) and that her privacy be saved by adapting the anonymity process with regard to services reputation. The maximum total cost will determine the kind of privacy preserving algorithms to apply.
 
-The user preferences statement would include their cloud provider contract and quality preferences:
+The user preferences statement  includes her cloud provider contract and quality preferences:
 \begin{trivlist}\sf\footnotesize
 \item[~-~cloudSLA:]  $\langle$0,05 cents per call, 8 GB I/0 volume/month, free, 1 GB storage$\rangle$. 
 \end{trivlist}
 
-We consider a simplified cloud SLA contract inspired in the lowest contract provided by Azure\footnote{Azure is a trademark of Microsoft Corporation.}: {\sf cost of \$0,05 cents per call,  8~GB of I/O volume/month, free data transfer cost within the same region,  01~GB of storage}. 
+As shown above, we consider a simplified cloud SLA contract inspired in the lowest contract provided by Azure\footnote{Azure is a trademark of Microsoft Corporation.}: {\sf cost of \$0,05 cents per call,  8~GB of I/O volume/month, free data transfer cost within the same region,  01~GB of storage}. 
 
-The user is ready to pay a maximum of {\sf \$1 as total query cost}; she requests that only {\sf certified} content providers are listed (provenance); even if their data are not fresh; she requires a contract duration of one week.
+As expressed in the query example, the user is ready to pay a maximum of {\sf \$1 as total query cost}; she requests that only {\sf certified} content providers are listed (provenance); even if their data are not fresh; she requires a contract duration of one week.
 
 \begin{trivlist}\sf\footnotesize
 \item[~-~SLA$_\mathit{user}$: ] $\langle$cost $\leq$ \$1, availability, freshness = ``any'', provenance = ``certified'', location = ``close'', duration = 7 days, privacy-preserving=``reputation-based''$\rangle$. 
 \end{trivlist}
 
-As usual, SLAs will be represented as conditions over variables that will be used in the query.
-In this context, the compliance to the SLAs will drive the query rewriting process.
+%As usual, SLAs will be represented as conditions over variables that will be used in the rewritten query.
+In this context, the compliance between the QoS preferences of the user, her cloud SLAs (given by her subscriptions) and the  agreed SLAs will drive the query rewriting process.
 
-
-Given a requirement expressing a query and quality of service preferences: cost, provenance, trust requirement, execution time, data confidentiality needs, \dots, the data integration process for computing a result is done as follows: (i) User preferences (including cloud SLAs according to user subscriptions) and agreed SLAs will be used to produce a derived SLA to be associated to the query. 
-These derived SLA will influence the choice of (data) services that will actually be used for building the result; (ii) Query rewriting for computing service compositions that can be used for  building query results. The agreed SLA proposed by the chosen services is added as  conditions in  each re-written   query expression; (iii) Managing the integration process particularly storing partial results (including in  which location data is stored), delivering data (applying security control during integration) and launching and re-launching queries. Intermediate results  are stored as knowledge in order to reduce the overhead of the query evaluation process. 
+Given a requirement expressing a query and quality of service preferences: cost, provenance, trust requirement, execution time, data confidentiality needs, \dots, the data integration process for computing a result is done as follows: (i) User preferences (including cloud SLAs according to user subscriptions) and agreed SLAs will be used to produce a derived SLA to be associated to the query. The derived SLA  will guide the way the query will be evaluated, and the way results will be computed and delivered.
+%These derived SLA will influence the choice of (data) services that will actually be used for building the result; 
+(ii) Query rewriting for computing service compositions that can be used for  building query results. The derived SLA (that copes agreed SLAs with user preferences) is added as  conditions in  each re-written   query expression; (iii) Integration SLA is computed according to the conditions in which the query will be executed. It will help to  manage the integration process particularly storing partial results (including in  which location data is stored), delivering data (applying security control during integration) and launching and re-launching queries. 
+%Intermediate results  are stored as knowledge in order to reduce the overhead of the query evaluation process. 
 
 \color{black}
 %-----------------------------------------------------------------
@@ -109,7 +112,6 @@ This request  includes the price of calling a service (e.g.,  between 0,25 - 0,5
 
 Given agreed SLAs and a user preferences statement the challenge is to compute a  {\em derived SLA} that  maps SLA measures and preferences attributes.  
 The derived SLA is defined as a set of measures that correspond to the user preferences computed as a function of different static, computed and hybrid measures. 
-The derived SLA  will guide the way the query will be evaluated, and the way results will be computed and delivered.
 
 In the example, some of the user preferences statement measures are used for defining a derived SLA that, as said in previous section, will guide the evaluation of the query. 
 These measures are defined as a function of the measures used by the agreed SLAs and by the cloud SLA contract.
