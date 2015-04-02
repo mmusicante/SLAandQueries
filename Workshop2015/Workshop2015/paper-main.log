@@ -1,0 +1,356 @@
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.5.18)  1 APR 2015 23:32
+entering extended mode
+\write18 enabled.
+ %&-line parsing enabled.
+**paper-main.tex
+(./paper-main.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, arabic, basque, bulgarian, coptic, welsh, czech, slovak, german, ng
+erman, danish, esperanto, spanish, catalan, galician, estonian, farsi, finnish,
+ french, greek, monogreek, ancientgreek, croatian, hungarian, interlingua, ibyc
+us, indonesian, icelandic, italian, latin, mongolian, dutch, norsk, polish, por
+tuguese, pinyin, romanian, russian, slovenian, uppersorbian, serbian, swedish, 
+turkish, ukenglish, ukrainian, loaded.
+(./IEEEtran.cls
+Document Class: IEEEtran 2012/11/21 V1.8c by Harald Hanche-Olsen and Anders Chr
+istensen
+-- Based on V1.7a by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+\@IEEEtrantmpdimenA=\dimen102
+\@IEEEtrantmpdimenB=\dimen103
+\@IEEEtrantmpcountA=\count79
+\@IEEEtrantmpcountB=\count80
+\@IEEEtrantmptoksA=\toks14
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 373.
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+\@IEEEnormalsizeunitybaselineskip=\dimen104
+-- This is a 10 point document.
+\CLASSINFOnormalsizebaselineskip=\dimen105
+\CLASSINFOnormalsizeunitybaselineskip=\dimen106
+\IEEEnormaljot=\dimen107
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 731.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 731.
+\IEEEilabelindentA=\dimen108
+\IEEEilabelindentB=\dimen109
+\IEEEilabelindent=\dimen110
+\IEEEelabelindent=\dimen111
+\IEEEdlabelindent=\dimen112
+\IEEElabelindent=\dimen113
+\IEEEiednormlabelsep=\dimen114
+\IEEEiedmathlabelsep=\dimen115
+\IEEEiedtopsep=\skip41
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@IEEEsubequation=\count85
+\abovecaptionskip=\skip42
+\belowcaptionskip=\skip43
+\c@figure=\count86
+\c@table=\count87
+\@IEEEeqnnumcols=\count88
+\@IEEEeqncolcnt=\count89
+\@IEEEtmpitemindent=\dimen116
+\c@IEEEbiography=\count90
+\@IEEEtranrubishbin=\box26
+) (/usr/local/texlive/2007/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 149.
+LaTeX Info: Redefining \nocite on input line 214.
+Package: cite 2003/11/04  v 4.01
+)
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2006/02/20 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2007/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 90.
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2007/01/08 v0.04d Graphics/color for pdfTeX
+\Gread@gobject=\count91
+))
+\Gin@req@height=\dimen117
+\Gin@req@width=\dimen118
+)
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+\epsfxsize=\dimen119
+\epsfysize=\dimen120
+)
+(/usr/local/texlive/2007/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip44
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2007/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks16
+\ex@=\dimen121
+))
+(/usr/local/texlive/2007/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen122
+)
+(/usr/local/texlive/2007/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count92
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count93
+\leftroot@=\count94
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count95
+\DOTSCASE@=\count96
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box27
+\strutbox@=\box28
+\big@size=\dimen123
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count97
+\c@MaxMatrixCols=\count98
+\dotsspace@=\muskip10
+\c@parentequation=\count99
+\dspbrk@lvl=\count100
+\tag@help=\toks17
+\row@=\count101
+\column@=\count102
+\maxfields@=\count103
+\andhelp@=\toks18
+\eqnshift@=\dimen124
+\alignsep@=\dimen125
+\tagshift@=\dimen126
+\tagwidth@=\dimen127
+\totwidth@=\dimen128
+\lineht@=\dimen129
+\@envbody=\toks19
+\multlinegap=\skip45
+\multlinetaggap=\skip46
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/usr/local/texlive/2007/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+(/usr/local/texlive/2007/texmf-dist/tex/latex/ntheorem/ntheorem.sty
+Style `ntheorem', Version 1.25 <2005/07/07>
+Package: ntheorem 2005/07/07 1.25
+\theorem@style=\toks21
+\theorem@@style=\toks22
+\theorembodyfont=\toks23
+\theoremnumbering=\toks24
+\theorempreskipamount=\skip47
+\theorempostskipamount=\skip48
+\theoremindent=\dimen130
+\theorem@indent=\dimen131
+\theoremheaderfont=\toks25
+\theoremseparator=\toks26
+\theoremprework=\toks27
+\theorempostwork=\toks28
+\theoremsymbol=\toks29
+\qedsymbol=\toks30
+\theoremkeyword=\toks31
+\qedsymbol=\toks32
+\thm@topsepadd=\skip49
+Package ntheorem Info: Option `thmmarks' loaded on input line 1029.
+\c@endNonectr=\count104
+\c@currNonectr=\count105
+\mysavskip=\skip50
+Package ntheorem Info: option `amsmath' handling for `thmmarks' loaded on input
+ line 1029.
+\thm@amstmpdepth=\dimen132
+)
+\c@curralgoctr=\count106
+\c@endalgoctr=\count107
+\c@algo=\count108
+\c@currexamplectr=\count109
+\c@endexamplectr=\count110
+\c@example=\count111
+\c@currdefictr=\count112
+\c@enddefictr=\count113
+\c@defi=\count114
+\c@currpropctr=\count115
+\c@endpropctr=\count116
+\c@prop=\count117
+
+
+LaTeX Warning: Unused global option(s):
+    [compsocconf].
+
+(./paper-main.aux)
+\openout1 = `paper-main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 397.
+LaTeX Font Info:    ... okay on input line 397.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 397.
+LaTeX Font Info:    ... okay on input line 397.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 397.
+LaTeX Font Info:    ... okay on input line 397.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 397.
+LaTeX Font Info:    ... okay on input line 397.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 397.
+LaTeX Font Info:    ... okay on input line 397.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 397.
+LaTeX Font Info:    ... okay on input line 397.
+
+(/usr/local/texlive/2007/texmf-dist/tex/context/base/supp-pdf.tex
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count118
+\scratchdimen=\dimen133
+\scratchbox=\box29
+\nofMPsegments=\count119
+\nofMParguments=\count120
+\MPscratchCnt=\count121
+\MPscratchDim=\dimen134
+\MPnumerator=\count122
+\everyMPtoPDFconversion=\toks33
+)
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 465.
+ (./introduction.tex [1{/usr/local/texlive/2007/texmf-var/fonts/map/pdftex/updm
+ap/pdftex.map}
+
+
+]) (./relwork.tex) (./incremental.tex
+<workflow.pdf, id=10, 700.6175pt x 373.395pt>
+File: workflow.pdf Graphic file (type pdf)
+ <use workflow.pdf>
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 26.
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+) [2]
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
+[]\OT1/phv/m/n/8 estim-cost$[]$(contents, req[]size, cost, prov[]size, loc), Qo
+S
+ []
+
+
+Underfull \hbox (badness 7047) in paragraph at lines 84--85
+\OT1/phv/m/n/8 = ``cer-ti-fied'', lo-ca-tion = ``close'', du-ra-tion = 7 days, 
+privacy-
+ []
+
+[3 <./workflow.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 104--104
+[][][]\OT1/ptm/m/n/8 http://www.research.ibm.com/people/a/akeller/-Data/WSLASpe
+cV1-
+ []
+
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <8> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 118.
+[4]) (./conclusions.tex) [5] (./paper-main.bbl)
+
+** Conference Paper **
+Before submitting the final camera ready copy, remember to:
+
+ 1. Manually equalize the lengths of two columns on the last page
+ of your paper;
+
+ 2. Ensure that any PostScript and/or PDF output post-processing
+ uses only Type 1 fonts and that every step in the generation
+ process uses the appropriate paper size.
+
+\tf@thm=\write3
+\openout3 = `paper-main.thm'.
+
+[6
+
+] (./paper-main.aux) ) 
+Here is how much of TeX's memory you used:
+ 2743 strings out of 94073
+ 39026 string characters out of 1162984
+ 98258 words of memory out of 1500000
+ 6003 multiletter control sequences out of 10000+50000
+ 51104 words of font info for 97 fonts, out of 1200000 for 2000
+ 648 hyphenation exceptions out of 8191
+ 32i,13n,24p,1423b,296s stack positions out of 5000i,500n,6000p,200000b,5000s
+{/usr/local/texlive/2007/texmf-dist/fonts/enc/dvips/base/
+8r.enc}</usr/local/texlive/2007/texmf-dist/fonts/type1/bluesky/cm/cmmi10.pfb></
+usr/local/texlive/2007/texmf-dist/fonts/type1/bluesky/cm/cmmi6.pfb></usr/local/
+texlive/2007/texmf-dist/fonts/type1/bluesky/cm/cmmi7.pfb></usr/local/texlive/20
+07/texmf-dist/fonts/type1/bluesky/cm/cmmi8.pfb></usr/local/texlive/2007/texmf-d
+ist/fonts/type1/bluesky/cm/cmr6.pfb></usr/local/texlive/2007/texmf-dist/fonts/t
+ype1/bluesky/cm/cmr7.pfb></usr/local/texlive/2007/texmf-dist/fonts/type1/bluesk
+y/cm/cmr8.pfb></usr/local/texlive/2007/texmf-dist/fonts/type1/bluesky/cm/cmsy10
+.pfb></usr/local/texlive/2007/texmf-dist/fonts/type1/bluesky/cm/cmsy8.pfb></usr
+/local/texlive/2007/texmf-dist/fonts/type1/bluesky/cm/cmti7.pfb></usr/local/tex
+live/2007/texmf-dist/fonts/type1/public/cmex/fmex8.pfb></usr/local/texlive/2007
+/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2007/texmf-
+dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive/2007/texmf-dist/f
+onts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2007/texmf-dist/fonts/type1
+/urw/times/utmbi8a.pfb></usr/local/texlive/2007/texmf-dist/fonts/type1/urw/time
+s/utmr8a.pfb></usr/local/texlive/2007/texmf-dist/fonts/type1/urw/times/utmri8a.
+pfb>
+Output written on paper-main.pdf (6 pages, 377689 bytes).
+PDF statistics:
+ 502 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 131072)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+
