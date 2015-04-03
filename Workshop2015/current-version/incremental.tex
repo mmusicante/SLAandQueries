@@ -56,25 +56,37 @@ This request  includes the price of calling a service (e.g.,  between 0,25 - 0,5
 As aforementioned, an a-priori SLA enforcement mechanism is mandatory to assess data integration feasibility.
 To this end, non-functional characteristics of the content provision services ({i.e e$_1$, ... e$_4$}) are calculated by specific cloud services (SCS) that enforce SLAs  and which should present an API, composed of a set of methods such as:
 
+\color{green}
 \begin{trivlist}\sf\footnotesize
-\item[~-~S$_i$:]estim-cost$_i$(contents, req\_size, cost, prov\_size, loc), QoS preferences$_\mathit{user}$, agreedSLA$_i$.
+\item[~-~]estim-cost$_i$(contents, req\_size, cost, prov\_size, loc), 
+%QoS preferences$_\mathit{user}$, -- These should be in the query... not in the concrete services specification.
+agreedSLA$_i$.
 
-                engage$_i$(contents, req\_size, payment), agreedSLA$_i$.
+\item[~-~]engage$_i$(contents, req\_size, payment), agreedSLA$_i$.
 \end{trivlist}
 
  
 
-Given user expressed QoS preferences ({QoS preferences}$_\mathit{user}$) and {agreedSLA}$_i$, the first method allows to obtain for each service $e_i$ the estimation of the budget (in our example, of a given course (content)) and a required minimum size. In other words, it will returns the cost of the data, as well as its actual size and location.
+%Given user expressed QoS preferences ({QoS preferences}$_\mathit{user}$) and {agreedSLA}$_i$, 
+The first method allows to obtain for each service $e_i$ the estimation of the budget (in our example, of a given course (content)) and a required minimum size. In other words, it will returns the cost of the data, as well as its actual size and location.
  
- 
- The second method is used to engage in a data service (in our example a course data service) and will be used later if the service is retained for a composition that answer the query.
+The second method is used to engage in a data service (in our example a course data service) and will be used later if the service is retained for a composition that answer the query.
+
  
 %The user will ask for a given derived SLA to which the provider may agree.
 
-ICL by asking SCS for each semantic functionality, obtain the set of potential services that satisfy either user preferences and  service offering described through their \textit{Agreed SLAs}. Indeed, the query $Q_1$ has two parts: the one that corresponds to the content asked for by the user  that will be solved by combining data services and the user preferences. For this query the user is ready to pay a maximum of \$1 as total cost; she requests that content providers be certified as experts (provenance) even if their data are not fresh; she requires a contract duration of one week. Besides, she wishes her privacy be saved by adapting the anonymity process with regard to service reputation. The maximum total cost will condition also which kind of privacy preserving algorithms to apply.
+ICL by asking SCS for each semantic functionality, obtain the set of potential services that satisfy both user preferences and  service offering described through their \textit{Agreed SLAs}. 
+Indeed, the query $Q_1$ has two parts: the one that corresponds to the content asked for by the user  that will be solved by combining data services and the \textit{user preferences}, noted by {QoS preferences}$_\mathit{user}$:
+\begin{trivlist}\sf\footnotesize
+\item[~-~QoS preferences$_\mathit{user}$: ] $\langle$cost, freshness, provenance, location, duration, privacy-preserving$\rangle$. 
+\end{trivlist}
+
+\color{black}
+
+Let us suppose that for this query the user is ready to pay a maximum of \$1 as total cost; she requests that content providers be certified as experts (provenance) even if their data are not fresh; she requires a contract duration of one week. Besides, she wishes her privacy be saved by adapting the anonymity process with regard to service reputation. The maximum total cost will condition also which kind of privacy preserving algorithms to apply.
  
 \begin{trivlist}\sf\footnotesize
-\item[~-~QoS preferences$_\mathit{user}$: ] $\langle$cost $\leq$ \$1, availability, freshness = ``any'', provenance = ``certified'', location = ``close'', duration = 7 days, privacy-preserving=``reputation-based''$\rangle$. 
+\item[~-~QoS preferences$_\mathit{user}$: ] $\langle$cost $\leq$ \$1, freshness = ``any'', provenance = ``certified'', location = ``close'', duration = 7 days, privacy-preserving=``reputation-based''$\rangle$. 
 \end{trivlist}
 
 
@@ -96,9 +108,16 @@ Illustration inspired in the lowest contract provided by Azure\footnote{Azure is
 
    
 
+\color{green}
 
 
-The next step supervised by the ICL consists in elaborating a set of potential composition specifications via a query rewriting process that complies both the user cloud SLAs and QoS preferences: cost, provenance, trust requirement, execution time, data confidentiality needs, \dots.
+The next step supervised by the ICL consists in elaborating a set of potential composition specifications via a query rewriting process:
+Given the user query, specified as a sequence of abstract operations and the available services, specified in the same way, we use a Local-as-View approach~\cite{CostaAMR13} to obtain a combination of services that match the query specification.
+The algorithm in~\cite{CostaAMR13} is being modified to deal with SLA and QoS user preferences.
+
+\color{black}
+
+In this paper, we are interested in rewritten queries that comply with the user preferences,  cloud SLAs and QoS preferences.
  This allows computing a result as follows: (i) User preferences (including cloud SLAs according to user subscriptions) and \textit{agreed SLAs} will be used to produce a \textit{derived SLA} to be associated to the query. These derived SLA will influence the choice of (data) services that will actually be used for building the result; (ii) Query rewriting for computing service compositions that can be used for  building query results. The \textit{agreed SLA} exposed by the chosen services is added as  conditions in  each re-written query expression; Two situations could arise: a full compliance of a composition with the \textit{derived SLA} or a partial compliance that requires a negotiation step. For both alternatives, an \textit{integration SLA} will be produced indicating the negotiation conditions and the implementation of the final integration; (iii) and Managing the integration process according to the \textit{integration SLA}.
 
  
@@ -151,6 +170,9 @@ Given a query and its preferences statement, the system  finds  service composit
 \color{red}
 One point remain very crucial to fix: once the multi-cloud layer generate a list of derived SLA corresponding to Agreed-SLA of services that could match a part of the query, What should happen?  With whom rewritten query using user preferences is matched with SLA and which one (not clear in the paper.  This point should be discussed quickly. The workflow of SLA between the abstract layer and cloud is not so clearly described.
 
+\color{green}
+Answer by Martin: The agreedSLA will be included and merged with the SLA conditions obtained by the rewriting process. Only those compositions that comply with the agreedSLA will be presented as solutions to the user.
+ 
 \color{black}
 Query rewriting is a well-known problem in the database domain.
 The problem consists in transforming an abstract query into a set (or list) of lower-level queries that can be solved by  available databases.
@@ -196,9 +218,13 @@ The specification of each available service is also considered (this specificati
 %~\hfill\openbox
 %\end{example}
 
+\color{green}
+%Given a set of services that can possibly be composed and the derived SLA, a service composition must be produced.
+%Some of the inequations of the derived SLA should be included in the service compositions that answers the query.
 
-Given a set of services that can possibly be composed and the derived SLA, a service composition must be produced.
-Some of the inequations of the derived SLA should be included in the service compositions that answers the query.
+The agreedSLA will be included and merged with the SLA conditions obtained by the rewriting process. Only those compositions that comply with the agreedSLA will be presented as possible solutions to the user.
+\color{black}
+
 In the case of our query example the following composition can be used for answering it:
 
 \begin{footnotesize}
@@ -213,7 +239,7 @@ In the case of our query example the following composition can be used for answe
  \>  provenance = ``expert'', \\
  \>  duration = 7 days, \\
  \>  I/0 volume/month $\leq$ 8GB, \\
- \>reputation level :] $\geq \lambda$ (the threshold) \\
+ \>  reputation level $\geq \lambda$ (the threshold) \\
  \>  storageSpace $\leq$ 1GB, \\
  \>  engage(``E.Dickinson'', size, myCreditCard).
  \end{tabbing} 
