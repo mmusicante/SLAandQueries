@@ -1,0 +1,77 @@
+
+%\begin{itemize}
+%\item Cloud computing represents a novel on-demand computing approach where resources are provided in compliance to a set of predefined non-functional properties specified and negotiated by means of Service Level Agreements (SLAs).  SLA currently exploited in the cloud allows service providers and cloud client to fix the resource level that should be used either by a service for the service provider or by the client in the case of service invokation. SLA could concern all types of the services on the cloud (IAAS, PAAS or SAAS). One of the weakness of SLA for the client is that they express low level clauses like storage amount use or virtualization level. In fact when a client launches a task on the cloud, she has unlikely Q \& S requirement rather than low level features. Recently we notice the existing of a lot of works with the objective to fill the gap.  Emeakaroha and al propose in \cite{5547150}  a cloud component that acts autonomously based on low level  monitored features after analysing them towards high level clauses expressed by the user. Moreover, another difficulty to enforce an SLA is to measure and identify, starting from a high level SLA clause, how could it be declined at different layers in the cloud. Therefore in \cite{Dastjerdi:2012:DOA:2275356.2275360} the authors describe a semanticSLA which can be understood by all parties including providers,
+%requestors, and monitoring services. One of the major objectives in the cloud is to anticipate SLA violation and to assess SLA failure cascading on violation detection. \cite{Dastjerdi:2012:DOA:2275356.2275360} proposes an SLA dependency modeling using Web Service Modeling Ontology (WSMO) to build a knowledge database.  \cite{5547150} proposes to anticipate failure by analysing the monitored feature and to act by anticipation. in \cite{5614035}, the authors propose LAYSI, a layered solution that minimizes user interactions with the system and prevents violations of agreed SLAs. 
+%On the other hand SLA contracts do not cover all client requirement. There is still a lack in some domain.....(to be completed)
+
+%\item some 
+
+
+%Service Level Agreements (SLA)~\cite{SLA} can be used in the context of cloud computing to establish those conditions. 
+In the cloud, the adoption of SLAs relies on two principles: (i) The negotiation of conditions in which services will be provided and that are statically agreed between the parts and (ii) The monitoring of these conditions during the use of cloud resources in order to detect SLA contract violation.
+
+%The agreed conditions should be explicit and quantifiable.
+%They should be part of the contract between the client and the service provider.
+%Their quantifiable nature makes it possible for the conditions to appear as non-functional requirement to be imposed to each individual service.
+%SLA could concern all types of services on the cloud (IaaS, PaaS or SaaS).
+
+%SLA compliance may be ensured by construction or may be monitored during the execution of the service.
+%Monitoring SLAs is normally part of the infrastructure provided by the cloud.
+%Service monitoring may incur in extra processing costs.
+
+%SLA currently exploited in the cloud allows service providers and cloud clients to describe the amount of resources to be simultaneously used and also the conditions to use them.
+%This limit may apply both for the service provider and the client (in the case of service invocation). 
+
+%Negotiating a SLA may be a difficult task.
+%Indeed, 
+SLAs are normally expressed in terms of \textit{technical}, quantifiable measures, like the storage space size  or the degree of virtualization. 
+On the user side, the interest is normally on \textit{service} delivery measures such as QoS requirements.
+The challenge is to couple technical and service delivery measures expressed in SLA in order to agree on the conditions in which they will interact. Existing works use matching and negociation techniques for addressing this challenge.  
+For instance,~\cite{5547150} 
+proposes a bottom-up approach based on a cloud component that monitors technical measures, analyses and matches them to service delivery (high level) clauses expressed by the user.
+  \cite{Dastjerdi:2012:DOA:2275356.2275360} describes a \textit{Semantic SLA} that can be understood by all parties including providers, consumers, and monitoring services.
+Their goal is, starting from a high level SLA, to measure and identify how to derive SLA measures  at different layers of the cloud.  \cite{Ortiz:2013:VPS:2486767.2486772}
+  proposes a set of templates to  cloud data services users, each specifying the query type that can be executed with some tread-off in time and corresponding cost.  The client  chooses among the proposed tempates the one that best corresponds   to her requirements. \cite{6141307} proposes a set of matching algorithms to identify compatible cloud providers for a given requirements specification by matching SLA parameters. Cloud SLA parameters and application requirements are represented by two models using RDF. RDF definitions are then converted into graph representations. An Induced Propagation Graph is calculated using both models to establish a correspondence between them.
+
+
+%{\color{red}
+%One of the major objectives in the cloud is to anticipate SLA violation and to assess SLA failure cascading on violation detection. 
+%\cite{Dastjerdi:2012:DOA:2275356.2275360} proposes an SLA dependency modeling using Web Service Modeling Ontology (WSMO) to build a knowledge database.  
+%\cite{5547150} proposes to anticipate failure by analysing the monitored feature and to act by anticipation. 
+%In \cite{5614035}, the authors propose LAYSI, a layered solution that minimizes user interactions with the system and prevents violations of agreed SLAs. 
+%}
+
+Recent  works on SLA are devoted to extend  SLA for including  security concerns. 
+\cite{6274042} propose an extension of the WSAgreement, initially developed by the GRAAP
+working group. 
+Security constraints are expressed over the service description
+terms (SDTs) and the service level objectives (SLOs) of the SLA. 
+This leads to an interoperable security expression that can be used by users for comparing security levels of different cloud service providers. Hale and Al. in \cite{6655684} extends their first work proposing an ontology representation of security concerns and let security services expressed in SLA connected to documents regulating security controls.
+\cite{LunaGarcia:2012:BCS:2381913.2381932} focuses on how to build a SEcSLA Template starting from gathering then categorizing a set of security statements using a semantic tool. 
+The designed template is then used both to express user security requirements and cloud service provider security provision.
+Finally, some works  deal with SLA violation anticipation and SLA failure cascading on violation detection.  \cite{Dastjerdi:2012:DOA:2275356.2275360}  proposes an SLA dependency model using Web Service Modeling Ontology (WSMO) to build a knowledge database. \cite{5614035} proposes to anticipate failure by analysing the monitored feature. 
+\cite{5614035} proposes LAYSI, a layered solution that minimizes user interactions with the system and prevents violations of agreed SLAs.
+
+Regarding recent work on SLA modeling in the cloud, it clearly appears that no work has been proposed before using SLA for data integration.
+Furthermore, SLA are exclusively used in a mono-cloud context, low level oriented and serve to express condition in which a user could exploit cloud ressources. Whereas data integration in a multi-cloud context implies to express and enforce multiple granularity constraints at different levels (users, services, clouds and inter-cloud environnements).  Finally,  an a-priori SLA enforcement mechanism -in opposition to the a-posteriori SLA monitoring to detect violation-  is mandatory to assess data integration feasibility.
+
+ 
+%=====================================
+
+%Another issue in the SLA management domain is how to let cloud service provider offer fit the best user requirements. In fact, current SLA are only resource oriented and lacks in expressing client requirement in service quality and characteristics. Plenty of works tends to fill the gap. First by proposing predefined templates;. 
+
+  
+%  In \cite{LunaGarcia:2012:BCS:2381913.2381932,}, the authors propose to do a mapping of both user SecSLA requirements and CSP SecSLA provisions on a set of Quantitative Policy Tree(QPT), where atomic capabilities are mapped on leaves and intermediate represents coarse provisions with some logical operators (AND, OR). The mapping allows to give a quantitative benchmarking to each CSP offer with respect to user requirements that lets the user be able to make a choice. For more experienced users, \cite{6313668} proposes an extensible specification grammar that allows to express user and application-specific requirements in using a cloud data service. This allows to customize the SLA management at the cloud side. Emeakaroha and al propose in \cite{5547150}  a cloud component that acts autonomously based on low level monitored features after analysing them towards high level clauses expressed by the user. Moreover, another difficulty to enforce an SLA is to measure and identify, starting from a high level SLA clause, how could it be declined at different layers in the cloud. Therefore in  \cite{Dastjerdi:2012:DOA:2275356.2275360}  the authors describe a semantic- SLA which can be understood by all parties including providers,requestors, and monitoring services. 
+% \cite{6141307} proposes a batterie of matching algorithms to identify compatible cloud provider for a given requirements by matching SLA parameters.
+%In this work, SLA parameters of the cloud are defined in a cloud capable model and application's requirements are defined
+%in an application requirement model. Those models specified firstly using RDF, are converted into graph structures using Jena APIs.
+%From those graphs a Pairwise Connectivity Graph is defined and an Induced Propagation Graph is calculated.
+%Pairwise Connectivity Graph is constituted by nodes called mappairs established when source and target nodes from initial graphs have the same property edge.
+%For the Propagation Graph each edge is given a weight. Finally, a Similarity propagation graph is constructed based on an initial mapping between the RDF models, where mapping nodes are compared (subclass, superclass, equivalence relation) and the mapping is used in a similarity flooding algorithm which is filtered out to only the instance node pairs that have similarity value greater than zero.
+%  
+
+
+
+ 
+ % \item data integration (cf. travaux Gonzalez) 
+%\end{itemize}
