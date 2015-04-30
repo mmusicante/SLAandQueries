@@ -120,18 +120,18 @@ In this paper, we are interested in rewritten queries that comply with the QoS u
 
  
 %-----------------------------------------------------------------
-\section{DerivedSLA}
+\section{Deriving SLA}
 \label{sec:derivedSla}
 %-----------------------------------------------------------------
 
-The key and original aspect of  our proposed data integration and provision process is  defined as a vertical mapping of user QoS preferences and agreedSLAs of potential com posable services. This  leads to a {\em derivedSLA} that guides the evaluation of a query and maps SLA measures and preferences attributes.  
+The key and original aspect of  our proposed data integration and provision process is  defined as a vertical mapping of user QoS preferences and agreedSLAs of potential com posable services. This  leads to a {\em derived SLA} that guides the evaluation of a query and maps SLA measures and preferences attributes.  
 
 %A query has associated preferences  expressed as macroscopic constraints (i.e. user preferences statement): execution time, pay / no pay, data reliability, provenance, freshness, privacy-preserving constraints, partial/full results, delivery mode. These constraints are coupled with the profile of the user which is in general stated in her cloud subscription (amount of assigned storage space, number of requests, I/O transfered Mega bytes, etc.). 
 
 %As said before, we assume that services export their \textit{agreed SLAs} that define measures that can be either expressed as constants,  computed (dynamically) by monitoring the execution and conversations associated to services, and hybrid they can be statically stated  but they change at execution time.  A service  agreed SLA is expressed through an  XML document using the specification WSLA (Web service level agreement \footnote{\footnotesize http://www.research.ibm.com/people/a/akeller/\-Data/WSLASpecV1-20030128.pdf}). The service SLA measures  that we consider in our example are: cost, availability, freshness, provenance, location, duration of the engagement, privacy-preserving status. Other measures are associated to the conditions in which the service is called or to the precision and recall of their produced data given a request. 
 
 
-The derivedSLA is defined as a set of measures that correspond to the user preferences computed as a function of different static, computed and hybrid measures. 
+The {\em derived SLA} is defined as a set of measures that correspond to the user preferences computed as a function of different static, computed and hybrid measures. 
 The derivedSLA  will guide the way the query will be evaluated, and the way results will be computed and delivered.
 
 In the example, some of the user preferences statement measures are used for defining a derivedSLA that, as said in previous section, will guide the evaluation of the query. 
@@ -237,7 +237,7 @@ Our approach would generate a number $k$ of service compositions, combining as m
  Yet, the algorithm should be modified to take into account the different SLAs. 
  
 %-----------------------------------------------------------------
-\section{Towards an integration SLA}
+\section{First approach for deriving an Integration SLA}
 \label{sec:queryProcessOpt}
 %-----------------------------------------------------------------
  Our data provision and integration approach relies on data services deployed on one or different clouds providers and it is delivered as a distributed DaaS on top of the clouds involved.  This DaaS  uses resources from a cloud and this use  is  guided by an economic model (stated in a cloud subscription) that puts a threshold on the amount of resources to be invested in a query evaluation process. It is thus important to optimize the use of these resources. 
