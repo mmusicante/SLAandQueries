@@ -1,14 +1,4 @@
-
-%\begin{itemize}
-%\item Cloud computing represents a novel on-demand computing approach where resources are provided in compliance to a set of predefined non-functional properties specified and negotiated by means of Service Level Agreements (SLAs).  SLA currently exploited in the cloud allows service providers and cloud client to fix the resource level that should be used either by a service for the service provider or by the client in the case of service invokation. SLA could concern all types of the services on the cloud (IAAS, PAAS or SAAS). One of the weakness of SLA for the client is that they express low level clauses like storage amount use or virtualization level. In fact when a client launches a task on the cloud, she has unlikely Q \& S requirement rather than low level features. Recently we notice the existing of a lot of works with the objective to fill the gap.  Emeakaroha and al propose in \cite{5547150}  a cloud component that acts autonomously based on low level  monitored features after analysing them towards high level clauses expressed by the user. Moreover, another difficulty to enforce an SLA is to measure and identify, starting from a high level SLA clause, how could it be declined at different layers in the cloud. Therefore in \cite{Dastjerdi:2012:DOA:2275356.2275360} the authors describe a semanticSLA which can be understood by all parties including providers,
-%requestors, and monitoring services. One of the major objectives in the cloud is to anticipate SLA violation and to assess SLA failure cascading on violation detection. \cite{Dastjerdi:2012:DOA:2275356.2275360} proposes an SLA dependency modeling using Web Service Modeling Ontology (WSMO) to build a knowledge database.  \cite{5547150} proposes to anticipate failure by analysing the monitored feature and to act by anticipation. in \cite{5614035}, the authors propose LAYSI, a layered solution that minimizes user interactions with the system and prevents violations of agreed SLAs. 
-%On the other hand SLA contracts do not cover all client requirement. There is still a lack in some domain.....(to be completed)
-
-%\item some 
-
-
-%Service Level Agreements (SLA)~\cite{SLA} can be used in the context of cloud computing to establish those conditions. 
-In the cloud, the adoption of SLAs relies on two principles: (i) The negotiation of conditions in which services will be provided and that are statically agreed between the parts and (ii) The monitoring of these conditions during the use of cloud resources in order to detect SLA contract violation.
+In the cloud, the   SLA's rely on two principles: (i)  negotiation of conditions in which services will be provided and that are statically agreed between the parts and (ii)  monitoring of these conditions during the use of cloud resources in order to detect SLA contract violation.
 
 %The agreed conditions should be explicit and quantifiable.
 %They should be part of the contract between the client and the service provider.
@@ -24,14 +14,14 @@ In the cloud, the adoption of SLAs relies on two principles: (i) The negotiation
 
 %Negotiating a SLA may be a difficult task.
 %Indeed, 
-SLAs are normally expressed in terms of \textit{technical}, quantifiable measures, like the storage space size  or the degree of virtualization. 
-On the user side, the interest is normally on \textit{service} delivery measures such as QoS requirements.
-The challenge is to couple technical and service delivery measures expressed in SLA in order to agree on the conditions in which they will interact. Existing works use matching and negociation techniques for addressing this challenge.  
+SLA's are normally expressed in terms of \textit{technical}, quantifiable measures, like the storage space size, the degree of virtualization, the number of requests for a given service. 
+From the user point of view, the interest is normally on \textit{service} delivery measures that are related with her QoS requirements like service availability, resilience, recovery time or cost.
+The challenge is to couple technical and service delivery measures expressed in SLA's in order to agree on the conditions in which they will be considered for executing tasks for a user. Existing works use matching and negotiation techniques for addressing this challenge.  
 For instance,~\cite{5547150} 
 proposes a bottom-up approach based on a cloud component that monitors technical measures, analyses and matches them to service delivery (high level) clauses expressed by the user.
   \cite{Dastjerdi:2012:DOA:2275356.2275360} describes a \textit{Semantic SLA} that can be understood by all parties including providers, consumers, and monitoring services.
 Their goal is, starting from a high level SLA, to measure and identify how to derive SLA measures  at different layers of the cloud.  \cite{Ortiz:2013:VPS:2486767.2486772}
-  proposes a set of templates to  cloud data services users, each specifying the query type that can be executed with some tread-off in time and corresponding cost.  The client  chooses among the proposed tempates the one that best corresponds   to her requirements. \cite{6141307} proposes a set of matching algorithms to identify compatible cloud providers for a given requirements specification by matching SLA parameters. Cloud SLA parameters and application requirements are represented by two models using RDF. RDF definitions are then converted into graph representations. An Induced Propagation Graph is calculated using both models to establish a correspondence between them.
+  proposes a set of templates to  cloud data services users, each specifying the query type that can be executed with some tread-off in time and corresponding cost.  The client  chooses among the proposed templates the one that best corresponds   to her requirements. \cite{6141307} proposes a set of matching algorithms to identify compatible cloud providers for a given requirements specification by matching SLA parameters. Cloud SLA parameters and application requirements are represented by two models using RDF. RDF definitions are then converted into graph representations. An Induced Propagation Graph is calculated using both models to establish a correspondence between them.
 
 
 %{\color{red}
@@ -41,19 +31,19 @@ Their goal is, starting from a high level SLA, to measure and identify how to de
 %In \cite{5614035}, the authors propose LAYSI, a layered solution that minimizes user interactions with the system and prevents violations of agreed SLAs. 
 %}
 
-Recent  works on SLA are devoted to extend  SLA for including  security concerns. 
+Recent  works on SLA are devoted to extend  SLA specifications for including  security concerns. 
 \cite{6274042} propose an extension of the WSAgreement, initially developed by the GRAAP
 working group. 
 Security constraints are expressed over the service description
 terms (SDTs) and the service level objectives (SLOs) of the SLA. 
-This leads to an interoperable security expression that can be used by users for comparing security levels of different cloud service providers. Hale and Al. in \cite{6655684} extends their first work proposing an ontology representation of security concerns and let security services expressed in SLA connected to documents regulating security controls.
+This leads to an interoperable security expression that can be used by users for comparing security levels of different cloud  providers. Hale and Al. in \cite{6655684} extend their first work proposing an ontology representation of security concerns and connect security services expressed in SLA  to documents regulating security controls.
 \cite{LunaGarcia:2012:BCS:2381913.2381932} focuses on how to build a SEcSLA Template starting from gathering then categorizing a set of security statements using a semantic tool. 
 The designed template is then used both to express user security requirements and cloud service provider security provision.
-Finally, some works  deal with SLA violation anticipation and SLA failure cascading on violation detection.  \cite{Dastjerdi:2012:DOA:2275356.2275360}  proposes an SLA dependency model using Web Service Modeling Ontology (WSMO) to build a knowledge database. \cite{5614035} proposes to anticipate failure by analysing the monitored feature. 
+Finally, some works  deal with SLA violation anticipation and SLA failure cascading on violation detection.  \cite{Dastjerdi:2012:DOA:2275356.2275360}  proposes an SLA dependency model using Web Service Modeling Ontology (WSMO) to build a knowledge database. \cite{5614035} proposes to anticipate failure by analyzing the monitored feature. 
 \cite{5614035} proposes LAYSI, a layered solution that minimizes user interactions with the system and prevents violations of agreed SLAs.
 
-Regarding recent work on SLA modeling in the cloud, it clearly appears that no work has been proposed before using SLA for data integration.
-Furthermore, SLA are exclusively used in a mono-cloud context, low level oriented and serve to express condition in which a user could exploit cloud ressources. Whereas data integration in a multi-cloud context implies to express and enforce multiple granularity constraints at different levels (users, services, clouds and inter-cloud environnements).  Finally,  an a-priori SLA enforcement mechanism -in opposition to the a-posteriori SLA monitoring to detect violation-  is mandatory to assess data integration feasibility.
+ Recent work on SLA modeling in the cloud does not seem to use SLA for data integration, maybe because measures concern data services and not data itself.
+Furthermore, SLA are in general exclusively used in a mono-cloud context to express the conditions in which a user can expect the cloud to provide resources. Whereas data integration in a multi-cloud context implies to express and enforce multiple granularity constraints at different levels of SLA (users, services, clouds and inter-cloud environments).  Finally,  an a-priori SLA enforcement mechanism -in opposition to the a-posteriori SLA monitoring to detect violation-  is mandatory to assess data integration feasibility. \cite{anisetti2014auctions} proposed an e-auctions based approach for matching services with requirements in multi-cloud settings. Our work aims at going further in the use of SLA for integrating data and it provides strategies to guide the whole data integration process.
 
  
 %=====================================
