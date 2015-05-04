@@ -8,7 +8,12 @@ The optimization of this process can occur at two levels: first at the level of 
 Second, pre-computed queries and partial results can be also stored in cache or in a persistent support. Rewriting results can be also stored and reduce execution and resources consumption time when evaluating similar queries. Storing or not such SLAs  depends on the cloud subscription of the user that issued the query (data access, intermediate storage capacity, cost of storage, etc.).
 
 
-Furthermore, the execution of the concrete service composition  must enforce functional and non functional preferences taken into account as integration constraints. In the example this is illustrated by  the access control level constraints required by data services when they are involved in an integration process. Another important point is to consider the existing inter-cloud contracts as described in \cite{} to decide how to implement the integration itself. This leads to the build of the \textit{integration SLA}.
+Furthermore, the execution of the concrete service composition  must enforce functional and non functional preferences taken into account  integration constraints. In the example this is illustrated by  the access control level constraints required by data services when they are involved in an integration process. Another important point is to consider the existing inter-cloud contracts as described in \cite{} to decide how to implement the integration itself. Finally, query time execution will be stored  for further partial or similar queries.
+This leads to the build of the \textit{integration SLA}.
+
+
+
+
  
 
 %As discussed in previous sections, the derived SLA associated to service compositions can have free measures that can only be evaluated at run-time. In order to do so, we assume that there is a monitoring system observing and aggregating events for computing resources consumption, execution and time cost, volumes of data transferred when services deliver results. These computations are used dynamically for instantiating free variables in the derived SLA and thus determine whether the contract is respected by the execution of a query. Since this is monitored dynamically, the evaluation of the query can be adapted if the SLA is not being respected anymore.
