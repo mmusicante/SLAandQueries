@@ -1,19 +1,23 @@
-To answer the needs expressed above, we propose an SLA guided, security-aware continuous data provision and integration approach performed within a multi-cloud service oriented environment  (see
-%starting from the processing of the query  to the delivery of the results.
-Figure~\ref{fig:arch}). In this section, we present  step-by-step data integration process with the implied  SLA categories.
+To answer this question, we propose an SLA guided, security-aware continuous data provision and integration approach performed within a multi-cloud service oriented environment  (see
+Figure~\ref{fig:arch}). 
+We present a step-by-step data integration process and the implied  SLA categories.
 
-In our context, data are provided by services deployed on different clouds. In the example of the MOOC system presented above, several producers will supply equivalent content for a given period of time. They    will be chosen with respect to the  preferences expressed by a consumer. 
+In our context, data are provided by services deployed on different clouds. 
+In the example of the MOOC system presented above, several producers will supply equivalent content for a given period of time. 
+They will be chosen with respect to the  preferences expressed by a consumer. 
 
-Consumers will express queries  expressed as  Datalog-like programs or  SQL-like expressions, including spatio-temporal attributes and preferences.
-For instance, the following query $Q_1$ ``\textit{List of English poetry content providers that can provide commented Emily Dickinson poems that are close to my city and that are labelled as experts, where the total cost is not higher to 1 dollar, with using only services that preserve her anonymity}''. 
+Consumers will specify queries as Datalog- or SQL-like programs including spatio-temporal attributes and preferences.
+For instance, the following query $Q_1$: ``\textit{List of English poetry content providers that can provide commented Emily Dickinson poems that are close to my city and are labeled as experts, where the total cost is less than 1 dollar, using only services that preserve their anonymity}''. 
 
-The abstract Inter-Cloud Layer (ICL) delivers the results to the  query. The ICL  first identifies a set of abstract functionalities  and associated services that fit the  query. These descriptions are stored in a service description registry (SCS).
+The Abstract Inter-Cloud Layer (ICL) delivers the results to the  query. 
+The ICL  first identifies a set of abstract functionalities  and associated services that fit the  query. These descriptions are stored in a service description registry.
 
 Assume that there are four content providers on English poetry that can be queried individually and two hubs that collect information from other sources like social network groups and hash tags.
 Hubs  store content about given topics on  English poetry, available from particular producers (e.g., participants of a given course).
-We represent these providers respectively by { e$_1$, \dots, e$_4$} and {h$_1$} and {h$_2$}. We suppose that hubs  have the same interface as individual service providers.
-We also suppose the existence of two free location services exporting the following interface: {loc(IP) $\rightarrow$ $\langle$ X, Y$\rangle$}, meaning that given an IP address it returns a geographic position expressed as a pair of coordinates. 
-All these services can potentially be combined for answering queries. Each combination will answer the query and fulfill in a specific degree the QoS requirements associated to the query.
+We represent these providers respectively by { e$_1$ - e$_4$}, {h$_1$}, {h$_2$}. 
+We suppose that hubs  have the same interface as individual service providers.
+We also suppose the existence of two free location services exporting the following interface: {loc(IP) $\rightarrow$ $\langle$ X, Y$\rangle$}, meaning that given an IP address it returns a geographic position.
+All these services can potentially be combined for answering queries. Each combination will answer the query and fulfill in a specific degree the QoS requirements of the query.
 
 
 %shows the general architecture of an SLA guided data integration system. 
@@ -25,7 +29,7 @@ All these services can potentially be combined for answering queries. Each combi
 
 \begin{figure*}
 \center{
-\includegraphics[width=0.75\textwidth]{workflow.pdf}
+\includegraphics[width=0.65\textwidth]{workflow.pdf}
 \caption{SLA guided  data integration workflow.\label{fig:arch}}}
 \end{figure*}
 
@@ -44,15 +48,16 @@ Each deployed service exports an \textit{agreed SLA} that specifies the economic
  
 Some of these measures ({cost/call, maxCall/day}) are static and explicitly specified by the service provider. 
 In contrast, the other measures should be computed by monitoring the conversations between the service and the applications that contact it.  It is the case of service reputation that will determine the way personal user data will be anonymized (Constraint1).  Some measures will be instantiated depending on the context of  the service invoked within a multi-cloud environment. It is the case for constraint 2 expressed above:   user data access credentials should be calculated according to the policies adopted by the clouds  hosting  data services.
-An \textit{agreed SLA} is expressed through an  XML document using the specification WSLA (Web service level agreement \footnote{\footnotesize http://www.research.ibm.com/people/a/akeller/\-Data/WSLASpecV1-20030128.pdf}).
+An \textit{agreed SLA} is given as an  XML document using the specification WSLA (Web service level agreement\footnote{\footnotesize http://www.research.ibm.com/people/a/akeller/\-Data/WSLASpecV1-20030128.pdf}).
 
-In our scenario, examples of computed measures are the cost of retrieving the list of ``expert'' Emily Dickinson poems providers within a region with their cost. 
+In our scenario, an example of computed measure is the cost of retrieving ``expert'' Emily Dickinson poems providers within a region, with their cost. 
 The cost is determined by the  cost of the calls. 
-This request  includes the price of calling a service (e.g.,  between 0,25 - 0,50 euros depending on the data service), plus the price of data transmission according to the amount of transmitted MegaBytes through the network, the type of subscription of the user for using the network and also the cost of applying encryption algorithm if asked for. The second computed measure is service reputation that is calculated according to the feedback obtained when application contacts the service.
+This request  includes the price of calling a service (e.g.,  between \$0,25 - 0,50, depending on the data service), plus the price of data transmission (amount of transmitted MB through the network), the type of subscription of the user for using the network and also the cost of applying encryption algorithms if required. 
+The second computed measure is service reputation that is calculated according to the feedback obtained when application contacts the service.
 
 
-As aforementioned, an a-priori SLA enforcement mechanism is mandatory to assess data integration feasibility.
-To this end, non-functional characteristics of the content provision services ({i.e e$_1$, ... e$_4$}) are calculated by specific cloud services (SCS) that enforce SLAs  and which export  an API, composed of the following set of methods:
+As aforementioned, an \textit{a-priori} SLA enforcement mechanism is mandatory to assess data integration feasibility.
+To this end, non-functional characteristics of the content provision services ({i.e e$_1$-e$_4$}) are calculated by specific cloud services that enforce SLA and which should export  an API, composed of the following methods:
 
  
 \begin{trivlist}\sf\footnotesize
@@ -110,12 +115,14 @@ The algorithm in~\cite{CostaAMR13} is being modified to deal with agreedSLA and 
 
 In this paper, we are interested in the process of rewriting queries  considering QoS user preferences and SLAs.
 This process includes the following phases: 
-\begin{enumerate}
-\item  User preferences (including cloud SLAs according to user subscriptions) and \textit{agreed SLAs} are  used to produce a \textit{derived SLA} to be associated to the query. The {\em derived SLA}  influences the choice of (data) services that will actually be used for building the result; 
-\item Computing service compositions that rewrite the initial query and that can be used for  building query results. The \textit{agreed SLA} exported by the chosen services is added as  conditions in  each re-written query expression. 
+\begin{trivlist}
+\item[~1)]  User preferences (including cloud SLA according to user subscriptions) and \textit{agreed SLA} are  used to produce a \textit{derived SLA} to be associated to the query. 
+{\em Derived SLA}  influences the choice of services that will be used to build the result; 
+\item[~2)] Computing service compositions that rewrite the initial query and that are used to  build query results. 
+The \textit{agreed SLA} exported by the chosen services is added as conditions in  each re-written query expression. 
 Rewritten queries expressed as service composition can fully or partially comply with the \textit{derived SLA}.  An \textit{integration SLA} is  computed for guiding  negotiation (in the case of partial compliance)  and the implementation of the final integration; 
-\item   Managing the integration process according to the \textit{integration SLA}.
-\end{enumerate}
+\item[~3)]   Integration process guided by the \textit{integration SLA}.
+\end{trivlist}
  
 
 

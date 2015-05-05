@@ -2,14 +2,20 @@
 %\section{Deriving an Integration SLA: first approach}
 %\label{sec:queryProcessOpt}
 %-----------------------------------------------------------------
- Our data provision and integration approach relies on data services deployed on one or different cloud providers and it is delivered as a distributed DaaS on top of the clouds involved.  This DaaS  uses resources from a cloud and this use  is  guided by an economic model (stated in a cloud subscription) that puts a threshold on the amount of resources to be used in a query evaluation process. It is thus important to optimize the use of these resources. 
+ Our data provision and integration approach relies on data services deployed on one or different cloud providers and it is delivered as a distributed DaaS on top of those clouds.  
+The use of resources from a cloud is  guided by an economic model (stated in a cloud subscription) that puts a threshold on the amount of resources used for query evaluation. 
+It is thus important to optimize the use of these resources. 
    
-The optimization of this process can occur at two levels: first at the level of the {\em agreed SLA} exported by services.  Indeed, queries requesting the same service compositions will have clauses that are  conditions of use of the infrastructure (i.e., not storing the data produced by a service). Instead of recomputing the {\em derived SLA} every time, we propose to store it and reuse it for other queries. 
-Second, pre-computed queries and partial results can be also stored in cache or in a persistent support. Rewriting results can be also stored and reduce execution and resources consumption time when evaluating similar queries. Storing or not such SLAs  depends on the cloud subscription of the user that issued the query (data access, intermediate storage capacity, cost of storage, etc.).
+The optimization of this process can occur at two levels: first at the level of the {\em agreed SLA} exported by services.  
+Indeed, queries requesting the same service compositions may have clauses that are conditions of use of the infrastructure (i.e., not storing the data produced by a service). 
+Instead of recomputing the {\em derived SLA} every time, we propose to store it and reuse it in future queries. 
+Second, pre-computed queries and partial results can be also stored in cache or in a persistent support. %Rewriting results can be stored and reduce execution and resources consumption time when evaluating similar queries. 
+Storing or not these results depends on the cloud subscription SLA of the user (data access, intermediate storage capacity, storage cost, etc.).
 
 
-Furthermore, the execution of the concrete service composition  must enforce functional and non functional preferences taken into account  integration constraints. In the example this is illustrated by  the access control level constraints required by data services when they are involved in an integration process. Another important point is to consider the existing inter-cloud contracts as described in \cite{} to decide how to implement the integration itself. Finally, query time execution will be stored  for further partial or similar queries.
-This leads to the build of the \textit{integration SLA}.
+%Furthermore, the execution of the concrete service composition  must enforce functional and non functional preferences taken into account  integration constraints. In the example this is illustrated by  the access control level constraints required by data services when they are involved in an integration process. 
+%Another important point is to consider the existing inter-cloud contracts as described in \cite{} to decide how to implement the integration itself. Finally, query time execution will be stored  for further partial or similar queries.
+%This leads to the build of the \textit{integration SLA}.
 
 
 

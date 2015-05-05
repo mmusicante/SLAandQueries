@@ -3,7 +3,8 @@
 %\label{sec:derivedSla}
 %%-----------------------------------------------------------------
 
-The key and original aspect of  our proposed data integration and provision process is  defined as a vertical mapping of user QoS preferences and agreedS LAs of potential composable services. This  leads to a {\em derived SLA} that guides the evaluation of a query and maps SLA measures and QoS preferences attributes.  
+The key and original aspect of  our proposed data integration and provision process is  defined as a vertical mapping of user QoS preferences and agreed SLA of potentially composable services. 
+This  leads to a {\em derived SLA} that guides the evaluation of a query and maps SLA measures and QoS preferences attributes.  
 
 %A query has associated preferences  expressed as macroscopic constraints (i.e. user preferences statement): execution time, pay / no pay, data reliability, provenance, freshness, privacy-preserving constraints, partial/full results, delivery mode. These constraints are coupled with the profile of the user which is in general stated in her cloud subscription (amount of assigned storage space, number of requests, I/O transfered Mega bytes, etc.). 
 
@@ -16,13 +17,13 @@ The {\em derived SLA}  will guide the way the query will be evaluated, and the w
 In the example, some of the user preferences statement measures are used for defining a {\em derived SLA} that, as said in previous section, will guide the evaluation of the query. 
 These measures are defined as a function of the measures used by the agreed SLAs and by the cloud SLA contract. For example: 
 \begin{trivlist}\sf\footnotesize
- \item[~-~query total cost:] $\sum_{i = 1\dots n}$ cost(s$_i$) + data transfer + encryption cost $\leq$ \$1.
- \item[~-~availability:] {\em (of services involved)} $\geq$ {\sf 90$\%$}.
- \item[~-~freshness:] non.
- \item[~-~provenance:] all services involved must be $expert$.
- \item[~-~duration:] 7 days.
- \item[~-~I/0 volume/month:] 8GB.
- \item[~-~reputation level :] $\geq$ threshold.
+ \item[~-~ total cost:] $\sum_{i = 1\dots n}$ cost(s$_i$) + data transfer + encryption cost $\leq$ \$1;
+ \item[~-~availability:] {\em (of services involved)} $\geq$ {\sf 90$\%$};
+ ~-~freshness: non;
+ \item[~-~provenance:] all services involved must be $expert$;
+  ~-~duration: 7 days;
+ \item[~-~I/0 volume/month:] 8GB;
+  ~-~reputation level: $\geq$ threshold;
  \item[~-~storageSpace:] 1GB.
  \end{trivlist} 
  

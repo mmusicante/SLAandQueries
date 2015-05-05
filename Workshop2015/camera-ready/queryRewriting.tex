@@ -4,43 +4,45 @@
 %-----------------------------------------------------------------
 
 
-Query rewriting is a well-known problem in the database domain that consists in transforming an abstract query into a set (or list) of lower-level queries that can be solved by  available databases.
+Query rewriting is a well-known problem for databases.
+It consists in transforming an abstract query into lower-level queries that can be answered by available databases.
 %Query rewriting is guided by the schema of  abstract and concrete databases.
-The answers to the lower level queries are combined in order to obtain the result for the higher-level query.
-The query rewriting problem can be generalized to the case of services.
-In this case, the query to be rewritten is seen as an \textit{abstract} service composition, to be expressed in terms of \textit{concrete} services.
+The answers to the lower level queries are combined in order to obtain the result.
+The query rewriting problem can be generalized to the case of services:
+The query to be rewritten is seen as an \textit{abstract} service composition, to be expressed in terms of \textit{concrete} services.
 Query rewriting techniques have been adapted to the context of data providing services~\cite{BBM10,ZLC11} as well as for general service compositions~\cite{CostaAMR13}. 
-The case of more general services (\textit{i.e}, services that maintain and update information) is a generalization of the information-provision case.
-Unlike the simpler case, where only the service interfaces need to be considered, the general case requires considering the functional and non-functional aspects of the query and available services.
+The latter case (\textit{i.e}, services that maintain and update information) is a generalization of the data provision case.
+The general case requires considering the functional and non-functional aspects of the query and available services.
 %In this context, the \textit{Local as View} (\textit{LAV}) methods of query rewriting~\cite{Levy2000} are suitable.
-
-In~\cite{CostaAMR13} the authors present an algorithm to automatically refine high-level specifications of service compositions into lower-level ones. 
-The method is based on the MiniCon algorithm~\cite{PH01} for query rewriting.
+%In~\cite{CostaAMR13} the authors present an algorithm to automatically refine high-level specifications of service compositions into lower-level ones. 
+%The method is based on the MiniCon algorithm~\cite{PH01} for query rewriting.
 %In the LAV approach, 
 The rewriting process is guided by the specification of both the query to be rewritten and the available services.
 %The specification of the composition to be produced as well as the specification of each available service are used in the case of general services.
 %These specifications may detail both the functional and non-functional behaviour of each service, including SLA.
 The approach consists in generating translations of an abstract query into \textit{several}  compositions over concrete  services. 
-The solutions proposed are ranked and may be coded into concrete workflows as shown in the following sections.  
-The next example shows the main features of the approach proposed in~\cite{CostaAMR13} which is extended to the case of SLA-guided service-based data integration. 
+The solutions proposed are ranked and may be coded into concrete workflows.
 
-\begin{example}[Service Refinement by Rewriting]\label{Ex:rew1}
+The approach proposed in~\cite{CostaAMR13} which may be extended to the case of SLA-guided service-based data integration. 
+%
+%\begin{example}[Service Refinement by Rewriting]\label{Ex:rew1}
 Let us consider the MOOC scenario, where people can participate on a content trading pool.
 We suppose that this hypothetical MOOC has a large number of participants that sell their content  to  consumers. 
 The MOOC has four information hubs described by their {\em agreed SLA}s, located in four different geographic locations, connected to other content providers.
 These later may be  contacted directly, through the services of three different cloud providers that expose their {\em Cloud SLA}.
 
-When an on-line consumer searches servers to buy/retrieve content, a composed  service is computed, in order to fetch each individual or hub service and to start  content retrieval procedures.
+When an on-line consumer searches servers to buy/retrieve content, a composed  service is computed.
+%, in order to fetch each individual or hub service and to start  content retrieval procedures.
 Depending on the location of the consumer and producers, different conditions and constraints may apply.
-Also  cloud providers  publish the conditions for using their services.
-These conditions and non-functional requirements (such as authentication or security requirements) should  be also expressed in the QoS user preferences and {\em agreed SLA}s.
-
-In this context, the user  expresses a content order, her location and payment information. A composite  service is  generated to fulfill the order.
+%Also  cloud providers  publish the conditions for using their services.
+These conditions (such as authentication or security requirements) should  be also expressed in the QoS user preferences and {\em agreed SLA}.
+In this context, the user  expresses a content order, her location and payment information. 
+A composite  service is  generated to fulfill the order.
 The generated service composition should consider the nearest providers, in accordance to the {\em derived SLA}.
 
-In order to produce a personalized service composition for a user, the algorithm in~\cite{CostaAMR13} takes into account the specification of the composition. The specification of each available service is also considered. 
-%~\hfill\openbox
-\end{example}
+%In order to produce a personalized service composition for a user, the algorithm in~\cite{CostaAMR13} takes into account the specification of the composition. The specification of each available service is also considered. 
+%%~\hfill\openbox
+%\end{example}
 
 It is worth to notice that the algorithm in~\cite{CostaAMR13} shows an exponential behavior, since it produces all combinations of concrete services that satisfy the abstract specification.
 In order to solve this problem, we propose to use the \textit{agreed SLA} and user preferences to guide the choice of concrete services, to allow that the most preferred ones are combined first.
@@ -49,24 +51,22 @@ This will allow to produce the top \textit{k} rewritings first (in accordance to
 %Some of the inequations of the derived SLA should be included in the service compositions that answers the query.
 
 The {\em agreed SLA} is included and merged with other SLA conditions that may be obtained by the rewriting process. Only those compositions that comply with the {\em derived SLA} will be presented as possible solutions to the user.
- 
-
 In the case of our query example the following composition can be used for answering it:
 
 \begin{footnotesize}
 \sf
 \begin{tabbing}
- -~Q(myIPad\=dress, ``E.Dickinson'', 1MB, ``expert'', \$1, myCreditCard) $\equiv$ \\
+ -~Q\=(myIPaddress, ``E.Dickinson'', 1MB, ``expert'', \$1, myCreditCard) $\equiv$ \\
  \>  myLoc = loc(myIPaddress), \\
  \>  estim$\_$cost(``E.Dickinson'', 1MB, cost, size, theirLocation), \\
- \>  query total cost + cost $\leq$ \$1,\\
- \>  availability $\geq$ 90$\%$, \\
- \>  freshness = any, \\
- \>  provenance = ``expert'', \\
- \>  duration = 7 days, \\
- \>  I/0 volume/month $\leq$ 8GB, \\
- \>  reputation level $\geq \lambda$ (the threshold) \\
- \>  storageSpace $\leq$ 1GB, \\
+ \>  query total cost + cost $\leq$ \$1, 
+ \   availability $\geq$ 90$\%$, 
+ \  freshness = any, \\
+ \>  provenance = ``expert'', 
+ \   duration = 7 days, 
+ \   storageSpace $\leq$ 1GB, \\
+ \>  I/0 volume/month $\leq$ 8GB, 
+ \   reputation level $\geq \lambda$ (the threshold) \\
  \>  engage(``E.Dickinson'', size, myCreditCard).
  \end{tabbing} 
 \end{footnotesize}
