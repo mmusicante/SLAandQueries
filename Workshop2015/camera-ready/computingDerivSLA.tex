@@ -6,15 +6,13 @@
 The key and original aspect of  our proposed data integration and provision process is  defined as a vertical mapping of user QoS preferences and agreed SLA of potentially composable services. 
 This  leads to a {\em derived SLA} that guides the evaluation of a query and maps SLA measures and QoS preferences attributes.  
 
-%A query has associated preferences  expressed as macroscopic constraints (i.e. user preferences statement): execution time, pay / no pay, data reliability, provenance, freshness, privacy-preserving constraints, partial/full results, delivery mode. These constraints are coupled with the profile of the user which is in general stated in her cloud subscription (amount of assigned storage space, number of requests, I/O transfered Mega bytes, etc.). 
-
-%As said before, we assume that services export their \textit{agreed SLAs} that define measures that can be either expressed as constants,  computed (dynamically) by monitoring the execution and conversations associated to services, and hybrid they can be statically stated  but they change at execution time.  A service  agreed SLA is expressed through an  XML document using the specification WSLA (Web service level agreement \footnote{\footnotesize http://www.research.ibm.com/people/a/akeller/\-Data/WSLASpecV1-20030128.pdf}). The service SLA measures  that we consider in our example are: cost, availability, freshness, provenance, location, duration of the engagement, privacy-preserving status. Other measures are associated to the conditions in which the service is called or to the precision and recall of their produced data given a request. 
 
 
-The {\em derived SLA} is defined as a set of measures that correspond to the user preferences computed as a function of different static, computed and hybrid measures that can come from the evaluation of measures expressed in the cloud subscription of the user. 
+
+The {\em derived SLA} is defined as a set of measures that correspond to the user preferences computed as a function of different static, computed and hybrid measures. These measures can come from the evaluation of simpler measures expressed in the cloud subscription of the user. 
 The {\em derived SLA}  will guide the way the query will be evaluated, and the way results will be computed and delivered.
 
-In the example, some of the user preferences statement measures are used for defining a {\em derived SLA} that, as said in previous section, will guide the evaluation of the query. 
+In the example, some of the user preferences statement measures are used for defining a {\em derived SLA} that, as said before, will guide the evaluation of the query. 
 These measures are defined as a function of the measures used by the agreed SLAs and by the cloud SLA contract. For example: 
 \begin{trivlist}\sf\footnotesize
  \item[~-~ total cost:] $\sum_{i = 1\dots n}$ cost(s$_i$) + data transfer + encryption cost $\leq$ \$1;
@@ -30,7 +28,7 @@ These measures are defined as a function of the measures used by the agreed SLAs
 Therefore, we propose a classification of SLA measures that represents the combination of fine grained measures used by {\em agreed SLAs} and coarse grained measures used in user preferences statements. 
 It specifies also how to compute coarse grained measures with fine grained ones. 
 For example, data precision will be computed as a function of availability, freshness and provenance exported by data services. The {\em derived SLA} can be seen as a set of inequations that have to be solved during the execution of a service composition. Since some of them can only be determined at execution time, the decision on which services will participate in the evaluation of the query is approximated.  
-This later step may conduct either to the rejection of integration in case of total incompatibility, or to a negotiation step between {\em agreed SLA}s and the {\em derived SLA}. In order to address this problem we introduce the notion of  {\em integration SLA}. 
+This latter step may conduct either to the rejection of integration in case of total incompatibility, or to a negotiation step between {\em agreed SLA}s and the {\em derived SLA}. In order to address this problem we introduce the notion of  {\em integration SLA} (defined in  Section \ref{sec:queryProcessOpt}). 
 %and thus the need for an adaptive setting.
 %Negotiation of implied SLAs depends strongly on the request sent and the services deployed at the arrival time of the application on the involved  clouds (i.e clouds holding services that satisfies user requests and that are candidate to service composition to answer the query). This negotiation can be expensive and may not scale well.
  

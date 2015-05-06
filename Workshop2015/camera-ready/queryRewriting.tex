@@ -4,15 +4,16 @@
 %-----------------------------------------------------------------
 
 
-Query rewriting is a well-known problem for databases.
-It consists in transforming an abstract query into lower-level queries that can be answered by available databases.
+Query rewriting 
+%is a well-known problem for databases. It
+ consists in transforming an abstract query into lower-level queries that can be answered by available databases.
 %Query rewriting is guided by the schema of  abstract and concrete databases.
 The answers to the lower level queries are combined in order to obtain the result.
 The query rewriting problem can be generalized to the case of services:
 The query to be rewritten is seen as an \textit{abstract} service composition, to be expressed in terms of \textit{concrete} services.
 Query rewriting techniques have been adapted to the context of data providing services~\cite{BBM10,ZLC11} as well as for general service compositions~\cite{CostaAMR13}. 
 The latter case (\textit{i.e}, services that maintain and update information) is a generalization of the data provision case.
-The general case requires considering the functional and non-functional aspects of the query and available services.
+`%The general case requires considering the functional and non-functional aspects of the query and available services.
 %In this context, the \textit{Local as View} (\textit{LAV}) methods of query rewriting~\cite{Levy2000} are suitable.
 %In~\cite{CostaAMR13} the authors present an algorithm to automatically refine high-level specifications of service compositions into lower-level ones. 
 %The method is based on the MiniCon algorithm~\cite{PH01} for query rewriting.
@@ -21,9 +22,9 @@ The rewriting process is guided by the specification of both the query to be rew
 %The specification of the composition to be produced as well as the specification of each available service are used in the case of general services.
 %These specifications may detail both the functional and non-functional behaviour of each service, including SLA.
 The approach consists in generating translations of an abstract query into \textit{several}  compositions over concrete  services. 
-The solutions proposed are ranked and may be coded into concrete workflows.
+The solutions proposed are ranked and may be coded into concrete workflows that will be executed in one or several clouds by a special engine.
 
-The approach proposed in~\cite{CostaAMR13} which may be extended to the case of SLA-guided service-based data integration. 
+The approach proposed in~\cite{CostaAMR13} is being extended to the case of SLA-guided service-based data integration. 
 %
 %\begin{example}[Service Refinement by Rewriting]\label{Ex:rew1}
 Let us consider the MOOC scenario, where people can participate on a content trading pool.

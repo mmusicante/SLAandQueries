@@ -3,10 +3,10 @@ Figure~\ref{fig:arch}).
 We present a step-by-step data integration process and the implied  SLA categories.
 
 In our context, data are provided by services deployed on different clouds. 
-In the example of the MOOC system presented above, several producers will supply equivalent content for a given period of time. 
+In the preivous   MOOC system example, several producers will supply equivalent content for a given period of time. 
 They will be chosen with respect to the  preferences expressed by a consumer. 
 
-Consumers will specify queries as Datalog- or SQL-like programs including spatio-temporal attributes and preferences.
+Consumers  specify queries as Datalog- or SQL-like programs including spatio-temporal attributes and preferences.
 For instance, the following query $Q_1$: ``\textit{List of English poetry content providers that can provide commented Emily Dickinson poems that are close to my city and are labeled as experts, where the total cost is less than 1 dollar, using only services that preserve their anonymity}''. 
 
 The Abstract Inter-Cloud Layer (ICL) delivers the results to the  query. 
@@ -20,12 +20,7 @@ We also suppose the existence of two free location services exporting the follow
 All these services can potentially be combined for answering queries. Each combination will answer the query and fulfill in a specific degree the QoS requirements of the query.
 
 
-%shows the general architecture of an SLA guided data integration system. 
-%It accesses data services which are data providers deployed in a cloud  that provide agreed SLA's. 
-%The whole process is monitored to determine whether a computed SLA is being honoured while a query is evaluated. 
 
-%These descriptions are stored in a directory together with meta-data about the way queries are evaluated for producing results. 
-%The system uses this information  by query processing and monitoring modules for rewriting queries according to given quality of service (QoS) preferences expressed by a data consumer, for example a user.The following lines describe how this query is evaluated according to our approach. 
 
 \begin{figure*}
 \center{
@@ -33,10 +28,6 @@ All these services can potentially be combined for answering queries. Each combi
 \caption{SLA guided  data integration workflow.\label{fig:arch}}}
 \end{figure*}
 
-%In order to illustrate our approach, consider a massive open online course system (MOOC) that aims at being privacy respectful of the students participating in courses and produce and consume content according to the geographic area and expertise of participants. 
-%Producers are characterized according to their location, the type and topic of the content that they can provide, the access conditions (e.g. cost, inscription, or exchange unit), and the time window in which they can produce contents. 
-%Consumers are described by their location, their interests requirements during a certain interval of time, the maximum total cost they are ready to pay, or the resources they are ready to provide in order to get the service, and quality of service requirements such as availability and how critical it is to consume a given type of content. 
-%An energy exchange market is established in order to continuously trade  content provision/consumption ensuring that all consumers will have the content they require at every moment.
 
 Each deployed service exports an \textit{agreed SLA} that specifies the economic cost per call, the maximum number of calls that can be done per day, the availability of the service, the average response time when a method is called, the reliability, the privacy of the produced data (whether they can be stored or not), the precision, freshness and provenance of the produced data, as defined below:
 
@@ -71,7 +62,7 @@ agreedSLA$_i$.
  
 
 %Given user expressed QoS preferences ({QoS preferences}$_\mathit{user}$) and {agreedSLA}$_i$, 
-The first method allows to obtain for each service $e_i$ the estimation of the budget (in our example, of a given course (content)) and a required minimum size. In other words, it  returns the cost of the data, as well as its  size and location.
+For each service $e_i$, the first method returns the cost of the data (in our example, the cost of a given course (content)), as well as its  size and location,  and a required minimum size.  
 The second method is used to engage to a data service (in our example a content data service) and will be used  if the service is retained for a composition to answer the query.
 
  
@@ -84,7 +75,7 @@ For instance, the query $Q_1$ has two parts: the one that corresponds to the con
 \end{trivlist}
 
 
-Let us suppose that for $Q_1$  the user is ready to pay a total cost of maximum  \$1; she requests that content providers be certified as experts (provenance) even if their data are not fresh; she requires to receive content  during  one week. Besides, she wishes to keep the content exchange private and she wants to order services by reputation. The maximum total cost will condition also the kind of privacy preserving algorithms that will be applied.
+Let us suppose that for $Q_1$  the user is ready to pay a total cost of maximum  \$1; she requests that content providers be certified as experts (provenance) even if their data are not fresh; she requires to receive content  during  one week. Besides, she wishes to keep the content exchange private and she wants to order services by reputation. The maximum total cost will  also determine the kind of privacy preserving algorithms that will be applied.
  
 \begin{trivlist}\sf\footnotesize
 \item[~-~QoS preferences$_\mathit{user}$: ] $\langle$cost $\leq$ \$1, freshness = ``any'', provenance = ``certified'', location = ``close'', duration = 7 days, privacy-preserving=``reputation-based''$\rangle$. 
