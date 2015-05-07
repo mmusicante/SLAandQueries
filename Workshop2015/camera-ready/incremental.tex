@@ -3,13 +3,13 @@ Figure~\ref{fig:arch}).
 We present a step-by-step data integration process and the implied  SLA categories.
 
 In our context, data are provided by services deployed on different clouds. 
-In the preivous   MOOC system example, several producers will supply equivalent content for a given period of time. 
+In the previous   MOOC system example, several producers will supply equivalent content for a given period of time. 
 They will be chosen with respect to the  preferences expressed by a consumer. 
 
 Consumers  specify queries as Datalog- or SQL-like programs including spatio-temporal attributes and preferences.
 For instance, the following query $Q_1$: ``\textit{List of English poetry content providers that can provide commented Emily Dickinson poems that are close to my city and are labeled as experts, where the total cost is less than 1 dollar, using only services that preserve their anonymity}''. 
 
-The Abstract Inter-Cloud Layer (ICL) delivers the results to the  query. 
+The Abstract Inter-Cloud Layer (ICL) (see Figure~\ref{fig:arch} is responsible to deliver the results to the  query. 
 The ICL  first identifies a set of abstract functionalities  and associated services that fit the  query. These descriptions are stored in a service description registry.
 
 Assume that there are four content providers on English poetry that can be queried individually and two hubs that collect information from other sources like social network groups and hash tags.
@@ -24,7 +24,7 @@ All these services can potentially be combined for answering queries. Each combi
 
 \begin{figure*}
 \center{
-\includegraphics[width=0.65\textwidth]{workflow.pdf}
+\includegraphics[width=0.66\textwidth]{workflow.pdf}
 \caption{SLA guided  data integration workflow.\label{fig:arch}}}
 \end{figure*}
 
@@ -38,7 +38,7 @@ Each deployed service exports an \textit{agreed SLA} that specifies the economic
  \end{trivlist}
  
 Some of these measures ({cost/call, maxCall/day}) are static and explicitly specified by the service provider. 
-In contrast, the other measures should be computed by monitoring the conversations between the service and the applications that contact it.  It is the case of service reputation that will determine the way personal user data will be anonymized (Constraint1).  Some measures will be instantiated depending on the context of  the service invoked within a multi-cloud environment. It is the case for constraint 2 expressed above:   user data access credentials should be calculated according to the policies adopted by the clouds  hosting  data services.
+In contrast, the other measures should be computed by monitoring the conversations between the service and the applications that contact it.  It is the case of user privacy-preserving service that will determine the way personal user data will be anonymized (Constraint1).  Some measures will be instantiated depending on the context of  the service invoked within a multi-cloud environment. It is the case for constraint 2 expressed above:   user data access credentials should be calculated according to the policies adopted by the clouds  hosting  data services.
 An \textit{agreed SLA} is given as an  XML document using the specification WSLA (Web service level agreement\footnote{\footnotesize http://www.research.ibm.com/people/a/akeller/\-Data/WSLASpecV1-20030128.pdf}).
 
 In our scenario, an example of computed measure is the cost of retrieving ``expert'' Emily Dickinson poems providers within a region, with their cost. 
@@ -75,7 +75,7 @@ For instance, the query $Q_1$ has two parts: the one that corresponds to the con
 \end{trivlist}
 
 
-Let us suppose that for $Q_1$  the user is ready to pay a total cost of maximum  \$1; she requests that content providers be certified as experts (provenance) even if their data are not fresh; she requires to receive content  during  one week. Besides, she wishes to keep the content exchange private and she wants to order services by reputation. The maximum total cost will  also determine the kind of privacy preserving algorithms that will be applied.
+Let us suppose that for $Q_1$  the user is ready to pay a total cost of maximum  \$1; she requests that content providers be certified as experts (provenance) even if their data are not fresh; she requires to receive content  during  one week. Besides, she wishes to keep the content exchange private and she wants to order services by reputation. The maximum total cost will  also determine the kind of privacy preserving algorithms that should be applied.
  
 \begin{trivlist}\sf\footnotesize
 \item[~-~QoS preferences$_\mathit{user}$: ] $\langle$cost $\leq$ \$1, freshness = ``any'', provenance = ``certified'', location = ``close'', duration = 7 days, privacy-preserving=``reputation-based''$\rangle$. 
